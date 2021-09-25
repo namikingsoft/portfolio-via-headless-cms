@@ -27,9 +27,11 @@ const Post = ({ post, morePosts, preview }: Props) => {
     <Layout preview={preview}>
       <Container>
         <Header />
-        {router.isFallback ? (
+        {router.isFallback
+          ? (
           <PostTitle>Loading…</PostTitle>
-        ) : (
+            )
+          : (
           <>
             <article className="mb-32">
               <Head>
@@ -47,7 +49,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
               <PostBody content={post.content} />
             </article>
           </>
-        )}
+            )}
       </Container>
     </Layout>
   )
@@ -61,7 +63,7 @@ type Params = {
   }
 }
 
-export async function getStaticProps({ params }: Params) {
+export async function getStaticProps ({ params }: Params) {
   const post = getPostBySlug(params.slug, [
     'title',
     'date',
@@ -83,7 +85,7 @@ export async function getStaticProps({ params }: Params) {
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths () {
   const posts = getAllPosts(['slug'])
 
   return {

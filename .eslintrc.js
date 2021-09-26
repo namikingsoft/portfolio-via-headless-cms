@@ -4,8 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
     'standard',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,10 +16,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   settings: {
     react: {
       version: 'detect',
@@ -30,7 +28,8 @@ module.exports = {
     // use @typescript-eslint
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'error',
-    // fav
+    // other
+    'prettier/prettier': 'error',
     'comma-dangle': ['error', 'always-multiline'],
   },
 }

@@ -16,10 +16,24 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       })
     }
     router.events.on('routeChangeComplete', handleRouteChange)
-
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
+
+  useEffect(() => {
+    const handle = (event: MouseEvent) => {
+      console.log('event', event)
+      window.gtag('event', 'click', {
+        page_x: event.pageX,
+        page_y: event.pageY,
+      })
+    }
+    window.addEventListener('click', handle)
+    return () => {
+      window.removeEventListener('click', handle)
+    }
+  }, [])
+
   return <Component {...pageProps} />
 }

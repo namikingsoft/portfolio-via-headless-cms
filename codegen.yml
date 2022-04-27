@@ -1,0 +1,9 @@
+overwrite: true
+schema: "schemas/contentful.graphql"
+documents: "**/*.gql"
+generates:
+  generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

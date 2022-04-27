@@ -2,6 +2,9 @@ include .env
 
 NPM_BIN := $(shell npm bin)
 
+.PHONY: all
+all: generated/contentful.tsx
+
 .PHONY: generated/contentful.graphql
 generated/contentful.graphql:
 	@npx apollo client:download-schema generated/contentful.graphql \

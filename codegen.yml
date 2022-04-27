@@ -1,8 +1,8 @@
 overwrite: true
-schema: "schemas/contentful.graphql"
 documents: "**/*.gql"
 generates:
-  generated/graphql.tsx:
+  generated/contentful.tsx:
+    schema: "generated/contentful.graphql"
     plugins:
       - "typescript"
       - "typescript-operations"

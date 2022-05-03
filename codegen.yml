@@ -1,9 +1,0 @@
-overwrite: true
-documents: "**/*.gql"
-generates:
-  generated/contentful.tsx:
-    schema: "generated/contentful.graphql"
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"

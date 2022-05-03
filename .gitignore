@@ -36,5 +36,5 @@ yarn-error.log*
 # typescript
 tsconfig.tsbuildinfo
 
-# etc
-generated
+# codegen
+*.generated.*

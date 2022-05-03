@@ -1,16 +1,16 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { gtagId } from '../env'
 
 export default class MyDocument extends Document {
   render() {
-    const { NEXT_PUBLIC_GTAG_ID } = process.env
     return (
       <Html lang="en">
         <Head>
-          {NEXT_PUBLIC_GTAG_ID && (
+          {gtagId && (
             <>
               <script
                 async
-                src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GTAG_ID}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}
               />
               <script
                 dangerouslySetInnerHTML={{
@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${NEXT_PUBLIC_GTAG_ID}');
+                    gtag('config', '${gtagId}');
                   `.replace(/\r?\n\s*/gs, ''),
                 }}
               />

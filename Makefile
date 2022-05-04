@@ -1,4 +1,5 @@
-include .env
+# NOTE: used dotenv by codegen
+# include .env
 
 NPM_BIN := $(shell npm bin)
 

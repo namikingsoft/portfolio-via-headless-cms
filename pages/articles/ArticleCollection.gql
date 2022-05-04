@@ -1,5 +1,16 @@
 query ArticleCollection {
   articleCollection {
-    items { slug, title, description }
+    items {
+      slug,
+      title,
+      description,
+      thumbnail {
+        title,
+        url,
+      },
+      sys {
+        publishedAt,
+      },
+    }
   }
 }

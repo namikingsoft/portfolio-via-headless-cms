@@ -1,5 +1,16 @@
 query ArticleFromSlug($slug: String!) {
   articleCollection(where: { slug: $slug }) {
-    items { slug, title, description }
+    items {
+      slug,
+      title,
+      description,
+      thumbnail {
+        title,
+        url,
+      },
+      sys {
+        publishedAt,
+      },
+    }
   }
 }

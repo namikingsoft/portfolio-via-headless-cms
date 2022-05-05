@@ -1,6 +1,4 @@
 import DateFormatter from './date-formatter'
-import CoverImage from './cover-image'
-import PostTitle from './post-title'
 
 type Props = {
   title: string
@@ -12,7 +10,9 @@ type Props = {
 const ArticleHeader = ({ title, coverImage, date, tags }: Props) => {
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+        {title}
+      </h1>
       <div className="hidden md:block md:mb-12">
         {tags.map((tag) => (
           <span
@@ -24,7 +24,7 @@ const ArticleHeader = ({ title, coverImage, date, tags }: Props) => {
         ))}
       </div>
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} src={coverImage} />
+        <img src={coverImage} alt={title} className="shadow-small" />
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="mb-6 text-lg">

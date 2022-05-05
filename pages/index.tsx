@@ -1,7 +1,7 @@
 import Container from '../components/container'
 import IntroSection from '../components/intro-section'
 import ArticleList from '../components/article-list'
-import SiteTitle from '../components/intro'
+import SiteTitle from '../components/site-title'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'

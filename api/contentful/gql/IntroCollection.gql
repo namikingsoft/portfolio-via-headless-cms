@@ -1,0 +1,12 @@
+query IntroCollection {
+  introCollection {
+    items {
+      title,
+      content,
+      image {
+        title,
+        url,
+      },
+    }
+  }
+}

@@ -174,6 +174,7 @@ input AssetFilter {
 
 type AssetLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): IntroCollection
   pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PageCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
 }
@@ -471,6 +472,64 @@ input ImageTransformOptions {
 }
 
 """
+Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro)
+"""
+type Intro implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): IntroLinkingCollections
+  title(locale: String): String
+  content(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+}
+
+type IntroCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Intro]!
+}
+
+input IntroFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  content_exists: Boolean
+  content: String
+  content_not: String
+  content_in: [String]
+  content_not_in: [String]
+  content_contains: String
+  content_not_contains: String
+  image_exists: Boolean
+  OR: [IntroFilter]
+  AND: [IntroFilter]
+}
+
+type IntroLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+}
+
+enum IntroOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
 [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page)
 """
 type Page implements Entry {
@@ -554,6 +613,8 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  intro(id: String!, preview: Boolean, locale: String): Intro
+  introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
   page(id: String!, preview: Boolean, locale: String): Page
   pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PageFilter, order: [PageOrder]): PageCollection
   article(id: String!, preview: Boolean, locale: String): Article

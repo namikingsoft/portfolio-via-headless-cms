@@ -307,6 +307,7 @@ export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  introCollection?: Maybe<IntroCollection>;
   pageCollection?: Maybe<PageCollection>;
 };
 
@@ -320,6 +321,14 @@ export type AssetLinkingCollectionsArticleCollectionArgs = {
 
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsIntroCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -588,6 +597,98 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']>;
 };
 
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type Intro = Entry & {
+  __typename?: 'Intro';
+  content?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  image?: Maybe<Asset>;
+  linkedFrom?: Maybe<IntroLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type IntroCollection = {
+  __typename?: 'IntroCollection';
+  items: Array<Maybe<Intro>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type IntroFilter = {
+  AND?: InputMaybe<Array<InputMaybe<IntroFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<IntroFilter>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type IntroLinkingCollections = {
+  __typename?: 'IntroLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type IntroLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum IntroOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
 export type Page = Entry & {
   __typename?: 'Page';
@@ -719,6 +820,8 @@ export type Query = {
   category?: Maybe<Category>;
   categoryCollection?: Maybe<CategoryCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  intro?: Maybe<Intro>;
+  introCollection?: Maybe<IntroCollection>;
   page?: Maybe<Page>;
   pageCollection?: Maybe<PageCollection>;
   tag?: Maybe<Tag>;
@@ -784,6 +887,23 @@ export type QueryEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<EntryFilter>;
+};
+
+
+export type QueryIntroArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryIntroCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<IntroOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<IntroFilter>;
 };
 
 
@@ -1003,10 +1123,10 @@ export type ArticleFromSlugQueryVariables = Exact<{
 
 export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, description?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
-export type PageCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type IntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageCollectionQuery = { __typename?: 'Query', pageCollection?: { __typename?: 'PageCollection', items: Array<{ __typename?: 'Page', slug?: string | null, title?: string | null, excerpt?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
+export type IntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
 
 
 export const ArticleCollectionDocument = gql`
@@ -1057,14 +1177,13 @@ export const ArticleFromSlugDocument = gql`
   }
 }
     `;
-export const PageCollectionDocument = gql`
-    query PageCollection {
-  pageCollection {
+export const IntroCollectionDocument = gql`
+    query IntroCollection {
+  introCollection {
     items {
-      slug
       title
-      excerpt
-      thumbnail {
+      content
+      image {
         title
         url
       }
@@ -1086,8 +1205,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     ArticleFromSlug(variables: ArticleFromSlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArticleFromSlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArticleFromSlugQuery>(ArticleFromSlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArticleFromSlug', 'query');
     },
-    PageCollection(variables?: PageCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PageCollectionQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PageCollectionQuery>(PageCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PageCollection', 'query');
+    IntroCollection(variables?: IntroCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IntroCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IntroCollectionQuery>(IntroCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IntroCollection', 'query');
     }
   };
 }

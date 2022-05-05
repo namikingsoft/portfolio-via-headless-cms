@@ -2,7 +2,7 @@ import { GraphQLClient } from 'graphql-request'
 import {
   getSdk,
   ArticleCollectionQuery,
-  PageCollectionQuery,
+  IntroCollectionQuery,
 } from './client.generated'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
@@ -10,8 +10,8 @@ export type Article = NonNullable<
   NonNullable<ArticleCollectionQuery['articleCollection']>['items'][number]
 >
 
-export type Page = NonNullable<
-  NonNullable<PageCollectionQuery['pageCollection']>['items'][number]
+export type Intro = NonNullable<
+  NonNullable<IntroCollectionQuery['introCollection']>['items'][number]
 >
 
 const client = new GraphQLClient(contentfulEndpoint, {
@@ -35,7 +35,7 @@ export async function getArticle(slug: string): Promise<Article> {
   return article
 }
 
-export async function getAllPages(): Promise<Page[]> {
-  const { pageCollection } = await getSdk(client).PageCollection()
-  return (pageCollection?.items ?? []).flatMap((x) => (x === null ? [] : [x]))
+export async function getIntroList(): Promise<Intro[]> {
+  const { introCollection } = await getSdk(client).IntroCollection()
+  return (introCollection?.items ?? []).flatMap((x) => (x === null ? [] : [x]))
 }

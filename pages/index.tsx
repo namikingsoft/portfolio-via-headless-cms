@@ -1,19 +1,18 @@
 import Container from '../components/container'
-import PagePreview from '../components/page-preview'
+import IntroSection from '../components/intro-section'
 import ArticleList from '../components/article-list'
-import Intro from '../components/intro'
+import SiteTitle from '../components/intro'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
-import { getAllArticles, Article, getAllPages, Page } from '../api/contentful'
+import { getAllArticles, Article, getIntroList, Intro } from '../api/contentful'
 
 type Props = {
+  intros: Intro[]
   articles: Article[]
-  pages: Page[]
 }
 
-const Index = ({ articles, pages }: Props) => {
-  const firstPage = pages?.[0]
+const Index = ({ intros, articles }: Props) => {
   return (
     <>
       <Layout>
@@ -21,15 +20,17 @@ const Index = ({ articles, pages }: Props) => {
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
         <Container>
-          <Intro />
-          {firstPage && (
-            <PagePreview
-              title={firstPage.title ?? ''}
-              thumbnail={firstPage.thumbnail?.url ?? ''}
-              excerpt={firstPage.excerpt ?? ''}
-              slug={firstPage.slug ?? ''}
-            />
-          )}
+          <SiteTitle />
+          {intros.length > 0 &&
+            intros.map((intro) => (
+              <IntroSection
+                key={intro.title}
+                title={intro.title ?? ''}
+                imageUrl={intro.image?.url ?? ''}
+                imageAlt={intro.image?.title ?? ''}
+                content={intro.content ?? ''}
+              />
+            ))}
           {articles.length > 0 && <ArticleList articles={articles} />}
         </Container>
       </Layout>
@@ -40,12 +41,12 @@ const Index = ({ articles, pages }: Props) => {
 export default Index
 
 export async function getStaticProps() {
+  const intros = await getIntroList()
   const articles = await getAllArticles()
-  const pages = await getAllPages()
   return {
     props: {
+      intros,
       articles,
-      pages,
     },
   }
 }

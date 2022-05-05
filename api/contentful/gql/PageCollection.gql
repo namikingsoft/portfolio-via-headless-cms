@@ -1,0 +1,13 @@
+query PageCollection {
+  pageCollection {
+    items {
+      slug,
+      title,
+      excerpt,
+      thumbnail {
+        title,
+        url,
+      },
+    }
+  }
+}

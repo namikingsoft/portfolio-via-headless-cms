@@ -1003,6 +1003,11 @@ export type ArticleFromSlugQueryVariables = Exact<{
 
 export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, description?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
+export type PageCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PageCollectionQuery = { __typename?: 'Query', pageCollection?: { __typename?: 'PageCollection', items: Array<{ __typename?: 'Page', slug?: string | null, title?: string | null, excerpt?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
+
 
 export const ArticleCollectionDocument = gql`
     query ArticleCollection {
@@ -1052,6 +1057,21 @@ export const ArticleFromSlugDocument = gql`
   }
 }
     `;
+export const PageCollectionDocument = gql`
+    query PageCollection {
+  pageCollection {
+    items {
+      slug
+      title
+      excerpt
+      thumbnail {
+        title
+        url
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -1065,6 +1085,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ArticleFromSlug(variables: ArticleFromSlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArticleFromSlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArticleFromSlugQuery>(ArticleFromSlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArticleFromSlug', 'query');
+    },
+    PageCollection(variables?: PageCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PageCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PageCollectionQuery>(PageCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PageCollection', 'query');
     }
   };
 }

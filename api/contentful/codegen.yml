@@ -1,0 +1,14 @@
+overwrite: true
+documents: "api/contentful/**/*.gql"
+schema: api/contentful/schema.graphql
+# ALT: use --require dotenv/config
+# schema:
+#  - https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT}:
+#      headers:
+#        Authorization: Bearer ${CONTENTFUL_ACCESS_TOKEN}
+generates:
+  api/contentful/client.generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-graphql-request"

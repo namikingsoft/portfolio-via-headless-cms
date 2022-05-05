@@ -1,10 +1,17 @@
-# NOTE: used dotenv by codegen
-# include .env
+include .env
 
 NPM_BIN := $(shell npm bin)
 
 .PHONY: all
-all: codegen/contentful.generated.ts
+all: \
+	api/contentful/client.generated.ts
 
-codegen/contentful.generated.ts:
-	@$(NPM_BIN)/graphql-codegen --require dotenv/config --config codegen/contentful.yml
+api/contentful/schema.graphql:
+	@npx get-graphql-schema \
+		--header "Authorization=Bearer $(CONTENTFUL_ACCESS_TOKEN)" \
+			"https://graphql.contentful.com/content/v1/spaces/$(CONTENTFUL_SPACE_ID)/environments/$(CONTENTFUL_ENVIRONMENT)" \
+		> api/contentful/schema.graphql
+	@echo Downloaded contentful schema
+
+api/contentful/client.generated.ts: api/contentful/schema.graphql
+	@$(NPM_BIN)/graphql-codegen --config api/contentful/codegen.yml

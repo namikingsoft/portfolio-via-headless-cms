@@ -4,7 +4,7 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
-import { getAllArticles, Article } from '../lib/contentful'
+import { getAllArticles, Article } from '../api/contentful'
 
 type Props = {
   articles: Article[]

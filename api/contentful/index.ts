@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
-import { getSdk, ArticleCollectionQuery } from '../codegen/contentful.generated'
-import { contentfulEndpoint, contentfulAccessToken } from '../env'
+import { getSdk, ArticleCollectionQuery } from './client.generated'
+import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
 export type Article = NonNullable<
   NonNullable<ArticleCollectionQuery['articleCollection']>['items'][number]

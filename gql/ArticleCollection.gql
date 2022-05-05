@@ -8,6 +8,12 @@ query ArticleCollection {
         title,
         url,
       },
+      tagCollection {
+        items {
+          slug,
+          title,
+        },
+      },
       sys {
         publishedAt,
       },

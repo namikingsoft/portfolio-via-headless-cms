@@ -8,6 +8,12 @@ query ArticleFromSlug($slug: String!) {
         title,
         url,
       },
+      tagCollection {
+        items {
+          slug,
+          title,
+        },
+      },
       sys {
         publishedAt,
       },

@@ -28,6 +28,9 @@ const Post = ({ article, content }: Props) => {
             title={article.title || ''}
             coverImage={article.thumbnail?.url || ''}
             date={article.sys.publishedAt}
+            tags={
+              article.tagCollection?.items.map((tag) => tag?.title ?? '') ?? []
+            }
           />
           <ArticleBody content={content} />
         </article>

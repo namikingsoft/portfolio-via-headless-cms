@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import Container from '../../components/container'
 import Header from '../../components/header'
 import Layout from '../../components/layout'
+import ArticleList from '../../components/article-list'
 import { CMS_NAME } from '../../lib/constants'
 import { getAllArticles, Article } from '../../lib/contentful'
 
@@ -10,7 +10,7 @@ type Props = {
   articles: Article[]
 }
 
-const Post = ({ articles }: Props) => {
+const ArticleIndex = ({ articles }: Props) => {
   return (
     <Layout>
       <Head>
@@ -18,31 +18,13 @@ const Post = ({ articles }: Props) => {
       </Head>
       <Container>
         <Header />
-        <section>
-          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-            More Stories
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
-            <ul>
-              {articles.map((article) => (
-                <li key={article.slug}>
-                  <Link
-                    as={`/articles/${article.slug}`}
-                    href="/articles/[slug]"
-                  >
-                    <a className="hover:underline">{article.title}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        {articles.length > 0 && <ArticleList articles={articles} />}
       </Container>
     </Layout>
   )
 }
 
-export default Post
+export default ArticleIndex
 
 export async function getStaticProps(): Promise<{ props: Props }> {
   const articles = await getAllArticles()

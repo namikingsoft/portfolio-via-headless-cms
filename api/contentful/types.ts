@@ -1,11 +1,11 @@
-type Tag = {
-  title: string
-  slug: string
-}
-
 type Image = {
   url: string
   alt: string
+}
+
+export type Tag = {
+  title: string
+  slug: string
 }
 
 export type Article = {

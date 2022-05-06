@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
 
@@ -13,12 +14,11 @@ const ArticleHeader = ({ article }: Props) => {
       </h1>
       <div className="hidden md:block md:mb-12">
         {article.tags.map((tag) => (
-          <span
-            key={tag.slug}
-            className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1"
-          >
-            {tag.title}
-          </span>
+          <Link key={tag.slug} as={`/tags/${tag.slug}`} href="/tags/[slug]">
+            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
+              {tag.title}
+            </span>
+          </Link>
         ))}
       </div>
       <div className="mb-8 md:mb-16 sm:mx-0">

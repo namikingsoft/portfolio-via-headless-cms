@@ -16,6 +16,7 @@ query ArticleFromSlug($slug: String!) {
         },
       },
       sys {
+        id,
         publishedAt,
       },
     }

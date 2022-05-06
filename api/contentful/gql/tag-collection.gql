@@ -1,0 +1,8 @@
+query TagCollection {
+  tagCollection {
+    items {
+      slug,
+      title,
+    }
+  }
+}

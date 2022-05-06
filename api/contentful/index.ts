@@ -3,8 +3,9 @@ import {
   getSdk,
   ArticleCollectionQuery,
   IntroCollectionQuery,
+  TagCollectionQuery,
 } from './client.generated'
-import { Article, Intro } from './types'
+import { Article, Intro, Tag } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
 type ArticleRaw = NonNullable<
@@ -15,11 +16,22 @@ type IntroRaw = NonNullable<
   NonNullable<IntroCollectionQuery['introCollection']>['items'][number]
 >
 
+type TagRaw = NonNullable<
+  NonNullable<TagCollectionQuery['tagCollection']>['items'][number]
+>
+
 // NOTE: contentful fields are all nullable even if required
 // https://www.contentfulcommunity.com/t/why-do-required-fields-appear-as-nullable-in-the-graphql-graph/4079
 function nonNullable<T>(x: T | null | undefined) {
   if (x == null) throw new Error('nullable not expected')
   return x
+}
+
+function toTag(raw: TagRaw): Tag {
+  return {
+    slug: nonNullable(raw.slug),
+    title: nonNullable(raw.title),
+  }
 }
 
 function toArticle(raw: ArticleRaw): Article {
@@ -33,10 +45,9 @@ function toArticle(raw: ArticleRaw): Article {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
     },
-    tags: (raw.tagCollection?.items ?? []).map((tag) => ({
-      slug: nonNullable(tag?.slug),
-      title: nonNullable(tag?.title),
-    })),
+    tags: (raw.tagCollection?.items ?? [])
+      .flatMap((x) => (x === null ? [] : [x]))
+      .map(toTag),
   }
 }
 
@@ -75,4 +86,33 @@ export async function getIntroList(): Promise<Intro[]> {
   return (introCollection?.items ?? [])
     .flatMap((x) => (x === null ? [] : [x]))
     .map(toIntro)
+}
+
+export async function getTagList(): Promise<Tag[]> {
+  const { tagCollection } = await getSdk(client).TagCollection()
+  return (tagCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toTag)
+}
+
+type TagWithArticles = {
+  tag: Tag
+  articles: Article[]
+}
+
+export async function getTagWithArticles(
+  slug: string,
+): Promise<TagWithArticles> {
+  const { TagFromSlug, TagWithArticles } = await getSdk(client)
+  const { tagCollection } = await TagFromSlug({ slug })
+  const firstTag = nonNullable(tagCollection?.items?.[0])
+  const { tag } = await TagWithArticles({ tagId: firstTag.sys.id })
+  const articleCollection = tag?.linkedFrom?.articleCollection
+  const articles = (articleCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toArticle)
+  return {
+    tag: toTag(firstTag),
+    articles,
+  }
 }

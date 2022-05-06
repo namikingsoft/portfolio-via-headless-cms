@@ -1,0 +1,32 @@
+query TagWithArticles($tagId: String!) {
+  tag(id: $tagId) {
+    slug,
+    title,
+    linkedFrom {
+      articleCollection {
+        items {
+          slug,
+          title,
+          excerpt,
+          content,
+          image {
+            title,
+            url,
+          },
+          tagCollection {
+            items {
+              slug,
+              title,
+            },
+          },
+          sys {
+            publishedAt,
+          },
+        },
+      },
+    },
+    sys {
+      id,
+    },
+  },
+}

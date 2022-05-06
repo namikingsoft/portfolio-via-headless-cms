@@ -1,5 +1,5 @@
-import DateFormatter from './date-formatter'
 import Link from 'next/link'
+import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
 
 type Props = {

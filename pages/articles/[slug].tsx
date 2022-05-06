@@ -40,6 +40,7 @@ type Context = {
     slug: string
   }
 }
+
 export async function getStaticProps({
   params: { slug },
 }: Context): Promise<{ props: Props }> {

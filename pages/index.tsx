@@ -26,7 +26,9 @@ const Index = ({ intros, articles }: Props) => {
             intros.map((intro) => (
               <IntroSection key={intro.title} intro={intro} />
             ))}
-          {articles.length > 0 && <ArticleList articles={articles} />}
+          {articles.length > 0 && (
+            <ArticleList title="More Stories" articles={articles} />
+          )}
         </Container>
       </Layout>
     </>

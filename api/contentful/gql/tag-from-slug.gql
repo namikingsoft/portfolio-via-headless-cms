@@ -1,0 +1,11 @@
+query TagFromSlug($slug: String!) {
+  tagCollection(where: { slug: $slug }) {
+    items {
+      slug,
+      title,
+      sys {
+        id,
+      },
+    },
+  },
+}

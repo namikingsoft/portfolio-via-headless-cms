@@ -19,7 +19,9 @@ const ArticleIndex = ({ articles }: Props) => {
       </Head>
       <Container>
         <Header />
-        {articles.length > 0 && <ArticleList articles={articles} />}
+        {articles.length > 0 && (
+          <ArticleList title="All Stories" articles={articles} />
+        )}
       </Container>
     </Layout>
   )

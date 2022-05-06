@@ -6,7 +6,8 @@ import ArticleBody from '../../components/article-body'
 import ArticleHeader from '../../components/article-header'
 import markdownToHtml from '../../lib/markdownToHtml'
 import { CMS_NAME } from '../../lib/constants'
-import { getAllArticles, getArticle, Article } from '../../api/contentful'
+import { Article } from '../../api/contentful/types'
+import { getAllArticles, getArticle } from '../../api/contentful'
 
 type Props = {
   article: Article
@@ -24,14 +25,7 @@ const Post = ({ article, content }: Props) => {
               {article.title} | Next.js Blog Example with {CMS_NAME}
             </title>
           </Head>
-          <ArticleHeader
-            title={article.title || ''}
-            coverImage={article.thumbnail?.url || ''}
-            date={article.sys.publishedAt}
-            tags={
-              article.tagCollection?.items.map((tag) => tag?.title ?? '') ?? []
-            }
-          />
+          <ArticleHeader article={article} />
           <ArticleBody content={content} />
         </article>
       </Container>
@@ -50,7 +44,7 @@ export async function getStaticProps({
   params: { slug },
 }: Context): Promise<{ props: Props }> {
   const article = await getArticle(slug)
-  const content = await markdownToHtml(article.description ?? '')
+  const content = await markdownToHtml(article.content)
   return {
     props: {
       article,

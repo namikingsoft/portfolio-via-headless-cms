@@ -5,7 +5,8 @@ import SiteTitle from '../components/site-title'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
-import { getAllArticles, Article, getIntroList, Intro } from '../api/contentful'
+import { Article, Intro } from '../api/contentful/types'
+import { getAllArticles, getIntroList } from '../api/contentful'
 
 type Props = {
   intros: Intro[]
@@ -23,13 +24,7 @@ const Index = ({ intros, articles }: Props) => {
           <SiteTitle />
           {intros.length > 0 &&
             intros.map((intro) => (
-              <IntroSection
-                key={intro.title}
-                title={intro.title ?? ''}
-                imageUrl={intro.image?.url ?? ''}
-                imageAlt={intro.image?.title ?? ''}
-                content={intro.content ?? ''}
-              />
+              <IntroSection key={intro.title} intro={intro} />
             ))}
           {articles.length > 0 && <ArticleList articles={articles} />}
         </Container>

@@ -3,8 +3,9 @@ query ArticleCollection {
     items {
       slug,
       title,
-      description,
-      thumbnail {
+      excerpt,
+      content,
+      image {
         title,
         url,
       },

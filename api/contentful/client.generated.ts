@@ -31,20 +31,34 @@ export type Scalars = {
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
 export type Article = Entry & {
   __typename?: 'Article';
+  content?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']>;
+  excerpt?: Maybe<Scalars['String']>;
+  image?: Maybe<Asset>;
   linkedFrom?: Maybe<ArticleLinkingCollections>;
   slug?: Maybe<Scalars['String']>;
   sys: Sys;
   tagCollection?: Maybe<ArticleTagCollection>;
-  thumbnail?: Maybe<Asset>;
   title?: Maybe<Scalars['String']>;
 };
 
 
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
-export type ArticleDescriptionArgs = {
+export type ArticleContentArgs = {
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleExcerptArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -70,13 +84,6 @@ export type ArticleTagCollectionArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
-export type ArticleThumbnailArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
 export type ArticleTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -92,14 +99,22 @@ export type ArticleCollection = {
 export type ArticleFilter = {
   AND?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  excerpt?: InputMaybe<Scalars['String']>;
+  excerpt_contains?: InputMaybe<Scalars['String']>;
+  excerpt_exists?: InputMaybe<Scalars['Boolean']>;
+  excerpt_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  excerpt_not?: InputMaybe<Scalars['String']>;
+  excerpt_not_contains?: InputMaybe<Scalars['String']>;
+  excerpt_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
   slug?: InputMaybe<Scalars['String']>;
   slug_contains?: InputMaybe<Scalars['String']>;
   slug_exists?: InputMaybe<Scalars['Boolean']>;
@@ -109,7 +124,6 @@ export type ArticleFilter = {
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   tagCollection_exists?: InputMaybe<Scalars['Boolean']>;
-  thumbnail_exists?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
   title_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1114,14 +1128,14 @@ export type CfTagNestedFilter = {
 export type ArticleCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticleCollectionQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, description?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
+export type ArticleCollectionQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
 export type ArticleFromSlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, description?: string | null, thumbnail?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
+export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
 export type IntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1135,8 +1149,9 @@ export const ArticleCollectionDocument = gql`
     items {
       slug
       title
-      description
-      thumbnail {
+      excerpt
+      content
+      image {
         title
         url
       }
@@ -1159,8 +1174,9 @@ export const ArticleFromSlugDocument = gql`
     items {
       slug
       title
-      description
-      thumbnail {
+      excerpt
+      content
+      image {
         title
         url
       }

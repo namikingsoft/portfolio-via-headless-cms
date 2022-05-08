@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { gtagId } from '../env'
 import '../styles/index.css'
+import '../styles/prism.css'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

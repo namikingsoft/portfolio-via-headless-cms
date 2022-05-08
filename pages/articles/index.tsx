@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Container from '../../components/container'
-import Header from '../../components/header'
 import Layout from '../../components/layout'
+import Container from '../../components/container'
+import SiteTitle from '../../components/site-title'
 import ArticleList from '../../components/article-list'
 import { CMS_NAME } from '../../lib/constants'
 import { Article } from '../../api/contentful/types'
@@ -18,7 +18,7 @@ const ArticleIndex = ({ articles }: Props) => {
         <title>Testest | Next.js Blog Example with {CMS_NAME}</title>
       </Head>
       <Container>
-        <Header />
+        <SiteTitle isLowerPage />
         {articles.length > 0 && (
           <ArticleList title="All Stories" articles={articles} />
         )}

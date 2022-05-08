@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Container from '../../components/container'
-import Header from '../../components/header'
 import Layout from '../../components/layout'
+import Container from '../../components/container'
+import SiteTitle from '../../components/site-title'
 import ArticleList from '../../components/article-list'
 import { CMS_NAME } from '../../lib/constants'
 import { Article, Tag } from '../../api/contentful/types'
@@ -21,7 +21,7 @@ const ArticleIndex = ({ tag, articles }: Props) => {
         </title>
       </Head>
       <Container>
-        <Header />
+        <SiteTitle isLowerPage />
         {articles.length > 0 && (
           <ArticleList title={tag.title} articles={articles} />
         )}

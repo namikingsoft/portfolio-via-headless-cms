@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
 
@@ -24,11 +25,7 @@ const ArticleHeader = ({ article }: Props) => {
         ))}
       </div>
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <img
-          src={article.image.url}
-          alt={article.image.alt}
-          className="shadow-small"
-        />
+        <CoverImage src={article.image.url} alt={article.image.alt} />
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="mb-6 text-lg">

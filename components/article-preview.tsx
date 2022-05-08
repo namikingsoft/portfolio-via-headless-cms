@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
 
@@ -13,10 +14,10 @@ const ArticlePreview = ({ article }: Props) => {
         <div className="sm:mx-0">
           <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
             <a className="hover">
-              <img
+              <CoverImage
                 src={article.image.url}
                 alt={article.image.alt}
-                className="shadow-small hover:shadow-medium transition-shadow duration-200"
+                hasHoverStyle
               />
             </a>
           </Link>

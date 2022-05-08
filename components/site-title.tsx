@@ -1,7 +1,12 @@
+import Link from 'next/link'
 import { CMS_NAME } from '../lib/constants'
 
-const SiteTitle = () => {
-  return (
+type Props = {
+  isLowerPage?: boolean
+}
+
+const SiteTitle = ({ isLowerPage }: Props) => {
+  return !isLowerPage ? (
     <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
       <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
         {CMS_NAME}
@@ -17,6 +22,12 @@ const SiteTitle = () => {
         and Markdown.
       </h4>
     </section>
+  ) : (
+    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
+      <Link href="/">
+        <a className="hover:underline">{CMS_NAME}</a>
+      </Link>
+    </h2>
   )
 }
 

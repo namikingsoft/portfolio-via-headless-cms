@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Container from '../../components/container'
-import Header from '../../components/header'
 import Layout from '../../components/layout'
+import Container from '../../components/container'
+import SiteTitle from '../../components/site-title'
 import ArticleBody from '../../components/article-body'
 import ArticleHeader from '../../components/article-header'
 import markdownToHtml from '../../lib/markdownToHtml'
@@ -18,7 +18,7 @@ const Post = ({ article, content }: Props) => {
   return (
     <Layout>
       <Container>
-        <Header />
+        <SiteTitle isLowerPage />
         <article className="mb-32">
           <Head>
             <title>

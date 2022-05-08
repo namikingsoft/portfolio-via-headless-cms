@@ -1,3 +1,4 @@
+import CoverImage from './cover-image'
 import { Intro } from '../api/contentful/types'
 
 type Props = {
@@ -8,11 +9,7 @@ const IntroSection = ({ intro }: Props) => {
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <img
-          src={intro.image.url}
-          alt={intro.image.alt}
-          className="shadow-small"
-        />
+        <CoverImage src={intro.image.url} alt={intro.image.alt} />
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>

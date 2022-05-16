@@ -5,7 +5,7 @@ import SiteTitle from '../../components/site-title'
 import ArticleList from '../../components/article-list'
 import { CMS_NAME } from '../../lib/constants'
 import { Article, Tag } from '../../api/contentful/types'
-import { getTagWithArticles, getTagList } from '../../api/contentful'
+// import { getTagWithArticles, getTagList } from '../../api/contentful'
 
 type Props = {
   tag: Tag
@@ -41,26 +41,27 @@ type Context = {
 export async function getStaticProps({
   params: { slug },
 }: Context): Promise<{ props: Props }> {
-  const { tag, articles } = await getTagWithArticles(slug)
+  // const { tag } = await getTagWithArticles(slug)
   return {
     props: {
-      tag,
-      articles,
+      tag: { title: '', slug: '' },
+      articles: [],
     },
   }
 }
 
 export async function getStaticPaths() {
-  const tags = await getTagList()
+  // const tags = await getTagList()
 
   return {
-    paths: tags.map((tag) => {
-      return {
-        params: {
-          slug: tag.slug,
-        },
-      }
-    }),
+    // paths: tags.map((tag) => {
+    //   return {
+    //     params: {
+    //       slug: tag.slug,
+    //     },
+    //   }
+    // }),
+    paths: [],
     fallback: false,
   }
 }

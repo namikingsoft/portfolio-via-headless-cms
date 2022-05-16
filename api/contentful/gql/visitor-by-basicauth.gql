@@ -1,0 +1,8 @@
+query VisitorByBasicAuth($username: String!, $password: String!) {
+  visitorCollection(where: { username: $username, password: $password }) {
+    items {
+      username,
+      disabled,
+    }
+  }
+}

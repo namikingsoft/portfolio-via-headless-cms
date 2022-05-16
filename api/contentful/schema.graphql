@@ -11,8 +11,9 @@ type Article implements Entry {
   sys: Sys!
   contentfulMetadata: ContentfulMetadata!
   linkedFrom(allowedLocales: [String]): ArticleLinkingCollections
-  slug(locale: String): String
   title(locale: String): String
+  slug(locale: String): String
+  date(locale: String): DateTime
   image(preview: Boolean, locale: String): Asset
   excerpt(locale: String): String
   content(locale: String): String
@@ -29,13 +30,6 @@ type ArticleCollection {
 input ArticleFilter {
   sys: SysFilter
   contentfulMetadata: ContentfulMetadataFilter
-  slug_exists: Boolean
-  slug: String
-  slug_not: String
-  slug_in: [String]
-  slug_not_in: [String]
-  slug_contains: String
-  slug_not_contains: String
   title_exists: Boolean
   title: String
   title_not: String
@@ -43,6 +37,22 @@ input ArticleFilter {
   title_not_in: [String]
   title_contains: String
   title_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
   image_exists: Boolean
   excerpt_exists: Boolean
   excerpt: String
@@ -68,10 +78,12 @@ type ArticleLinkingCollections {
 }
 
 enum ArticleOrder {
-  slug_ASC
-  slug_DESC
   title_ASC
   title_DESC
+  slug_ASC
+  slug_DESC
+  date_ASC
+  date_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
@@ -184,7 +196,6 @@ type AssetLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
   introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): IntroCollection
-  pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PageCollection
 }
 
 enum AssetOrder {
@@ -538,82 +549,6 @@ enum IntroOrder {
 }
 
 """
-[See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page)
-"""
-type Page implements Entry {
-  sys: Sys!
-  contentfulMetadata: ContentfulMetadata!
-  linkedFrom(allowedLocales: [String]): PageLinkingCollections
-  title(locale: String): String
-  slug(locale: String): String
-  thumbnail(preview: Boolean, locale: String): Asset
-  excerpt(locale: String): String
-  content(locale: String): String
-}
-
-type PageCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [Page]!
-}
-
-input PageFilter {
-  sys: SysFilter
-  contentfulMetadata: ContentfulMetadataFilter
-  title_exists: Boolean
-  title: String
-  title_not: String
-  title_in: [String]
-  title_not_in: [String]
-  title_contains: String
-  title_not_contains: String
-  slug_exists: Boolean
-  slug: String
-  slug_not: String
-  slug_in: [String]
-  slug_not_in: [String]
-  slug_contains: String
-  slug_not_contains: String
-  thumbnail_exists: Boolean
-  excerpt_exists: Boolean
-  excerpt: String
-  excerpt_not: String
-  excerpt_in: [String]
-  excerpt_not_in: [String]
-  excerpt_contains: String
-  excerpt_not_contains: String
-  content_exists: Boolean
-  content: String
-  content_not: String
-  content_in: [String]
-  content_not_in: [String]
-  content_contains: String
-  content_not_contains: String
-  OR: [PageFilter]
-  AND: [PageFilter]
-}
-
-type PageLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-}
-
-enum PageOrder {
-  title_ASC
-  title_DESC
-  slug_ASC
-  slug_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-"""
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
 """
 scalar Quality
@@ -621,12 +556,12 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  visitor(id: String!, preview: Boolean, locale: String): Visitor
+  visitorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: VisitorFilter, order: [VisitorOrder]): VisitorCollection
   article(id: String!, preview: Boolean, locale: String): Article
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   intro(id: String!, preview: Boolean, locale: String): Intro
   introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
-  page(id: String!, preview: Boolean, locale: String): Page
-  pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PageFilter, order: [PageOrder]): PageCollection
   tag(id: String!, preview: Boolean, locale: String): Tag
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   category(id: String!, preview: Boolean, locale: String): Category
@@ -730,6 +665,70 @@ enum TagOrder {
   title_DESC
   slug_ASC
   slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor)
+"""
+type Visitor implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): VisitorLinkingCollections
+  username(locale: String): String
+  password(locale: String): String
+  disabled(locale: String): Boolean
+}
+
+type VisitorCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Visitor]!
+}
+
+input VisitorFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  username_exists: Boolean
+  username: String
+  username_not: String
+  username_in: [String]
+  username_not_in: [String]
+  username_contains: String
+  username_not_contains: String
+  password_exists: Boolean
+  password: String
+  password_not: String
+  password_in: [String]
+  password_not_in: [String]
+  password_contains: String
+  password_not_contains: String
+  disabled_exists: Boolean
+  disabled: Boolean
+  disabled_not: Boolean
+  OR: [VisitorFilter]
+  AND: [VisitorFilter]
+}
+
+type VisitorLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+}
+
+enum VisitorOrder {
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  disabled_ASC
+  disabled_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC

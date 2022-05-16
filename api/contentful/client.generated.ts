@@ -33,6 +33,7 @@ export type Article = Entry & {
   __typename?: 'Article';
   content?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
+  date?: Maybe<Scalars['DateTime']>;
   excerpt?: Maybe<Scalars['String']>;
   image?: Maybe<Asset>;
   linkedFrom?: Maybe<ArticleLinkingCollections>;
@@ -45,6 +46,12 @@ export type Article = Entry & {
 
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
 export type ArticleContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleDateArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -107,6 +114,15 @@ export type ArticleFilter = {
   content_not_contains?: InputMaybe<Scalars['String']>;
   content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  date?: InputMaybe<Scalars['DateTime']>;
+  date_exists?: InputMaybe<Scalars['Boolean']>;
+  date_gt?: InputMaybe<Scalars['DateTime']>;
+  date_gte?: InputMaybe<Scalars['DateTime']>;
+  date_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  date_lt?: InputMaybe<Scalars['DateTime']>;
+  date_lte?: InputMaybe<Scalars['DateTime']>;
+  date_not?: InputMaybe<Scalars['DateTime']>;
+  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   excerpt?: InputMaybe<Scalars['String']>;
   excerpt_contains?: InputMaybe<Scalars['String']>;
   excerpt_exists?: InputMaybe<Scalars['Boolean']>;
@@ -147,6 +163,8 @@ export type ArticleLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum ArticleOrder {
+  DateAsc = 'date_ASC',
+  DateDesc = 'date_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -322,7 +340,6 @@ export type AssetLinkingCollections = {
   articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
   introCollection?: Maybe<IntroCollection>;
-  pageCollection?: Maybe<PageCollection>;
 };
 
 
@@ -343,14 +360,6 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 
 
 export type AssetLinkingCollectionsIntroCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type AssetLinkingCollectionsPageCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -703,128 +712,6 @@ export enum IntroOrder {
   TitleDesc = 'title_DESC'
 }
 
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type Page = Entry & {
-  __typename?: 'Page';
-  content?: Maybe<Scalars['String']>;
-  contentfulMetadata: ContentfulMetadata;
-  excerpt?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageLinkingCollections>;
-  slug?: Maybe<Scalars['String']>;
-  sys: Sys;
-  thumbnail?: Maybe<Asset>;
-  title?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageContentArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageExcerptArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageLinkedFromArgs = {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageSlugArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageThumbnailArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/page) */
-export type PageTitleArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-export type PageCollection = {
-  __typename?: 'PageCollection';
-  items: Array<Maybe<Page>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-};
-
-export type PageFilter = {
-  AND?: InputMaybe<Array<InputMaybe<PageFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<PageFilter>>>;
-  content?: InputMaybe<Scalars['String']>;
-  content_contains?: InputMaybe<Scalars['String']>;
-  content_exists?: InputMaybe<Scalars['Boolean']>;
-  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  content_not?: InputMaybe<Scalars['String']>;
-  content_not_contains?: InputMaybe<Scalars['String']>;
-  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  excerpt?: InputMaybe<Scalars['String']>;
-  excerpt_contains?: InputMaybe<Scalars['String']>;
-  excerpt_exists?: InputMaybe<Scalars['Boolean']>;
-  excerpt_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  excerpt_not?: InputMaybe<Scalars['String']>;
-  excerpt_not_contains?: InputMaybe<Scalars['String']>;
-  excerpt_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug?: InputMaybe<Scalars['String']>;
-  slug_contains?: InputMaybe<Scalars['String']>;
-  slug_exists?: InputMaybe<Scalars['Boolean']>;
-  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug_not?: InputMaybe<Scalars['String']>;
-  slug_not_contains?: InputMaybe<Scalars['String']>;
-  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  thumbnail_exists?: InputMaybe<Scalars['Boolean']>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type PageLinkingCollections = {
-  __typename?: 'PageLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-};
-
-
-export type PageLinkingCollectionsEntryCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-export enum PageOrder {
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
-}
-
 export type Query = {
   __typename?: 'Query';
   article?: Maybe<Article>;
@@ -836,10 +723,10 @@ export type Query = {
   entryCollection?: Maybe<EntryCollection>;
   intro?: Maybe<Intro>;
   introCollection?: Maybe<IntroCollection>;
-  page?: Maybe<Page>;
-  pageCollection?: Maybe<PageCollection>;
   tag?: Maybe<Tag>;
   tagCollection?: Maybe<TagCollection>;
+  visitor?: Maybe<Visitor>;
+  visitorCollection?: Maybe<VisitorCollection>;
 };
 
 
@@ -921,23 +808,6 @@ export type QueryIntroCollectionArgs = {
 };
 
 
-export type QueryPageArgs = {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-export type QueryPageCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<PageOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageFilter>;
-};
-
-
 export type QueryTagArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -952,6 +822,23 @@ export type QueryTagCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<TagFilter>;
+};
+
+
+export type QueryVisitorArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryVisitorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<VisitorOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VisitorFilter>;
 };
 
 export type Sys = {
@@ -1104,6 +991,103 @@ export enum TagOrder {
   TitleDesc = 'title_DESC'
 }
 
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type Visitor = Entry & {
+  __typename?: 'Visitor';
+  contentfulMetadata: ContentfulMetadata;
+  disabled?: Maybe<Scalars['Boolean']>;
+  linkedFrom?: Maybe<VisitorLinkingCollections>;
+  password?: Maybe<Scalars['String']>;
+  sys: Sys;
+  username?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type VisitorDisabledArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type VisitorLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type VisitorPasswordArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type VisitorUsernameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type VisitorCollection = {
+  __typename?: 'VisitorCollection';
+  items: Array<Maybe<Visitor>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type VisitorFilter = {
+  AND?: InputMaybe<Array<InputMaybe<VisitorFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<VisitorFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled_exists?: InputMaybe<Scalars['Boolean']>;
+  disabled_not?: InputMaybe<Scalars['Boolean']>;
+  password?: InputMaybe<Scalars['String']>;
+  password_contains?: InputMaybe<Scalars['String']>;
+  password_exists?: InputMaybe<Scalars['Boolean']>;
+  password_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  password_not?: InputMaybe<Scalars['String']>;
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  password_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  username?: InputMaybe<Scalars['String']>;
+  username_contains?: InputMaybe<Scalars['String']>;
+  username_exists?: InputMaybe<Scalars['Boolean']>;
+  username_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  username_not?: InputMaybe<Scalars['String']>;
+  username_not_contains?: InputMaybe<Scalars['String']>;
+  username_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type VisitorLinkingCollections = {
+  __typename?: 'VisitorLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type VisitorLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum VisitorOrder {
+  DisabledAsc = 'disabled_ASC',
+  DisabledDesc = 'disabled_DESC',
+  PasswordAsc = 'password_ASC',
+  PasswordDesc = 'password_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  UsernameAsc = 'username_ASC',
+  UsernameDesc = 'username_DESC'
+}
+
 export type CfTagNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfTagNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfTagNestedFilter>>>;
@@ -1160,6 +1144,14 @@ export type TagWithArticlesQueryVariables = Exact<{
 
 
 export type TagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
+
+export type VisitorByBasicAuthQueryVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type VisitorByBasicAuthQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, disabled?: boolean | null } | null> } | null };
 
 
 export const ArticleCollectionDocument = gql`
@@ -1284,6 +1276,16 @@ export const TagWithArticlesDocument = gql`
   }
 }
     `;
+export const VisitorByBasicAuthDocument = gql`
+    query VisitorByBasicAuth($username: String!, $password: String!) {
+  visitorCollection(where: {username: $username, password: $password}) {
+    items {
+      username
+      disabled
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -1309,6 +1311,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     TagWithArticles(variables: TagWithArticlesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagWithArticlesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TagWithArticlesQuery>(TagWithArticlesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagWithArticles', 'query');
+    },
+    VisitorByBasicAuth(variables: VisitorByBasicAuthQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VisitorByBasicAuthQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VisitorByBasicAuthQuery>(VisitorByBasicAuthDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VisitorByBasicAuth', 'query');
     }
   };
 }

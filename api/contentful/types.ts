@@ -23,3 +23,8 @@ export type Intro = {
   content: string
   image: Image
 }
+
+export type Visitor = {
+  username: string
+  disabled: boolean
+}

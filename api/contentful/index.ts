@@ -1,12 +1,24 @@
 import { GraphQLClient } from 'graphql-request'
 import {
   getSdk,
+  VisitorByBasicAuthQuery,
   ArticleCollectionQuery,
   IntroCollectionQuery,
   TagCollectionQuery,
 } from './client.generated'
-import { Article, Intro, Tag } from './types'
+import { Article, Intro, Tag, Visitor } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
+
+const client = new GraphQLClient(contentfulEndpoint, {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${contentfulAccessToken}`,
+  },
+  // NOTE: do not use cross-fetch of default in middleware
+  // https://github.com/vercel/next.js/issues/32369
+  // https://nextjs.org/docs/api-reference/edge-runtime#fetch
+  fetch,
+})
 
 type ArticleRaw = NonNullable<
   NonNullable<ArticleCollectionQuery['articleCollection']>['items'][number]
@@ -18,6 +30,10 @@ type IntroRaw = NonNullable<
 
 type TagRaw = NonNullable<
   NonNullable<TagCollectionQuery['tagCollection']>['items'][number]
+>
+
+type VisitorRaw = NonNullable<
+  NonNullable<VisitorByBasicAuthQuery['visitorCollection']>['items'][number]
 >
 
 // NOTE: contentful fields are all nullable even if required
@@ -62,12 +78,12 @@ function toIntro(raw: IntroRaw): Intro {
   }
 }
 
-const client = new GraphQLClient(contentfulEndpoint, {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${contentfulAccessToken}`,
-  },
-})
+function toVisitor(raw: VisitorRaw): Visitor {
+  return {
+    username: nonNullable(raw.username),
+    disabled: nonNullable(raw.disabled),
+  }
+}
 
 export async function getAllArticles(): Promise<Article[]> {
   const { articleCollection } = await getSdk(client).ArticleCollection()
@@ -77,7 +93,9 @@ export async function getAllArticles(): Promise<Article[]> {
 }
 
 export async function getArticle(slug: string): Promise<Article> {
-  const { articleCollection } = await getSdk(client).ArticleFromSlug({ slug })
+  const { articleCollection } = await getSdk(client).ArticleFromSlug({
+    slug,
+  })
   return toArticle(nonNullable(articleCollection?.items?.[0]))
 }
 
@@ -115,4 +133,15 @@ export async function getTagWithArticles(
     tag: toTag(firstTag),
     articles,
   }
+}
+
+export async function getVisitorByBasicAuth(
+  username: string,
+  password: string,
+): Promise<Visitor> {
+  const { visitorCollection } = await getSdk(client).VisitorByBasicAuth({
+    username,
+    password,
+  })
+  return toVisitor(nonNullable(visitorCollection?.items?.[0]))
 }

@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import { Article, Intro } from '../api/contentful/types'
-// import { getAllArticles, getIntroList } from '../api/contentful'
+import { getAllArticles, getIntroList } from '../api/contentful'
 
 type Props = {
   intros: Intro[]
@@ -38,12 +38,12 @@ const Index = ({ intros, articles }: Props) => {
 export default Index
 
 export async function getStaticProps() {
-  // const intros = await getIntroList()
-  // const articles = await getAllArticles()
+  const intros = await getIntroList()
+  const articles = await getAllArticles()
   return {
     props: {
-      intros: [],
-      articles: [],
+      intros,
+      articles,
     },
   }
 }

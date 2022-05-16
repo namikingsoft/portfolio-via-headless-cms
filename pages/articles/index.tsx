@@ -5,7 +5,7 @@ import SiteTitle from '../../components/site-title'
 import ArticleList from '../../components/article-list'
 import { CMS_NAME } from '../../lib/constants'
 import { Article } from '../../api/contentful/types'
-// import { getAllArticles } from '../../api/contentful'
+import { getAllArticles } from '../../api/contentful'
 
 type Props = {
   articles: Article[]
@@ -30,10 +30,10 @@ const ArticleIndex = ({ articles }: Props) => {
 export default ArticleIndex
 
 export async function getStaticProps(): Promise<{ props: Props }> {
-  // const articles = await getAllArticles()
+  const articles = await getAllArticles()
   return {
     props: {
-      articles: [],
+      articles,
     },
   }
 }

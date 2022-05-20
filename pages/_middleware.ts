@@ -9,8 +9,13 @@ import {
 const fernet = new FernetLike({ signerKey, cryptoKey, crypto })
 const tokenMaxAgeSec = 24 * 60 * 60
 
+const nonAuthPathnames = ['/api/graphql']
+
 export async function middleware(req: NextRequest) {
-  if (req.cookies.visitorToken && fernet.verify(req.cookies.visitorToken)) {
+  if (
+    nonAuthPathnames.some((pathname) => pathname === req.nextUrl.pathname) ||
+    (req.cookies.visitorToken && fernet.verify(req.cookies.visitorToken))
+  ) {
     return NextResponse.next()
   }
 

@@ -4,7 +4,8 @@ NPM_BIN := $(shell npm bin)
 
 .PHONY: all
 all: \
-	api/contentful/client.generated.ts
+	api/contentful/client.generated.ts \
+	api/bff/server.generated.ts
 
 api/contentful/schema.graphql:
 	@npx get-graphql-schema \
@@ -15,3 +16,6 @@ api/contentful/schema.graphql:
 
 api/contentful/client.generated.ts: api/contentful/schema.graphql
 	@$(NPM_BIN)/graphql-codegen --config api/contentful/codegen.yml
+
+api/bff/server.generated.ts:
+	@$(NPM_BIN)/graphql-codegen --config api/bff/codegen-server.yml

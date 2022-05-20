@@ -1,0 +1,22 @@
+type Query {
+  visitor: Visitor!
+}
+
+type Mutation {
+  authenticate(input: AuthenticateInput!): Authentication!
+}
+
+type Visitor {
+  identifier: String!
+  name: String!
+}
+
+type Authentication {
+  token: String!
+  visitor: Visitor!
+}
+
+input AuthenticateInput {
+  username: String!
+  password: String!
+}

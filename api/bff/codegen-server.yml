@@ -1,0 +1,10 @@
+overwrite: true
+schema: api/bff/schema.graphql
+generates:
+  api/bff/server.generated.ts:
+    config:
+      contextType: ./types#Context
+      useIndexSignature: true
+    plugins:
+      - typescript
+      - typescript-resolvers

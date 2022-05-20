@@ -17,7 +17,6 @@ export type Scalars = {
 
 export type AuthenticateInput = {
   password: Scalars['String'];
-  username: Scalars['String'];
 };
 
 export type Authentication = {
@@ -43,8 +42,8 @@ export type Query = {
 
 export type Visitor = {
   __typename?: 'Visitor';
-  identifier: Scalars['String'];
-  name: Scalars['String'];
+  label: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -152,8 +151,8 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 }>;
 
 export type VisitorResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Visitor'] = ResolversParentTypes['Visitor']> = ResolversObject<{
-  identifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

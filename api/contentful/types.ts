@@ -26,5 +26,5 @@ export type Intro = {
 
 export type Visitor = {
   username: string
-  disabled: boolean
+  label: string
 }

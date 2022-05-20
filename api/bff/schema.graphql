@@ -7,8 +7,8 @@ type Mutation {
 }
 
 type Visitor {
-  identifier: String!
-  name: String!
+  username: String!
+  label: String!
 }
 
 type Authentication {
@@ -17,6 +17,5 @@ type Authentication {
 }
 
 input AuthenticateInput {
-  username: String!
   password: String!
 }

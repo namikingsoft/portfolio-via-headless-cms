@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 import {
   getSdk,
-  VisitorByBasicAuthQuery,
+  VisitorByUsernameQuery,
   ArticleCollectionQuery,
   IntroCollectionQuery,
   TagCollectionQuery,
@@ -33,7 +33,7 @@ type TagRaw = NonNullable<
 >
 
 type VisitorRaw = NonNullable<
-  NonNullable<VisitorByBasicAuthQuery['visitorCollection']>['items'][number]
+  NonNullable<VisitorByUsernameQuery['visitorCollection']>['items'][number]
 >
 
 // NOTE: contentful fields are all nullable even if required
@@ -81,7 +81,7 @@ function toIntro(raw: IntroRaw): Intro {
 function toVisitor(raw: VisitorRaw): Visitor {
   return {
     username: nonNullable(raw.username),
-    disabled: nonNullable(raw.disabled),
+    label: nonNullable(raw.label),
   }
 }
 
@@ -135,12 +135,15 @@ export async function getTagWithArticles(
   }
 }
 
-export async function getVisitorByBasicAuth(
-  username: string,
-  password: string,
-): Promise<Visitor> {
-  const { visitorCollection } = await getSdk(client).VisitorByBasicAuth({
+export async function getVisitorByUsername(username: string): Promise<Visitor> {
+  const { visitorCollection } = await getSdk(client).VisitorByUsername({
     username,
+  })
+  return toVisitor(nonNullable(visitorCollection?.items?.[0]))
+}
+
+export async function getVisitorByPassword(password: string): Promise<Visitor> {
+  const { visitorCollection } = await getSdk(client).VisitorByPassword({
     password,
   })
   return toVisitor(nonNullable(visitorCollection?.items?.[0]))

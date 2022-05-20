@@ -34,6 +34,8 @@ export type Article = Entry & {
   content?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   date?: Maybe<Scalars['DateTime']>;
+  dateEnd?: Maybe<Scalars['DateTime']>;
+  dateIsContinue?: Maybe<Scalars['Boolean']>;
   excerpt?: Maybe<Scalars['String']>;
   image?: Maybe<Asset>;
   linkedFrom?: Maybe<ArticleLinkingCollections>;
@@ -52,6 +54,18 @@ export type ArticleContentArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
 export type ArticleDateArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleDateEndArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleDateIsContinueArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -115,6 +129,18 @@ export type ArticleFilter = {
   content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   date?: InputMaybe<Scalars['DateTime']>;
+  dateEnd?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_exists?: InputMaybe<Scalars['Boolean']>;
+  dateEnd_gt?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_gte?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  dateEnd_lt?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_lte?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_not?: InputMaybe<Scalars['DateTime']>;
+  dateEnd_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  dateIsContinue?: InputMaybe<Scalars['Boolean']>;
+  dateIsContinue_exists?: InputMaybe<Scalars['Boolean']>;
+  dateIsContinue_not?: InputMaybe<Scalars['Boolean']>;
   date_exists?: InputMaybe<Scalars['Boolean']>;
   date_gt?: InputMaybe<Scalars['DateTime']>;
   date_gte?: InputMaybe<Scalars['DateTime']>;
@@ -163,6 +189,10 @@ export type ArticleLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum ArticleOrder {
+  DateEndAsc = 'dateEnd_ASC',
+  DateEndDesc = 'dateEnd_DESC',
+  DateIsContinueAsc = 'dateIsContinue_ASC',
+  DateIsContinueDesc = 'dateIsContinue_DESC',
   DateAsc = 'date_ASC',
   DateDesc = 'date_DESC',
   SlugAsc = 'slug_ASC',
@@ -996,6 +1026,7 @@ export type Visitor = Entry & {
   __typename?: 'Visitor';
   contentfulMetadata: ContentfulMetadata;
   disabled?: Maybe<Scalars['Boolean']>;
+  label?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<VisitorLinkingCollections>;
   password?: Maybe<Scalars['String']>;
   sys: Sys;
@@ -1005,6 +1036,12 @@ export type Visitor = Entry & {
 
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
 export type VisitorDisabledArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/visitor) */
+export type VisitorLabelArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -1041,6 +1078,13 @@ export type VisitorFilter = {
   disabled?: InputMaybe<Scalars['Boolean']>;
   disabled_exists?: InputMaybe<Scalars['Boolean']>;
   disabled_not?: InputMaybe<Scalars['Boolean']>;
+  label?: InputMaybe<Scalars['String']>;
+  label_contains?: InputMaybe<Scalars['String']>;
+  label_exists?: InputMaybe<Scalars['Boolean']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label_not?: InputMaybe<Scalars['String']>;
+  label_not_contains?: InputMaybe<Scalars['String']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   password?: InputMaybe<Scalars['String']>;
   password_contains?: InputMaybe<Scalars['String']>;
   password_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1074,6 +1118,8 @@ export type VisitorLinkingCollectionsEntryCollectionArgs = {
 export enum VisitorOrder {
   DisabledAsc = 'disabled_ASC',
   DisabledDesc = 'disabled_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
   PasswordAsc = 'password_ASC',
   PasswordDesc = 'password_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1145,13 +1191,19 @@ export type TagWithArticlesQueryVariables = Exact<{
 
 export type TagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
 
-export type VisitorByBasicAuthQueryVariables = Exact<{
-  username: Scalars['String'];
+export type VisitorByPasswordQueryVariables = Exact<{
   password: Scalars['String'];
 }>;
 
 
-export type VisitorByBasicAuthQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, disabled?: boolean | null } | null> } | null };
+export type VisitorByPasswordQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, label?: string | null } | null> } | null };
+
+export type VisitorByUsernameQueryVariables = Exact<{
+  username: Scalars['String'];
+}>;
+
+
+export type VisitorByUsernameQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, label?: string | null } | null> } | null };
 
 
 export const ArticleCollectionDocument = gql`
@@ -1276,12 +1328,22 @@ export const TagWithArticlesDocument = gql`
   }
 }
     `;
-export const VisitorByBasicAuthDocument = gql`
-    query VisitorByBasicAuth($username: String!, $password: String!) {
-  visitorCollection(where: {username: $username, password: $password}) {
+export const VisitorByPasswordDocument = gql`
+    query VisitorByPassword($password: String!) {
+  visitorCollection(where: {password: $password, disabled: false}) {
     items {
       username
-      disabled
+      label
+    }
+  }
+}
+    `;
+export const VisitorByUsernameDocument = gql`
+    query VisitorByUsername($username: String!) {
+  visitorCollection(where: {username: $username, disabled: false}) {
+    items {
+      username
+      label
     }
   }
 }
@@ -1312,8 +1374,11 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     TagWithArticles(variables: TagWithArticlesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagWithArticlesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TagWithArticlesQuery>(TagWithArticlesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagWithArticles', 'query');
     },
-    VisitorByBasicAuth(variables: VisitorByBasicAuthQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VisitorByBasicAuthQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<VisitorByBasicAuthQuery>(VisitorByBasicAuthDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VisitorByBasicAuth', 'query');
+    VisitorByPassword(variables: VisitorByPasswordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VisitorByPasswordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VisitorByPasswordQuery>(VisitorByPasswordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VisitorByPassword', 'query');
+    },
+    VisitorByUsername(variables: VisitorByUsernameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VisitorByUsernameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VisitorByUsernameQuery>(VisitorByUsernameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VisitorByUsername', 'query');
     }
   };
 }

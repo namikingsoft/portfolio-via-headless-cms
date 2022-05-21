@@ -1,6 +1,8 @@
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { Provider } from 'urql'
+import { client } from '../api/bff/client'
 import { gtagId } from '../env'
 import '../styles/index.css'
 import '../styles/prism.css'
@@ -21,5 +23,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return (
+    <Provider value={client}>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }

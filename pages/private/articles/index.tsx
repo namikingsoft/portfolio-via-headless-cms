@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Layout from '../../components/layout'
-import Container from '../../components/container'
-import SiteTitle from '../../components/site-title'
-import ArticleList from '../../components/article-list'
-import { CMS_NAME } from '../../lib/constants'
-import { Article } from '../../api/contentful/types'
-import { getAllArticles } from '../../api/contentful'
+import Layout from '../../../components/layout'
+import Container from '../../../components/container'
+import SiteTitle from '../../../components/site-title'
+import ArticleList from '../../../components/article-list'
+import { CMS_NAME } from '../../../lib/constants'
+import { Article } from '../../../api/contentful/types'
+import { getAllArticles } from '../../../api/contentful'
 
 type Props = {
   articles: Article[]

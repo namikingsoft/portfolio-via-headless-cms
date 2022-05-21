@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import Layout from '../../components/layout'
-import Container from '../../components/container'
-import SiteTitle from '../../components/site-title'
-import ArticleBody from '../../components/article-body'
-import ArticleHeader from '../../components/article-header'
-import markdownToHtml from '../../lib/markdownToHtml'
-import { CMS_NAME } from '../../lib/constants'
-import { Article } from '../../api/contentful/types'
-import { getAllArticles, getArticle } from '../../api/contentful'
+import Layout from '../../../components/layout'
+import Container from '../../../components/container'
+import SiteTitle from '../../../components/site-title'
+import ArticleBody from '../../../components/article-body'
+import ArticleHeader from '../../../components/article-header'
+import markdownToHtml from '../../../lib/markdownToHtml'
+import { CMS_NAME } from '../../../lib/constants'
+import { Article } from '../../../api/contentful/types'
+import { getAllArticles, getArticle } from '../../../api/contentful'
 
 type Props = {
   article: Article

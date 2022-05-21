@@ -15,7 +15,11 @@ const ArticleHeader = ({ article }: Props) => {
       </h1>
       <div className="hidden md:block md:mb-12">
         {article.tags.map((tag) => (
-          <Link key={tag.slug} as={`/tags/${tag.slug}`} href="/tags/[slug]">
+          <Link
+            key={tag.slug}
+            as={`/private/tags/${tag.slug}`}
+            href="/private/tags/[slug]"
+          >
             <a className="hover">
               <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
                 {tag.title}

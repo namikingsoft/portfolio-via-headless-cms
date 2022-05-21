@@ -7,6 +7,7 @@ all: \
 	api/contentful/client.generated.ts \
 	api/bff/server.generated.ts \
 	api/bff/client.generated.ts \
+	lib/$path.ts \
 
 api/contentful/schema.graphql:
 	@npx get-graphql-schema \
@@ -23,3 +24,6 @@ api/bff/server.generated.ts:
 
 api/bff/client.generated.ts:
 	@$(NPM_BIN)/graphql-codegen --config api/bff/codegen-client.yml
+
+lib/$path.ts:
+	@$(NPM_BIN)/pathpida --ignorePath .gitignore

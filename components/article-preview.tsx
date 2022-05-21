@@ -2,6 +2,7 @@ import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
+import { pagesPath } from '../lib/$path'
 
 type Props = {
   article: Article
@@ -12,10 +13,7 @@ const ArticlePreview = ({ article }: Props) => {
     <div>
       <div className="mb-5">
         <div className="sm:mx-0">
-          <Link
-            as={`/private/articles/${article.slug}`}
-            href="/private/articles/[slug]"
-          >
+          <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
             <a className="hover">
               <CoverImage
                 src={article.image.url}
@@ -27,10 +25,7 @@ const ArticlePreview = ({ article }: Props) => {
         </div>
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
-        <Link
-          as={`/private/articles/${article.slug}`}
-          href="/private/articles/[slug]"
-        >
+        <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
           <a className="hover:underline">{article.title}</a>
         </Link>
       </h3>

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
 import { Article } from '../api/contentful/types'
+import { pagesPath } from '../lib/$path'
 
 type Props = {
   article: Article
@@ -17,8 +18,7 @@ const ArticleHeader = ({ article }: Props) => {
         {article.tags.map((tag) => (
           <Link
             key={tag.slug}
-            as={`/private/tags/${tag.slug}`}
-            href="/private/tags/[slug]"
+            href={pagesPath.private.tags._slug(tag.slug).$url()}
           >
             <a className="hover">
               <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">

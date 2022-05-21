@@ -4,6 +4,7 @@ import {
   redirectUriSearchParamsName,
   visitorTokenCookieName,
 } from '../../lib/constants'
+import { pagesPath } from '../../lib/$path'
 import {
   visitorTokenSignerKey128 as signerKey,
   visitorTokenCryptoKey128 as cryptoKey,
@@ -18,7 +19,7 @@ export async function middleware(req: NextRequest) {
   } catch (err) {
     const url = req.nextUrl.clone()
     url.searchParams.set(redirectUriSearchParamsName, url.pathname)
-    url.pathname = '/'
+    url.pathname = pagesPath.$url().pathname
     return Response.redirect(url)
   }
 }

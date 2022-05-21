@@ -1,3 +1,4 @@
 .next
 *.generated.*
+$path.ts
 out

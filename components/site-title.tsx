@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { CMS_NAME } from '../lib/constants'
+import { pagesPath } from '../lib/$path'
 
 type Props = {
   isLowerPage?: boolean
@@ -24,7 +25,7 @@ const SiteTitle = ({ isLowerPage }: Props) => {
     </section>
   ) : (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/private">
+      <Link href={pagesPath.private.$url()}>
         <a className="hover:underline">{CMS_NAME}</a>
       </Link>
     </h2>

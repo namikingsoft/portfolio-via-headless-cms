@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../api/bff/client'
 import { CMS_NAME, redirectUriSearchParamsName } from '../lib/constants'
+import { pagesPath } from '../lib/$path'
 
 const Index = () => {
   const router = useRouter()
@@ -25,7 +26,10 @@ const Index = () => {
         return setError('Wrong password')
       }
       const searchParams = new URLSearchParams(location.search)
-      router.push(searchParams.get(redirectUriSearchParamsName) ?? '/private')
+      router.push(
+        searchParams.get(redirectUriSearchParamsName) ??
+          pagesPath.private.$url().pathname,
+      )
     },
     [router],
   )

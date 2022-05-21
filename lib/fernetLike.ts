@@ -130,17 +130,17 @@ export class FernetLike {
 
   public async verify(token: string) {
     const [header, expired, ivBase64, crypted, signature] =
-      token.split(separator)
-    if (
-      parseInt(expired, expiredBaseNum) * 1000 <
-      this.getCurrentDate().getTime()
-    ) {
-      throw new Error('Expired token')
+      token?.split(separator) ?? []
+    const hmac = await this.createHmac(
+      `${header}${expired}${ivBase64}${crypted}`,
+    )
+    if (signature !== hmac) {
+      throw new Error('Verification failure')
     }
-    const hmac = await this.createHmac(header + expired + ivBase64 + crypted)
-    if (signature === hmac) {
+    const expiredMsec = parseInt(expired, expiredBaseNum) * 1000
+    if (expiredMsec > this.getCurrentDate().getTime()) {
       return this.decrypt(crypted, decodeBase64(ivBase64))
     }
-    throw new Error('Verification failure')
+    throw new Error('Expired token')
   }
 }

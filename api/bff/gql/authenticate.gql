@@ -1,0 +1,5 @@
+mutation Authenticate($password: String!) {
+  authenticate(input: { password: $password }) {
+    token,
+  }
+}

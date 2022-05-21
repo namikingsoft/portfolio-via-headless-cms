@@ -1,0 +1,9 @@
+overwrite: true
+schema: api/bff/schema.graphql
+documents: "api/bff/**/*.gql"
+generates:
+  api/bff/client.generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql

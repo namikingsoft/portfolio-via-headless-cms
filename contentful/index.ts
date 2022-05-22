@@ -7,7 +7,7 @@ import {
   TagCollectionQuery,
 } from './client.generated'
 import { Article, Intro, Tag, Visitor } from './types'
-import { contentfulEndpoint, contentfulAccessToken } from '../../env'
+import { contentfulEndpoint, contentfulAccessToken } from '../env'
 
 const client = new GraphQLClient(contentfulEndpoint, {
   headers: {

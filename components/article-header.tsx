@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
-import { Article } from '../api/contentful/types'
+import { Article } from '../contentful/types'
 import { pagesPath } from '../lib/$path'
 
 type Props = {

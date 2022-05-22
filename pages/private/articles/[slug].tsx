@@ -6,8 +6,8 @@ import ArticleBody from '../../../components/article-body'
 import ArticleHeader from '../../../components/article-header'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import { CMS_NAME } from '../../../lib/constants'
-import { Article } from '../../../api/contentful/types'
-import { getAllArticles, getArticle } from '../../../api/contentful'
+import { Article } from '../../../contentful/types'
+import { getAllArticles, getArticle } from '../../../contentful'
 
 type Props = {
   article: Article

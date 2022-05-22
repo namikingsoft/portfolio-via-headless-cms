@@ -5,8 +5,8 @@ import SiteTitle from '../../components/site-title'
 import Layout from '../../components/layout'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import { Article, Intro } from '../../api/contentful/types'
-import { getAllArticles, getIntroList } from '../../api/contentful'
+import { Article, Intro } from '../../contentful/types'
+import { getAllArticles, getIntroList } from '../../contentful'
 
 type Props = {
   intros: Intro[]

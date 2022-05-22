@@ -1,7 +1,7 @@
 overwrite: true
-schema: api/bff/schema.graphql
+schema: bff/schema.graphql
 generates:
-  api/bff/server.generated.ts:
+  bff/server.generated.ts:
     config:
       contextType: ./types#Context
       useIndexSignature: true

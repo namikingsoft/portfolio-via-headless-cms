@@ -4,7 +4,7 @@ import Container from '../components/container'
 import SiteTitle from '../components/site-title'
 import Layout from '../components/layout'
 import Head from 'next/head'
-import { useAuthenticateMutation } from '../api/bff/client'
+import { useAuthenticateMutation } from '../bff/client'
 import { CMS_NAME, redirectUriSearchParamsName } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 

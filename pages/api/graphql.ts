@@ -1,11 +1,11 @@
 import { readFileSync } from 'fs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { ApolloServer } from 'apollo-server-micro'
-import { context } from '../../api/bff/context'
-import { resolvers } from '../../api/bff/resolvers'
+import { context } from '../../bff/context'
+import { resolvers } from '../../bff/resolvers'
 import { bffGraphQLEndpoint } from '../../lib/constants'
 
-const schemaPath = `${process.cwd()}/api/bff/schema.graphql`
+const schemaPath = `${process.cwd()}/bff/schema.graphql`
 
 const typeDefs = readFileSync(schemaPath, { encoding: 'utf-8' })
 

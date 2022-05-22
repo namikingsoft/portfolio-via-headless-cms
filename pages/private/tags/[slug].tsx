@@ -4,8 +4,8 @@ import Container from '../../../components/container'
 import SiteTitle from '../../../components/site-title'
 import ArticleList from '../../../components/article-list'
 import { CMS_NAME } from '../../../lib/constants'
-import { Article, Tag } from '../../../api/contentful/types'
-import { getTagWithArticles, getTagList } from '../../../api/contentful'
+import { Article, Tag } from '../../../contentful/types'
+import { getTagWithArticles, getTagList } from '../../../contentful'
 
 type Props = {
   tag: Tag

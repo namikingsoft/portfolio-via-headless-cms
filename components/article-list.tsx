@@ -1,5 +1,5 @@
 import ArticlePreview from './article-preview'
-import { Article } from '../api/contentful/types'
+import { Article } from '../contentful/types'
 
 type Props = {
   title: string

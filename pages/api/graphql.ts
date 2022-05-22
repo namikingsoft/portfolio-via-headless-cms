@@ -1,7 +1,8 @@
 import { readFileSync } from 'fs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { ApolloServer } from 'apollo-server-micro'
-import { context, resolvers } from '../../api/bff/server'
+import { context } from '../../api/bff/context'
+import { resolvers } from '../../api/bff/resolvers'
 import { bffGraphQLEndpoint } from '../../lib/constants'
 
 const schemaPath = `${process.cwd()}/api/bff/schema.graphql`

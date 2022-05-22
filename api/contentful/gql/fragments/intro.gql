@@ -1,0 +1,8 @@
+fragment intro on Intro {
+  title
+  content
+  image {
+    title
+    url
+  }
+}

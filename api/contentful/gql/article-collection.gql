@@ -1,23 +1,7 @@
 query ArticleCollection {
   articleCollection {
     items {
-      slug,
-      title,
-      excerpt,
-      content,
-      image {
-        title,
-        url,
-      },
-      tagCollection {
-        items {
-          slug,
-          title,
-        },
-      },
-      sys {
-        publishedAt,
-      },
+      ...article
     }
   }
 }

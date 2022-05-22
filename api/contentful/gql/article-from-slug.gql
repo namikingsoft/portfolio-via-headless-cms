@@ -1,24 +1,7 @@
 query ArticleFromSlug($slug: String!) {
   articleCollection(where: { slug: $slug }) {
     items {
-      slug,
-      title,
-      excerpt,
-      content,
-      image {
-        title,
-        url,
-      },
-      tagCollection {
-        items {
-          slug,
-          title,
-        },
-      },
-      sys {
-        id,
-        publishedAt,
-      },
+      ...article
     }
   }
 }

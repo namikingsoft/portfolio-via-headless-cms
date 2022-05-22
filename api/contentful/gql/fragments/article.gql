@@ -1,0 +1,19 @@
+fragment article on Article {
+  slug
+  title
+  excerpt
+  content
+  image {
+    title
+    url
+  }
+  tagCollection {
+    items {
+      ...tag
+    }
+  }
+  sys {
+    id
+    publishedAt
+  },
+}

@@ -1158,14 +1158,22 @@ export type CfTagNestedFilter = {
 export type ArticleCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticleCollectionQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
+export type ArticleCollectionQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null };
 
 export type ArticleFromSlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null };
+export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null };
+
+export type ArticleFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
+
+export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null };
+
+export type TagFragment = { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } };
+
+export type VisitorFragment = { __typename?: 'Visitor', username?: string | null, label?: string | null };
 
 export type IntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1175,7 +1183,7 @@ export type IntroCollectionQuery = { __typename?: 'Query', introCollection?: { _
 export type TagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TagCollectionQuery = { __typename?: 'Query', tagCollection?: { __typename?: 'TagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null };
+export type TagCollectionQuery = { __typename?: 'Query', tagCollection?: { __typename?: 'TagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null };
 
 export type TagFromSlugQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1189,7 +1197,7 @@ export type TagWithArticlesQueryVariables = Exact<{
 }>;
 
 
-export type TagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null } | null> } | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
+export type TagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
 
 export type VisitorByPasswordQueryVariables = Exact<{
   password: Scalars['String'];
@@ -1205,149 +1213,130 @@ export type VisitorByUsernameQueryVariables = Exact<{
 
 export type VisitorByUsernameQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, label?: string | null } | null> } | null };
 
-
+export const TagFragmentDoc = gql`
+    fragment tag on Tag {
+  slug
+  title
+  sys {
+    id
+  }
+}
+    `;
+export const ArticleFragmentDoc = gql`
+    fragment article on Article {
+  slug
+  title
+  excerpt
+  content
+  image {
+    title
+    url
+  }
+  tagCollection {
+    items {
+      ...tag
+    }
+  }
+  sys {
+    id
+    publishedAt
+  }
+}
+    ${TagFragmentDoc}`;
+export const IntroFragmentDoc = gql`
+    fragment intro on Intro {
+  title
+  content
+  image {
+    title
+    url
+  }
+}
+    `;
+export const VisitorFragmentDoc = gql`
+    fragment visitor on Visitor {
+  username
+  label
+}
+    `;
 export const ArticleCollectionDocument = gql`
     query ArticleCollection {
   articleCollection {
     items {
-      slug
-      title
-      excerpt
-      content
-      image {
-        title
-        url
-      }
-      tagCollection {
-        items {
-          slug
-          title
-        }
-      }
-      sys {
-        publishedAt
-      }
+      ...article
     }
   }
 }
-    `;
+    ${ArticleFragmentDoc}`;
 export const ArticleFromSlugDocument = gql`
     query ArticleFromSlug($slug: String!) {
   articleCollection(where: {slug: $slug}) {
     items {
-      slug
-      title
-      excerpt
-      content
-      image {
-        title
-        url
-      }
-      tagCollection {
-        items {
-          slug
-          title
-        }
-      }
-      sys {
-        id
-        publishedAt
-      }
+      ...article
     }
   }
 }
-    `;
+    ${ArticleFragmentDoc}`;
 export const IntroCollectionDocument = gql`
     query IntroCollection {
   introCollection {
     items {
-      title
-      content
-      image {
-        title
-        url
-      }
+      ...intro
     }
   }
 }
-    `;
+    ${IntroFragmentDoc}`;
 export const TagCollectionDocument = gql`
     query TagCollection {
   tagCollection {
     items {
-      slug
-      title
+      ...tag
     }
   }
 }
-    `;
+    ${TagFragmentDoc}`;
 export const TagFromSlugDocument = gql`
     query TagFromSlug($slug: String!) {
   tagCollection(where: {slug: $slug}) {
     items {
-      slug
-      title
-      sys {
-        id
-      }
+      ...tag
     }
   }
 }
-    `;
+    ${TagFragmentDoc}`;
 export const TagWithArticlesDocument = gql`
     query TagWithArticles($tagId: String!) {
   tag(id: $tagId) {
-    slug
-    title
+    ...tag
     linkedFrom {
       articleCollection {
         items {
-          slug
-          title
-          excerpt
-          content
-          image {
-            title
-            url
-          }
-          tagCollection {
-            items {
-              slug
-              title
-            }
-          }
-          sys {
-            publishedAt
-          }
+          ...article
         }
       }
     }
-    sys {
-      id
-    }
   }
 }
-    `;
+    ${TagFragmentDoc}
+${ArticleFragmentDoc}`;
 export const VisitorByPasswordDocument = gql`
     query VisitorByPassword($password: String!) {
   visitorCollection(where: {password: $password, disabled: false}) {
     items {
-      username
-      label
+      ...visitor
     }
   }
 }
-    `;
+    ${VisitorFragmentDoc}`;
 export const VisitorByUsernameDocument = gql`
     query VisitorByUsername($username: String!) {
   visitorCollection(where: {username: $username, disabled: false}) {
     items {
-      username
-      label
+      ...visitor
     }
   }
 }
-    `;
+    ${VisitorFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 

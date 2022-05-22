@@ -1,0 +1,4 @@
+fragment visitor on Visitor {
+  username
+  label
+}

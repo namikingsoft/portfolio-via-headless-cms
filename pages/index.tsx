@@ -12,8 +12,11 @@ const Index = () => {
   const router = useRouter()
   const passwordRef = useRef<HTMLInputElement | null>(null)
   const [error, setError] = useState('')
+  const [redirecting, setRedirecting] = useState(false)
 
   const [result, authenticate] = useAuthenticateMutation()
+
+  const disabled = result.fetching || redirecting
 
   const onSubmit = useCallback(
     async (event?: FormEvent) => {
@@ -25,10 +28,13 @@ const Index = () => {
       if (result.error) {
         return setError('Wrong password')
       }
+      setRedirecting(true)
       const searchParams = new URLSearchParams(location.search)
+      const redirectUri = searchParams.get(redirectUriSearchParamsName)
       router.push(
-        searchParams.get(redirectUriSearchParamsName) ??
-          pagesPath.private.$url().pathname,
+        redirectUri?.startsWith(pagesPath.private.$url().pathname)
+          ? redirectUri
+          : pagesPath.private.$url().pathname,
       )
     },
     [router],
@@ -38,6 +44,13 @@ const Index = () => {
     setError('')
     const value = passwordRef.current?.value
     if (value && value.length >= 32) onSubmit()
+  }, [])
+
+  const onFocus = useCallback(() => {
+    const passwordElm = passwordRef.current
+    if (passwordElm) {
+      passwordElm.setSelectionRange(0, passwordElm.value.length)
+    }
   }, [])
 
   useEffect(() => {
@@ -60,11 +73,13 @@ const Index = () => {
               placeholder="Paste password"
               aria-label="Password"
               onChange={onChange}
+              onFocus={onFocus}
+              disabled={disabled}
             />
             <button
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:bg-slate-50"
+              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:bg-gray-400 disabled:border-gray-400"
               type="submit"
-              disabled={result.fetching}
+              disabled={disabled}
             >
               Login
             </button>

@@ -1,6 +1,6 @@
 query Visitor {
   visitor {
-    username,
-    label,
+    username
+    label
   }
 }

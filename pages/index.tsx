@@ -5,7 +5,11 @@ import SiteTitle from '../components/site-title'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../bff/client'
-import { CMS_NAME, redirectUriSearchParamsName } from '../lib/constants'
+import {
+  CMS_NAME,
+  passwordLength,
+  redirectUriSearchParamsName,
+} from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 
 const Index = () => {
@@ -42,8 +46,14 @@ const Index = () => {
 
   const onChange = useCallback(() => {
     setError('')
-    const value = passwordRef.current?.value
-    if (value && value.length >= 32) onSubmit()
+  }, [])
+
+  const onPaste = useCallback(() => {
+    // NOTE: value is previous before setTimeout
+    setTimeout(() => {
+      const value = passwordRef.current?.value
+      if (value && value.length >= passwordLength) onSubmit()
+    }, 0)
   }, [])
 
   const onFocus = useCallback(() => {
@@ -74,6 +84,7 @@ const Index = () => {
               aria-label="Password"
               onChange={onChange}
               onFocus={onFocus}
+              onPaste={onPaste}
               disabled={disabled}
             />
             <button

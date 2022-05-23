@@ -6,6 +6,8 @@ export const HOME_OG_IMAGE_URL =
 export const visitorTokenCookieName = 'visitorToken'
 export const visitorTokenMaxAgeSec = 24 * 60 * 60
 
+export const passwordLength = 64
+
 export const bffGraphQLEndpoint = '/api/graphql'
 
 export const redirectUriSearchParamsName = 'redirect'

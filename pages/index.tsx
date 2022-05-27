@@ -27,7 +27,9 @@ const Index = () => {
       event?.preventDefault()
 
       const result = await authenticate({
-        password: passwordRef.current?.value ?? '',
+        input: {
+          password: passwordRef.current?.value ?? '',
+        },
       })
       if (result.error) {
         return setError('Wrong password')

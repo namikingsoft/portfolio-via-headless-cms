@@ -1,5 +1,5 @@
-mutation Authenticate($password: String!) {
-  authenticate(input: { password: $password }) {
+mutation Authenticate($input: AuthenticateInput!) {
+  authenticate(input: $input) {
     token
   }
 }

@@ -2,13 +2,26 @@ import { readFileSync } from 'fs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { ApolloServer } from 'apollo-server-micro'
 import { PluginDefinition } from 'apollo-server-core'
+import {
+  constraintDirective,
+  constraintDirectiveTypeDefs,
+} from 'graphql-constraint-directive'
+import { makeExecutableSchema } from '@graphql-tools/schema'
 import { context } from '../../bff/context'
 import { resolvers } from '../../bff/resolvers'
+import { formatError } from '../../bff/errors'
 import { bffGraphQLEndpoint } from '../../lib/constants'
 
 const schemaPath = `${process.cwd()}/bff/schema.graphql`
 
 const typeDefs = readFileSync(schemaPath, { encoding: 'utf-8' })
+
+const schema = constraintDirective()(
+  makeExecutableSchema({
+    typeDefs: [constraintDirectiveTypeDefs, typeDefs],
+    resolvers,
+  }),
+)
 
 const setHttpPlugin: PluginDefinition = {
   async requestDidStart() {
@@ -23,9 +36,9 @@ const setHttpPlugin: PluginDefinition = {
 }
 
 const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context,
+  formatError,
   csrfPrevention: true,
   plugins: [setHttpPlugin],
 })

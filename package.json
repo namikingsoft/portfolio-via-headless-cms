@@ -9,10 +9,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@graphql-tools/schema": "8.3.13",
     "apollo-server-micro": "3.7.0",
     "classnames": "2.3.1",
     "cookie": "0.5.0",
     "date-fns": "^2.28.0",
+    "graphql-constraint-directive": "3.1.0",
     "graphql-request": "4.2.0",
     "micro": "9.3.4",
     "next": "latest",

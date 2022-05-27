@@ -47,7 +47,7 @@ export type Visitor = {
 };
 
 export type AuthenticateMutationVariables = Exact<{
-  password: Scalars['String'];
+  input: AuthenticateInput;
 }>;
 
 
@@ -60,8 +60,8 @@ export type VisitorQuery = { __typename?: 'Query', visitor: { __typename?: 'Visi
 
 
 export const AuthenticateDocument = gql`
-    mutation Authenticate($password: String!) {
-  authenticate(input: {password: $password}) {
+    mutation Authenticate($input: AuthenticateInput!) {
+  authenticate(input: $input) {
     token
   }
 }

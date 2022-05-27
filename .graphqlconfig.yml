@@ -4,4 +4,4 @@ projects:
     schemaPath: api/bff/schema.graphql
     extensions:
       endpoints:
-        dev: 'http://localhost:3000/api/graphql'
+        dev: 'http://localhost:3456/api/graphql'

@@ -17,5 +17,10 @@ type Authentication {
 }
 
 input AuthenticateInput {
-  password: String!
+  password: String! @constraint(minLength: 64, maxLength: 64)
+}
+
+schema {
+  query: Query
+  mutation: Mutation
 }

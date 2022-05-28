@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
-import { useRef, useCallback, useEffect, FormEvent, useState } from 'react'
+import { FocusEventHandler, useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Container from '../components/container'
 import SiteTitle from '../components/site-title'
 import Layout from '../components/layout'
@@ -11,62 +12,74 @@ import {
   redirectUriSearchParamsName,
 } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
+import { parseToFormValidationErrors } from '../bff/errors'
+
+type FieldValues = {
+  password: string
+}
+
+const isFormFieldName = (fieldName: string): fieldName is keyof FieldValues =>
+  fieldName === 'password'
 
 const Index = () => {
   const router = useRouter()
-  const passwordRef = useRef<HTMLInputElement | null>(null)
-  const [error, setError] = useState('')
   const [redirecting, setRedirecting] = useState(false)
 
   const [result, authenticate] = useAuthenticateMutation()
 
   const disabled = result.fetching || redirecting
 
+  const {
+    register,
+    setFocus,
+    setError,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>()
+
   const onSubmit = useCallback(
-    async (event?: FormEvent) => {
+    async ({ password }: FieldValues) => {
       event?.preventDefault()
 
-      const result = await authenticate({
-        input: {
-          password: passwordRef.current?.value ?? '',
-        },
-      })
-      if (result.error) {
-        return setError('Wrong password')
+      const result = await authenticate({ input: { password } })
+      if (result.error?.graphQLErrors) {
+        const errors = parseToFormValidationErrors(result.error?.graphQLErrors)
+        errors.forEach((err) => {
+          if (isFormFieldName(err.fieldName))
+            setError(err.fieldName, { message: err.fieldMessage })
+        })
+      } else {
+        setRedirecting(true)
+        const searchParams = new URLSearchParams(location.search)
+        const redirectUri = searchParams.get(redirectUriSearchParamsName)
+        router.push(
+          redirectUri?.startsWith(pagesPath.private.$url().pathname)
+            ? redirectUri
+            : pagesPath.private.$url().pathname,
+        )
       }
-      setRedirecting(true)
-      const searchParams = new URLSearchParams(location.search)
-      const redirectUri = searchParams.get(redirectUriSearchParamsName)
-      router.push(
-        redirectUri?.startsWith(pagesPath.private.$url().pathname)
-          ? redirectUri
-          : pagesPath.private.$url().pathname,
-      )
     },
     [router],
   )
 
-  const onChange = useCallback(() => {
-    setError('')
-  }, [])
-
   const onPaste = useCallback(() => {
     // NOTE: value is previous before setTimeout
     setTimeout(() => {
-      const value = passwordRef.current?.value
-      if (value && value.length >= passwordLength) onSubmit()
+      const value = getValues('password')
+      if (value && value.length >= passwordLength) handleSubmit(onSubmit)()
     }, 0)
   }, [])
 
-  const onFocus = useCallback(() => {
-    const passwordElm = passwordRef.current
-    if (passwordElm) {
-      passwordElm.setSelectionRange(0, passwordElm.value.length)
+  const onFocus: FocusEventHandler<HTMLInputElement> = useCallback((event) => {
+    const elem = event.currentTarget
+    if (elem instanceof HTMLInputElement) {
+      elem.setSelectionRange(0, elem.value.length)
     }
   }, [])
 
   useEffect(() => {
-    passwordRef.current?.focus()
+    setFocus('password')
   }, [])
 
   return (
@@ -76,18 +89,17 @@ const Index = () => {
       </Head>
       <Container>
         <SiteTitle />
-        <form className="max-w-2xl mx-auto" onSubmit={onSubmit}>
+        <form className="max-w-2xl mx-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex border-b border-teal-500 py-2">
             <input
-              ref={passwordRef}
               className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
               type="password"
               placeholder="Paste password"
               aria-label="Password"
-              onChange={onChange}
               onFocus={onFocus}
               onPaste={onPaste}
               disabled={disabled}
+              {...register('password')}
             />
             <button
               className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:bg-gray-400 disabled:border-gray-400"
@@ -97,7 +109,11 @@ const Index = () => {
               Login
             </button>
           </div>
-          {error && <p className="text-red-500 text-xs italic">{error}</p>}
+          {errors.password && (
+            <p className="text-red-500 text-xs italic">
+              {errors.password.message}
+            </p>
+          )}
         </form>
       </Container>
     </Layout>

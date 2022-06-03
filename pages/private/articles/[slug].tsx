@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import Layout from '../../../components/layout'
-import Container from '../../../components/container'
-import SiteTitle from '../../../components/site-title'
 import ArticleBody from '../../../components/article-body'
 import ArticleHeader from '../../../components/article-header'
 import markdownToHtml from '../../../lib/markdownToHtml'
@@ -16,20 +13,17 @@ type Props = {
 
 const Post = ({ article, content }: Props) => {
   return (
-    <Layout>
-      <Container>
-        <SiteTitle isLowerPage />
-        <article className="mb-32">
-          <Head>
-            <title>
-              {article.title} | Next.js Blog Example with {CMS_NAME}
-            </title>
-          </Head>
-          <ArticleHeader article={article} />
-          <ArticleBody content={content} />
-        </article>
-      </Container>
-    </Layout>
+    <>
+      <Head>
+        <title>
+          {article.title} | Next.js Blog Example with {CMS_NAME}
+        </title>
+      </Head>
+      <article className="mb-32">
+        <ArticleHeader article={article} />
+        <ArticleBody content={content} />
+      </article>
+    </>
   )
 }
 

@@ -20,8 +20,8 @@ const ArticleHeader = ({ article }: Props) => {
             key={tag.slug}
             href={pagesPath.private.tags._slug(tag.slug).$url()}
           >
-            <a className="hover">
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
+            <a className="hover last:mr-0 mr-1">
+              <span className="text-xs font-semibold inline-block py-1 px-2 rounded text-pink-600 bg-pink-200 uppercase">
                 {tag.title}
               </span>
             </a>

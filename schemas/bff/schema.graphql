@@ -4,6 +4,7 @@ type Query {
 
 type Mutation {
   authenticate(input: AuthenticateInput!): Authentication!
+  logout: Boolean!
 }
 
 type Visitor {

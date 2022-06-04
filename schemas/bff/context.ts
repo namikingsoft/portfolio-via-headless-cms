@@ -25,5 +25,14 @@ export const context = ({ req, res }: ContextArgument): Context => {
         path: '/',
       }),
     )
-  return { token, setCookieToken }
+  const removeCookieToken = () =>
+    res.setHeader(
+      'Set-Cookie',
+      serialize(visitorTokenCookieName, '', {
+        maxAge: 0,
+        httpOnly: true,
+        path: '/',
+      }),
+    )
+  return { token, setCookieToken, removeCookieToken }
 }

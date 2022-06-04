@@ -28,6 +28,7 @@ export type Authentication = {
 export type Mutation = {
   __typename?: 'Mutation';
   authenticate: Authentication;
+  logout: Scalars['Boolean'];
 };
 
 
@@ -53,6 +54,11 @@ export type AuthenticateMutationVariables = Exact<{
 
 export type AuthenticateMutation = { __typename?: 'Mutation', authenticate: { __typename?: 'Authentication', token: string } };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
 export type VisitorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -69,6 +75,15 @@ export const AuthenticateDocument = gql`
 
 export function useAuthenticateMutation() {
   return Urql.useMutation<AuthenticateMutation, AuthenticateMutationVariables>(AuthenticateDocument);
+};
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
 export const VisitorDocument = gql`
     query Visitor {

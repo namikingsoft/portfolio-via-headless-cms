@@ -28,6 +28,7 @@ export type Authentication = {
 export type Mutation = {
   __typename?: 'Mutation';
   authenticate: Authentication;
+  logout: Scalars['Boolean'];
 };
 
 
@@ -144,6 +145,7 @@ export type AuthenticationResolvers<ContextType = Context, ParentType extends Re
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   authenticate?: Resolver<ResolversTypes['Authentication'], ParentType, ContextType, RequireFields<MutationAuthenticateArgs, 'input'>>;
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{

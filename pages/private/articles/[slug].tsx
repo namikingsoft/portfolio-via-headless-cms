@@ -2,7 +2,7 @@ import Head from 'next/head'
 import ArticleBody from '../../../components/article-body'
 import ArticleHeader from '../../../components/article-header'
 import markdownToHtml from '../../../lib/markdownToHtml'
-import { CMS_NAME } from '../../../lib/constants'
+import { siteName } from '../../../lib/constants'
 import { Article } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 
@@ -16,7 +16,7 @@ const Post = ({ article, content }: Props) => {
     <>
       <Head>
         <title>
-          {article.title} | Next.js Blog Example with {CMS_NAME}
+          {article.title} | Next.js Blog Example with {siteName}
         </title>
       </Head>
       <article className="mb-32">

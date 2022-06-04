@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../schemas/bff/client'
 import {
-  CMS_NAME,
+  siteName,
   passwordLength,
   redirectUriSearchParamsName,
 } from '../lib/constants'
@@ -84,7 +84,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>Next.js Blog Example with {CMS_NAME}</title>
+        <title>Next.js Blog Example with {siteName}</title>
       </Head>
       <form className="my-16" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex border rounded-md overflow-hidden border-teal-500">

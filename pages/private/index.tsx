@@ -1,7 +1,7 @@
 import IntroSection from '../../components/intro-section'
 import ArticleList from '../../components/article-list'
 import Head from 'next/head'
-import { CMS_NAME } from '../../lib/constants'
+import { siteName } from '../../lib/constants'
 import { Article, Intro } from '../../schemas/contentful/types'
 import { getAllArticles, getIntroList } from '../../schemas/contentful'
 
@@ -14,7 +14,7 @@ const Index = ({ intros, articles }: Props) => {
   return (
     <>
       <Head>
-        <title>Next.js Blog Example with {CMS_NAME}</title>
+        <title>Next.js Blog Example with {siteName}</title>
       </Head>
       {intros.length > 0 &&
         intros.map((intro) => <IntroSection key={intro.title} intro={intro} />)}

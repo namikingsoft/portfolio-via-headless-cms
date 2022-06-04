@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
-import { CMS_NAME } from '../lib/constants'
+import { siteName, siteDescription } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Footer from './footer'
 import Meta from './meta'
@@ -44,28 +44,23 @@ const Layout = ({ children }: Props) => {
           >
             <div
               className={cn({
+                'text-6xl md:text-8xl font-bold tracking-tighter leading-tight':
+                  pageType === 'login',
                 'text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8':
-                  pageType === 'login' || pageType === 'top',
+                  pageType === 'top',
               })}
             >
-              <h1>{CMS_NAME}</h1>
+              <h1>{siteName}</h1>
             </div>
             <h4
               className={cn({
-                'text-lg mt-5 md:pl-8': pageType === 'login',
+                'text-lg mt-5': pageType === 'login',
                 'text-center md:text-left text-lg mt-5 md:pl-8':
                   pageType === 'top',
                 hidden: pageType === 'lower',
               })}
             >
-              A statically generated blog example using{' '}
-              <a
-                href="https://nextjs.org/"
-                className="underline hover:text-success duration-200 transition-colors"
-              >
-                Next.js
-              </a>{' '}
-              and Markdown.
+              {siteDescription}
             </h4>
           </section>
           <main>{children}</main>

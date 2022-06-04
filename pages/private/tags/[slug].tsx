@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import ArticleList from '../../../components/article-list'
-import { CMS_NAME } from '../../../lib/constants'
+import { siteName } from '../../../lib/constants'
 import { Article, Tag } from '../../../schemas/contentful/types'
 import { getTagWithArticles, getTagList } from '../../../schemas/contentful'
 
@@ -14,7 +14,7 @@ const ArticleIndex = ({ tag, articles }: Props) => {
     <>
       <Head>
         <title>
-          {tag.title} | Next.js Blog Example with {CMS_NAME}
+          {tag.title} | Next.js Blog Example with {siteName}
         </title>
       </Head>
       {articles.length > 0 && (

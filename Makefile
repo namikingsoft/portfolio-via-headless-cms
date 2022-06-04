@@ -4,10 +4,18 @@ NPM_BIN := $(shell npm bin)
 
 .PHONY: all
 all: \
-	schemas/contentful/client.generated.ts \
+	bff \
+	contentful \
+	lib/$path.ts \
+
+.PHONY: bff
+bff: \
 	schemas/bff/server.generated.ts \
 	schemas/bff/client.generated.ts \
-	lib/$path.ts \
+
+.PHONY: contentful
+contentful: \
+	schemas/contentful/client.generated.ts \
 
 schemas/contentful/schema.graphql:
 	@npx get-graphql-schema \

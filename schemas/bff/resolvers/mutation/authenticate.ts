@@ -1,7 +1,7 @@
 import { Resolvers } from '../../server.generated'
 import { getVisitorByPassword } from '../../../contentful'
 import { fernet } from '../../fernet'
-import { visitorTokenMaxAgeSec } from '../../../lib/constants'
+import { visitorTokenMaxAgeSec } from '../../../../lib/constants'
 import { FormValidationError } from '../../errors'
 
 export const authenticate: NonNullable<

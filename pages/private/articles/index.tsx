@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import ArticleList from '../../../components/article-list'
 import { CMS_NAME } from '../../../lib/constants'
-import { Article } from '../../../contentful/types'
-import { getAllArticles } from '../../../contentful'
+import { Article } from '../../../schemas/contentful/types'
+import { getAllArticles } from '../../../schemas/contentful'
 
 type Props = {
   articles: Article[]

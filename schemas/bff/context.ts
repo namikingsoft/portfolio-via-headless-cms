@@ -1,7 +1,10 @@
 import { ServerResponse, IncomingMessage } from 'http'
 import { serialize, parse } from 'cookie'
 import { Context } from './types'
-import { visitorTokenCookieName, visitorTokenMaxAgeSec } from '../lib/constants'
+import {
+  visitorTokenCookieName,
+  visitorTokenMaxAgeSec,
+} from '../../lib/constants'
 
 type ContextArgument = {
   req: IncomingMessage

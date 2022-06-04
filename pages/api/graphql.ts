@@ -7,12 +7,12 @@ import {
   constraintDirectiveTypeDefs,
 } from 'graphql-constraint-directive'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { context } from '../../bff/context'
-import { resolvers } from '../../bff/resolvers'
-import { formatError } from '../../bff/errors'
+import { context } from '../../schemas/bff/context'
+import { resolvers } from '../../schemas/bff/resolvers'
+import { formatError } from '../../schemas/bff/errors'
 import { bffGraphQLEndpoint } from '../../lib/constants'
 
-const schemaPath = `${process.cwd()}/bff/schema.graphql`
+const schemaPath = `${process.cwd()}/schemas/bff/schema.graphql`
 
 const typeDefs = readFileSync(schemaPath, { encoding: 'utf-8' })
 

@@ -2,14 +2,14 @@ import { useRouter } from 'next/router'
 import { FocusEventHandler, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
-import { useAuthenticateMutation } from '../bff/client'
+import { useAuthenticateMutation } from '../schemas/bff/client'
 import {
   CMS_NAME,
   passwordLength,
   redirectUriSearchParamsName,
 } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
-import { parseToFormValidationErrors } from '../bff/errors'
+import { parseToFormValidationErrors } from '../schemas/bff/errors'
 
 type FieldValues = {
   password: string

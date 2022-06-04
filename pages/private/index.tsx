@@ -2,8 +2,8 @@ import IntroSection from '../../components/intro-section'
 import ArticleList from '../../components/article-list'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import { Article, Intro } from '../../contentful/types'
-import { getAllArticles, getIntroList } from '../../contentful'
+import { Article, Intro } from '../../schemas/contentful/types'
+import { getAllArticles, getIntroList } from '../../schemas/contentful'
 
 type Props = {
   intros: Intro[]

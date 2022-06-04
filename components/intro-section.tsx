@@ -1,5 +1,5 @@
 import CoverImage from './cover-image'
-import { Intro } from '../contentful/types'
+import { Intro } from '../schemas/contentful/types'
 
 type Props = {
   intro: Intro

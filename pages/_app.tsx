@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import { Provider } from 'urql'
-import { client } from '../bff/client'
+import { client } from '../schemas/bff/client'
 import { gtagId } from '../env'
 import GtagProvider from '../components/gtag-provider'
 import Layout from '../components/layout'

@@ -1,8 +1,8 @@
 overwrite: true
-schema: bff/schema.graphql
-documents: "bff/**/*.gql"
+schema: schemas/bff/schema.graphql
+documents: "schemas/bff/**/*.gql"
 generates:
-  bff/client.generated.ts:
+  schemas/bff/client.generated.ts:
     plugins:
       - typescript
       - typescript-operations

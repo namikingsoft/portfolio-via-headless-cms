@@ -1,5 +1,5 @@
 import { createClient, defaultExchanges, debugExchange } from 'urql'
-import { bffGraphQLEndpoint } from '../lib/constants'
+import { bffGraphQLEndpoint } from '../../lib/constants'
 
 export * from './client.generated'
 

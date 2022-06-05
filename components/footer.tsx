@@ -1,5 +1,5 @@
 import Container from './container'
-import { siteName, siteDescription, portfolioGitHubUrl } from '../lib/constants'
+import { siteName, portfolioGitHubUrl } from '../lib/constants'
 
 const Footer = () => {
   return (

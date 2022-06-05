@@ -106,11 +106,12 @@ const Index = () => {
             Login
           </button>
         </div>
-        {errors.password && (
-          <p className="text-red-500 text-xs italic">
-            {errors.password.message}
-          </p>
-        )}
+        <p className="text-red-500 text-xs italic">
+          {
+            // render nbsp for prevent layout shift
+            errors.password ? errors.password.message : <>&nbsp;</>
+          }
+        </p>
       </form>
     </>
   )

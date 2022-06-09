@@ -1,14 +1,18 @@
+import cn from 'classnames'
+import { useMemo } from 'react'
+import { calcGravatarUrl } from '../lib/gravatar'
+
 type Props = {
-  name: string
-  picture: string
+  className?: string
+  email: string
+  size?: number
+  alt?: string
 }
 
-const Avatar = ({ name, picture }: Props) => {
+const Avatar = ({ className, email, size = 320, alt = 'Avatar' }: Props) => {
+  const src = useMemo(() => calcGravatarUrl(email, size), [email, size])
   return (
-    <div className="flex items-center">
-      <img src={picture} className="w-12 h-12 rounded-full mr-4" alt={name} />
-      <div className="text-xl font-bold">{name}</div>
-    </div>
+    <img className={cn('rounded-full inline', className)} src={src} alt={alt} />
   )
 }
 

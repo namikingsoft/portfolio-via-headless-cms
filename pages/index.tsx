@@ -10,6 +10,7 @@ import {
 } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import { parseToFormValidationErrors } from '../schemas/bff/errors'
+import Container from '../components/container'
 
 type FieldValues = {
   password: string
@@ -86,33 +87,35 @@ const Index = () => {
       <Head>
         <title>Next.js Blog Example with {siteName}</title>
       </Head>
-      <form className="my-16" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex border rounded-md overflow-hidden border-teal-500">
-          <input
-            className="appearance-none border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
-            type="password"
-            placeholder="Paste password"
-            aria-label="Password"
-            onFocus={onFocus}
-            onPaste={onPaste}
-            disabled={disabled}
-            {...register('password')}
-          />
-          <button
-            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400"
-            type="submit"
-            disabled={disabled}
-          >
-            Login
-          </button>
-        </div>
-        <p className="text-red-500 text-xs italic">
-          {
-            // render nbsp for prevent layout shift
-            errors.password ? errors.password.message : <>&nbsp;</>
-          }
-        </p>
-      </form>
+      <Container className="max-w-2xl my-10">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex border rounded-md overflow-hidden border-teal-500">
+            <input
+              className="appearance-none border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+              type="password"
+              placeholder="Paste password"
+              aria-label="Password"
+              onFocus={onFocus}
+              onPaste={onPaste}
+              disabled={disabled}
+              {...register('password')}
+            />
+            <button
+              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400"
+              type="submit"
+              disabled={disabled}
+            >
+              Login
+            </button>
+          </div>
+          <p className="text-red-500 text-xs italic">
+            {
+              // render nbsp for prevent layout shift
+              errors.password ? errors.password.message : <>&nbsp;</>
+            }
+          </p>
+        </form>
+      </Container>
     </>
   )
 }

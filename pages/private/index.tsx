@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { siteName } from '../../lib/constants'
 import { Article, Intro } from '../../schemas/contentful/types'
 import { getAllArticles, getIntroList } from '../../schemas/contentful'
+import Container from '../../components/container'
 
 type Props = {
   intros: Intro[]
@@ -16,11 +17,15 @@ const Index = ({ intros, articles }: Props) => {
       <Head>
         <title>Next.js Blog Example with {siteName}</title>
       </Head>
-      {intros.length > 0 &&
-        intros.map((intro) => <IntroSection key={intro.title} intro={intro} />)}
-      {articles.length > 0 && (
-        <ArticleList title="More Stories" articles={articles} />
-      )}
+      <Container>
+        {intros.length > 0 &&
+          intros.map((intro) => (
+            <IntroSection key={intro.title} intro={intro} />
+          ))}
+        {articles.length > 0 && (
+          <ArticleList title="More Stories" articles={articles} />
+        )}
+      </Container>
     </>
   )
 }

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
 import { siteName } from '../../../lib/constants'
 import { Article } from '../../../schemas/contentful/types'
@@ -14,9 +15,11 @@ const ArticleIndex = ({ articles }: Props) => {
       <Head>
         <title>Testest | Next.js Blog Example with {siteName}</title>
       </Head>
-      {articles.length > 0 && (
-        <ArticleList title="All Stories" articles={articles} />
-      )}
+      <Container>
+        {articles.length > 0 && (
+          <ArticleList title="All Stories" articles={articles} />
+        )}
+      </Container>
     </>
   )
 }

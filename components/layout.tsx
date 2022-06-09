@@ -3,10 +3,8 @@ import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
-import { siteName, siteDescription } from '../lib/constants'
+import { siteName, siteDescription, portfolioGitHubUrl } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
-import Footer from './footer'
-import Meta from './meta'
 import Container from './container'
 
 type Props = {
@@ -39,45 +37,38 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <Meta />
       <div
-        className={cn({
-          'flex flex-col justify-center min-h-screen': pageType === 'login',
+        className={cn('min-h-screen', {
+          'flex flex-col justify-center ': pageType === 'login',
         })}
       >
-        <Container
-          className={cn({
-            'max-w-2xl mx-auto': pageType === 'login',
-          })}
-        >
+        <Container>
           <section
             className={cn({
               'text-center': pageType === 'login',
               'flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12':
                 pageType === 'top',
-              'flex flex-row mb-20 mt-8': pageType === 'lower',
+              'flex flex-row my-6': pageType === 'lower',
             })}
           >
-            <div
+            <h1
               className={cn({
                 'text-6xl md:text-8xl font-bold tracking-tighter leading-tight':
                   pageType === 'login',
                 'text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
                   pageType === 'top',
-                'text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
+                'text-3xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
                   pageType === 'lower',
               })}
             >
-              <h1>
-                {pageType === 'lower' ? (
-                  <Link href={pagesPath.private.$url()}>
-                    <a className="hover">{siteName}</a>
-                  </Link>
-                ) : (
-                  siteName
-                )}
-              </h1>
-            </div>
+              {pageType === 'lower' ? (
+                <Link href={pagesPath.private.$url()}>
+                  <a className="hover">{siteName}</a>
+                </Link>
+              ) : (
+                siteName
+              )}
+            </h1>
             <h4
               className={cn({
                 'text-lg mt-5': pageType === 'login',
@@ -102,10 +93,39 @@ const Layout = ({ children }: Props) => {
               </button>
             </nav>
           </section>
-          <main>{children}</main>
         </Container>
+        <main>{children}</main>
       </div>
-      {pageType !== 'login' && <Footer />}
+      {pageType !== 'login' && (
+        <footer className="bg-accent-1 border-t border-accent-2">
+          <Container className="py-28 flex flex-col lg:flex-row items-center">
+            <div className="grow">
+              <h3 className="inline text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
+                {siteName}
+              </h3>
+              <cite className="text-xs block">
+                Copyright ©️ {new Date().getFullYear()} Tsubasa Namiki, Based by{' '}
+                <a
+                  className="underline"
+                  href="https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript"
+                >
+                  blog-starter-typescript
+                </a>{' '}
+                using{' '}
+                <a className="underline" href="https://nextjs.org/">
+                  Next.js
+                </a>
+              </cite>
+            </div>
+            <a
+              href={portfolioGitHubUrl}
+              className="grow-0 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"
+            >
+              View on GitHub
+            </a>
+          </Container>
+        </footer>
+      )}
     </>
   )
 }

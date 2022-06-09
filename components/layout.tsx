@@ -3,9 +3,15 @@ import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
-import { siteName, siteDescription, portfolioGitHubUrl } from '../lib/constants'
+import {
+  siteName,
+  siteDescription,
+  portfolioGitHubUrl,
+  myEmail,
+} from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
+import Avatar from './avatar'
 
 type Props = {
   children: ReactNode
@@ -45,8 +51,8 @@ const Layout = ({ children }: Props) => {
         <Container>
           <section
             className={cn({
-              'text-center': pageType === 'login',
-              'flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12':
+              'flex flex-col items-center': pageType === 'login',
+              'flex flex-col md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
                 pageType === 'top',
               'flex flex-row my-6': pageType === 'lower',
             })}
@@ -63,10 +69,16 @@ const Layout = ({ children }: Props) => {
             >
               {pageType === 'lower' ? (
                 <Link href={pagesPath.private.$url()}>
-                  <a className="hover">{siteName}</a>
+                  <a className="hover flex flex-row items-center">
+                    <Avatar className="mr-2" email={myEmail} size={32} />
+                    {siteName}
+                  </a>
                 </Link>
               ) : (
-                siteName
+                <div className="flex flex-row items-center">
+                  <Avatar className="mr-5" email={myEmail} size={100} />
+                  {siteName}
+                </div>
               )}
             </h1>
             <h4

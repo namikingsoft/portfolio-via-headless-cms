@@ -87,7 +87,7 @@ const Index = () => {
       <Head>
         <title>Next.js Blog Example with {siteName}</title>
       </Head>
-      <Container className="max-w-2xl my-10">
+      <Container className="max-w-2xl my-20">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex border rounded-md overflow-hidden border-teal-500">
             <input

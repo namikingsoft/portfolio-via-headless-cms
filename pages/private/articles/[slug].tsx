@@ -23,7 +23,7 @@ const Post = ({ article, content }: Props) => {
         </title>
       </Head>
       <article className="mb-32">
-        <div className="py-20 bg-stone-100">
+        <div className="py-20">
           <Container>
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
               {article.title}

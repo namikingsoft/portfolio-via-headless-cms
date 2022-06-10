@@ -55,7 +55,7 @@ const Post = ({ article, content }: Props) => {
         <div className="mb-8 md:mb-16">
           <CoverImage src={article.image.url} alt={article.image.alt} />
         </div>
-        <Container className="max-w-2xl">
+        <Container className="max-w-2xl mt-18">
           <div
             className={markdownStyles.markdown}
             dangerouslySetInnerHTML={{ __html: content }}

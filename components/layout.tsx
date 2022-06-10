@@ -54,7 +54,7 @@ const Layout = ({ children }: Props) => {
               'flex flex-col items-center': pageType === 'login',
               'flex flex-col md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
                 pageType === 'top',
-              'flex flex-row my-6': pageType === 'lower',
+              'flex flex-row items-center my-6': pageType === 'lower',
             })}
           >
             <h1
@@ -63,7 +63,7 @@ const Layout = ({ children }: Props) => {
                   pageType === 'login',
                 'text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
                   pageType === 'top',
-                'text-3xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
+                'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
                   pageType === 'lower',
               })}
             >

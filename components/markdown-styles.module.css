@@ -10,9 +10,39 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-6xl mt-32 mb-8 leading-snug font-bold tracking-tight;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-3xl mt-20 mb-8 leading-snug font-bold;
+}
+
+.markdown h4 {
+  @apply text-2xl mt-12 mb-6 leading-snug font-bold;
+}
+
+.markdown h2:first-child,
+.markdown h3:first-child,
+.markdown h4:first-child {
+  @apply mt-0;
+}
+
+.markdown img {
+  @apply block text-center;
+}
+
+.markdown a {
+  @apply text-sky-500;
+}
+
+.markdown a:hover {
+  @apply underline decoration-solid;
+}
+
+.markdown ul {
+  @apply list-disc ml-5;
+}
+
+.markdown hr {
+  @apply mt-24;
 }

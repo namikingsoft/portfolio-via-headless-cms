@@ -13,6 +13,9 @@ export type Article = {
   title: string
   excerpt: string
   content: string
+  date: string
+  dateEnd?: string
+  dateIsContinue: boolean
   publishedAt: string
   image: Image
   tags: Tag[]

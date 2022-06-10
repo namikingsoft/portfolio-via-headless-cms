@@ -56,6 +56,9 @@ function toArticle(raw: ArticleRaw): Article {
     title: nonNullable(raw.title),
     excerpt: nonNullable(raw.excerpt),
     content: nonNullable(raw.content),
+    date: nonNullable(raw.date),
+    dateEnd: raw.dateEnd,
+    dateIsContinue: !!raw.dateIsContinue,
     publishedAt: nonNullable(raw.sys.publishedAt),
     image: {
       url: nonNullable(raw.image?.url),

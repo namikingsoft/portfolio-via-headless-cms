@@ -3,6 +3,9 @@ fragment article on Article {
   title
   excerpt
   content
+  date
+  dateEnd
+  dateIsContinue
   image {
     title
     url

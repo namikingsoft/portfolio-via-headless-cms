@@ -8,6 +8,7 @@ import { pagesPath } from '../../../lib/$path'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
 import Container from '../../../components/container'
+import DateRange from '../../../components/date-range'
 
 type Props = {
   article: Article
@@ -28,6 +29,13 @@ const Post = ({ article, content }: Props) => {
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
               {article.title}
             </h1>
+            <div className="mt-10 text-2xl text-slate-500">
+              <DateRange
+                date={article.date}
+                dateEnd={article.dateEnd}
+                isContinue={article.dateIsContinue}
+              />
+            </div>
             <div className="mt-10">
               {article.tags.map((tag) => (
                 <Link

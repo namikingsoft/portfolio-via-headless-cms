@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import CoverImage from './cover-image'
-import DateFormatter from './date-formatter'
+import DateRange from './date-range'
 import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 
@@ -30,7 +30,11 @@ const ArticlePreview = ({ article }: Props) => {
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <DateFormatter dateString={article.publishedAt} />
+        <DateRange
+          date={article.date}
+          dateEnd={article.dateEnd}
+          isContinue={article.dateIsContinue}
+        />
       </div>
       <p className="text-lg leading-relaxed mb-4">{article.excerpt}</p>
     </div>

@@ -9,6 +9,23 @@
   @apply my-6;
 }
 
+.markdown li {
+  @apply my-1;
+}
+
+.markdown ul+ul,
+.markdown ol+ol {
+  @apply mt-0;
+}
+
+.markdown li ul {
+  @apply my-0;
+}
+
+.markdown h1 {
+  @apply text-7xl mt-32 mb-8 leading-snug font-bold tracking-tight;
+}
+
 .markdown h2 {
   @apply text-6xl mt-32 mb-8 leading-snug font-bold tracking-tight;
 }
@@ -21,6 +38,7 @@
   @apply text-2xl mt-12 mb-6 leading-snug font-bold;
 }
 
+.markdown h1:first-child,
 .markdown h2:first-child,
 .markdown h3:first-child,
 .markdown h4:first-child {
@@ -44,5 +62,9 @@
 }
 
 .markdown hr {
-  @apply mt-24;
+  @apply mt-28;
+}
+
+.markdown img {
+  @apply block mx-auto my-1;
 }

@@ -1,15 +1,14 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import CoverImage from '../../../components/cover-image'
 import { siteName } from '../../../lib/constants'
 import { Article } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
-import { pagesPath } from '../../../lib/$path'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
 import Container from '../../../components/container'
+import CoverImage from '../../../components/cover-image'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
+import TagList from '../../../components/tag-list'
 
 type Props = {
   article: Article
@@ -42,18 +41,7 @@ const Post = ({ article, content }: Props) => {
                 <GithubLink repo={article.githubRepo} />
               </div>
               <div className="col-span-2">
-                {article.tags.map((tag) => (
-                  <Link
-                    key={tag.slug}
-                    href={pagesPath.private.tags._slug(tag.slug).$url()}
-                  >
-                    <a className="hover last:mr-0 mr-2">
-                      <span className="text-xs font-semibold inline-block py-1 px-2 rounded text-pink-600 bg-pink-200 uppercase">
-                        {tag.title}
-                      </span>
-                    </a>
-                  </Link>
-                ))}
+                <TagList tags={article.tags} />
               </div>
             </div>
           </Container>

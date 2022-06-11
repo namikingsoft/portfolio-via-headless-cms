@@ -3,6 +3,7 @@ import CoverImage from './cover-image'
 import DateRange from './date-range'
 import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
+import TagList from './tag-list'
 
 type Props = {
   article: Article
@@ -36,7 +37,10 @@ const ArticlePreview = ({ article }: Props) => {
           isContinue={article.dateIsContinue}
         />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{article.excerpt}</p>
+      <div className="mb-4">
+        <TagList tags={article.tags} />
+      </div>
+      <p className="leading-relaxed mb-4">{article.excerpt}</p>
     </div>
   )
 }

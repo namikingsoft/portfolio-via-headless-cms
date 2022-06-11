@@ -16,6 +16,7 @@ export type Article = {
   date: string
   dateEnd?: string
   dateIsContinue: boolean
+  githubRepo?: string | null
   publishedAt: string
   image: Image
   tags: Tag[]

@@ -9,6 +9,7 @@ import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
 import Container from '../../../components/container'
 import DateRange from '../../../components/date-range'
+import GithubLink from '../../../components/github-link'
 
 type Props = {
   article: Article
@@ -29,26 +30,31 @@ const Post = ({ article, content }: Props) => {
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
               {article.title}
             </h1>
-            <div className="mt-10 text-2xl text-slate-500">
-              <DateRange
-                date={article.date}
-                dateEnd={article.dateEnd}
-                isContinue={article.dateIsContinue}
-              />
-            </div>
-            <div className="mt-10">
-              {article.tags.map((tag) => (
-                <Link
-                  key={tag.slug}
-                  href={pagesPath.private.tags._slug(tag.slug).$url()}
-                >
-                  <a className="hover last:mr-0 mr-2">
-                    <span className="text-xs font-semibold inline-block py-1 px-2 rounded text-pink-600 bg-pink-200 uppercase">
-                      {tag.title}
-                    </span>
-                  </a>
-                </Link>
-              ))}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10">
+              <div className="text-2xl text-slate-500">
+                <DateRange
+                  date={article.date}
+                  dateEnd={article.dateEnd}
+                  isContinue={article.dateIsContinue}
+                />
+              </div>
+              <div className="text-2xl text-slate-500">
+                <GithubLink repo={article.githubRepo} />
+              </div>
+              <div className="col-span-2">
+                {article.tags.map((tag) => (
+                  <Link
+                    key={tag.slug}
+                    href={pagesPath.private.tags._slug(tag.slug).$url()}
+                  >
+                    <a className="hover last:mr-0 mr-2">
+                      <span className="text-xs font-semibold inline-block py-1 px-2 rounded text-pink-600 bg-pink-200 uppercase">
+                        {tag.title}
+                      </span>
+                    </a>
+                  </Link>
+                ))}
+              </div>
             </div>
           </Container>
         </div>

@@ -59,6 +59,7 @@ function toArticle(raw: ArticleRaw): Article {
     date: nonNullable(raw.date),
     dateEnd: raw.dateEnd,
     dateIsContinue: !!raw.dateIsContinue,
+    githubRepo: raw.githubRepo,
     publishedAt: nonNullable(raw.sys.publishedAt),
     image: {
       url: nonNullable(raw.image?.url),

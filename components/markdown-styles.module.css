@@ -62,9 +62,14 @@
 }
 
 .markdown hr {
-  @apply mt-28;
+  @apply mt-24;
 }
 
 .markdown img {
   @apply block mx-auto my-1;
+}
+
+.markdown td,
+.markdown th {
+  @apply p-2 border border-gray-300;
 }

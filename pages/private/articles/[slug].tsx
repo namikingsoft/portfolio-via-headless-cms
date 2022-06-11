@@ -41,7 +41,7 @@ const Post = ({ article, content }: Props) => {
                 <GithubLink repo={article.githubRepo} />
               </div>
               <div className="col-span-2">
-                <TagList tags={article.tags} />
+                <TagList article={article} />
               </div>
             </div>
           </Container>

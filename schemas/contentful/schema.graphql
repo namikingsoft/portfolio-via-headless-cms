@@ -20,6 +20,7 @@ type Article implements Entry {
   excerpt(locale: String): String
   githubRepo(locale: String): String
   content(locale: String): String
+  category(preview: Boolean, locale: String): Tag
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleTagCollection
 }
 
@@ -31,6 +32,7 @@ type ArticleCollection {
 }
 
 input ArticleFilter {
+  category: cfTagNestedFilter
   sys: SysFilter
   contentfulMetadata: ContentfulMetadataFilter
   title_exists: Boolean
@@ -90,6 +92,7 @@ input ArticleFilter {
   content_not_in: [String]
   content_contains: String
   content_not_contains: String
+  category_exists: Boolean
   tagCollection_exists: Boolean
   OR: [ArticleFilter]
   AND: [ArticleFilter]
@@ -239,57 +242,6 @@ enum AssetOrder {
   width_DESC
   height_ASC
   height_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/category)
-"""
-type Category implements Entry {
-  sys: Sys!
-  contentfulMetadata: ContentfulMetadata!
-  linkedFrom(allowedLocales: [String]): CategoryLinkingCollections
-  title(locale: String): String
-  tag(preview: Boolean, locale: String): Tag
-}
-
-type CategoryCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [Category]!
-}
-
-input CategoryFilter {
-  tag: cfTagNestedFilter
-  sys: SysFilter
-  contentfulMetadata: ContentfulMetadataFilter
-  title_exists: Boolean
-  title: String
-  title_not: String
-  title_in: [String]
-  title_not_in: [String]
-  title_contains: String
-  title_not_contains: String
-  tag_exists: Boolean
-  OR: [CategoryFilter]
-  AND: [CategoryFilter]
-}
-
-type CategoryLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-}
-
-enum CategoryOrder {
-  title_ASC
-  title_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
@@ -592,8 +544,6 @@ type Query {
   introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
   tag(id: String!, preview: Boolean, locale: String): Tag
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
-  category(id: String!, preview: Boolean, locale: String): Category
-  categoryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: CategoryFilter, order: [CategoryOrder]): CategoryCollection
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: EntryFilter, order: [EntryOrder]): EntryCollection
 }
 
@@ -685,7 +635,6 @@ input TagFilter {
 type TagLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
-  categoryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): CategoryCollection
 }
 
 enum TagOrder {

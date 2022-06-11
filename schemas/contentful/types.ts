@@ -19,6 +19,7 @@ export type Article = {
   githubRepo?: string | null
   publishedAt: string
   image: Image
+  category: Tag
   tags: Tag[]
 }
 

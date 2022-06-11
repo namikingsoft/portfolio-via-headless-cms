@@ -11,6 +11,9 @@ fragment article on Article {
     title
     url
   }
+  category {
+    ...tag
+  }
   tagCollection {
     items {
       ...tag

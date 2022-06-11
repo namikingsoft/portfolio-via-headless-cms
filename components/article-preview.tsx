@@ -38,7 +38,7 @@ const ArticlePreview = ({ article }: Props) => {
         />
       </div>
       <div className="mb-4">
-        <TagList tags={article.tags} />
+        <TagList article={article} />
       </div>
       <p className="leading-relaxed mb-4">{article.excerpt}</p>
     </div>

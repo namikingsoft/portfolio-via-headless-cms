@@ -65,6 +65,7 @@ function toArticle(raw: ArticleRaw): Article {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
     },
+    category: toTag(nonNullable(raw.category)),
     tags: (raw.tagCollection?.items ?? [])
       .flatMap((x) => (x === null ? [] : [x]))
       .map(toTag),

@@ -1,10 +1,10 @@
-import IntroSection from '../../components/intro-section'
-import ArticleList from '../../components/article-list'
 import Head from 'next/head'
 import { siteName } from '../../lib/constants'
 import { Article, Intro } from '../../schemas/contentful/types'
 import { getAllArticles, getIntroList } from '../../schemas/contentful'
 import Container from '../../components/container'
+import CoverImage from '../../components/cover-image'
+import ArticleList from '../../components/article-list'
 
 type Props = {
   intros: Intro[]
@@ -17,11 +17,29 @@ const Index = ({ intros, articles }: Props) => {
       <Head>
         <title>Next.js Blog Example with {siteName}</title>
       </Head>
+      {intros.length > 0 &&
+        intros.map((intro) => (
+          <section key={intro.title}>
+            <div className="mb-8 md:mb-16">
+              <CoverImage src={intro.image.url} alt={intro.image.alt} />
+            </div>
+            <Container>
+              <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
+                <div>
+                  <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+                    {intro.title}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-lg leading-relaxed mb-4">
+                    {intro.content}
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+        ))}
       <Container>
-        {intros.length > 0 &&
-          intros.map((intro) => (
-            <IntroSection key={intro.title} intro={intro} />
-          ))}
         {articles.length > 0 && (
           <ArticleList title="More Stories" articles={articles} />
         )}

@@ -61,6 +61,10 @@
   @apply list-disc ml-5;
 }
 
+.markdown ol {
+  @apply list-decimal ml-5;
+}
+
 .markdown hr {
   @apply mt-24;
 }
@@ -76,4 +80,16 @@
 
 .markdown i {
   @apply not-italic;
+}
+
+.markdown :global .footnotes {
+  @apply mt-32 pt-16 border-t;
+}
+
+.markdown :global .footnotes p {
+  @apply m-3;
+}
+
+.markdown :global #footnote-label {
+  @apply hidden;
 }

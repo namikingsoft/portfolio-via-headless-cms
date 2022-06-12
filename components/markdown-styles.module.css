@@ -27,7 +27,7 @@
 }
 
 .markdown h2 {
-  @apply text-6xl mt-32 mb-8 leading-snug font-bold tracking-tight;
+  @apply text-5xl mt-32 mb-8 leading-snug font-bold tracking-tight;
 }
 
 .markdown h3 {
@@ -80,6 +80,14 @@
 
 .markdown i {
   @apply not-italic;
+}
+
+.markdown summary {
+  @apply cursor-pointer;
+}
+
+.markdown summary:hover {
+  @apply underline;
 }
 
 .markdown :global .footnotes {

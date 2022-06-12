@@ -73,3 +73,7 @@
 .markdown th {
   @apply p-2 border border-gray-300;
 }
+
+.markdown i {
+  @apply not-italic;
+}

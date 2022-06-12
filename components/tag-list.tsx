@@ -17,8 +17,8 @@ const TagList = ({ article }: Props) => {
         key={article.category.slug}
         href={pagesPath.private.tags._slug(article.category.slug).$url()}
       >
-        <a className="hover last:mr-0 mr-2">
-          <span className={cn(baseClassName, 'text-green-600 bg-green-200')}>
+        <a className="hover last:mr-0 mr-3">
+          <span className={cn(baseClassName, 'text-green-600 bg-green-200 ')}>
             {article.category.title}
           </span>
         </a>

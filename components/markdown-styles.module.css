@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply leading-7 text-gray-700;
 }
 
 .markdown p,
@@ -23,15 +23,15 @@
 }
 
 .markdown h1 {
-  @apply text-7xl mt-32 mb-8 leading-snug font-bold tracking-tight;
+  @apply text-7xl mt-32 mb-8 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h2 {
-  @apply text-5xl mt-32 mb-8 leading-snug font-bold tracking-tight;
+  @apply text-5xl mt-32 mb-8 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h3 {
-  @apply text-3xl mt-20 mb-8 leading-snug font-bold;
+  @apply text-3xl mt-20 mb-8 leading-snug font-bold text-gray-800;
 }
 
 .markdown h4 {

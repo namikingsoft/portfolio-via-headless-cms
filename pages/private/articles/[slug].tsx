@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { siteName } from '../../../lib/constants'
-import { Article } from '../../../schemas/contentful/types'
+import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
@@ -8,10 +8,11 @@ import Container from '../../../components/container'
 import CoverImage from '../../../components/cover-image'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
+import ArticleList from '../../../components/article-list'
 import TagList from '../../../components/tag-list'
 
 type Props = {
-  article: Article
+  article: ArticleWithRelated
   content: string
 }
 
@@ -55,6 +56,11 @@ const Post = ({ article, content }: Props) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </Container>
+        {article.relatedArticles.length > 0 && (
+          <Container className="mt-32">
+            <ArticleList articles={article.relatedArticles} />
+          </Container>
+        )}
       </article>
     </>
   )

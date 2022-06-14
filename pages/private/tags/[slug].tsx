@@ -19,9 +19,10 @@ const ArticleIndex = ({ tag, articles }: Props) => {
         </title>
       </Head>
       <Container>
-        {articles.length > 0 && (
-          <ArticleList title={tag.title} articles={articles} />
-        )}
+        <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+          {tag.title}
+        </h2>
+        {articles.length > 0 && <ArticleList articles={articles} />}
       </Container>
     </>
   )

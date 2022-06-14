@@ -6,7 +6,7 @@ import {
   IntroCollectionQuery,
   TagCollectionQuery,
 } from './client.generated'
-import { Article, Intro, Tag, Visitor } from './types'
+import { Article, ArticleWithRelated, Intro, Tag, Visitor } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
 const client = new GraphQLClient(contentfulEndpoint, {
@@ -97,11 +97,18 @@ export async function getAllArticles(): Promise<Article[]> {
     .map(toArticle)
 }
 
-export async function getArticle(slug: string): Promise<Article> {
+export async function getArticle(slug: string): Promise<ArticleWithRelated> {
   const { articleCollection } = await getSdk(client).ArticleFromSlug({
     slug,
   })
-  return toArticle(nonNullable(articleCollection?.items?.[0]))
+  const articleRaw = nonNullable(articleCollection?.items?.[0])
+  const { article } = await getSdk(client).RelatedArticleCollection({
+    id: articleRaw.sys.id,
+  })
+  const relatedArticles = (article?.relatedArticleCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toArticle)
+  return { ...toArticle(articleRaw), relatedArticles }
 }
 
 export async function getIntroList(): Promise<Intro[]> {

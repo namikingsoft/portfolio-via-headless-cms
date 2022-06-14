@@ -22,6 +22,7 @@ type Article implements Entry {
   content(locale: String): String
   category(preview: Boolean, locale: String): Tag
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleTagCollection
+  relatedArticleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleRelatedArticleCollection
 }
 
 type ArticleCollection {
@@ -94,12 +95,14 @@ input ArticleFilter {
   content_not_contains: String
   category_exists: Boolean
   tagCollection_exists: Boolean
+  relatedArticleCollection_exists: Boolean
   OR: [ArticleFilter]
   AND: [ArticleFilter]
 }
 
 type ArticleLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
 }
 
 enum ArticleOrder {
@@ -123,6 +126,13 @@ enum ArticleOrder {
   sys_firstPublishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+type ArticleRelatedArticleCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Article]!
 }
 
 type ArticleTagCollection {

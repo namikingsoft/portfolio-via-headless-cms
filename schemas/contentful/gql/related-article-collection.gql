@@ -1,0 +1,9 @@
+query RelatedArticleCollection($id: String!) {
+  article(id: $id) {
+    relatedArticleCollection {
+      items {
+        ...article
+      }
+    }
+  }
+}

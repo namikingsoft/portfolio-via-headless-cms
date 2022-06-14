@@ -8,7 +8,7 @@ export type Tag = {
   slug: string
 }
 
-export type Article = {
+export interface Article {
   slug: string
   title: string
   excerpt: string
@@ -21,6 +21,10 @@ export type Article = {
   image: Image
   category: Tag
   tags: Tag[]
+}
+
+export interface ArticleWithRelated extends Article {
+  relatedArticles: Article[]
 }
 
 export type Intro = {

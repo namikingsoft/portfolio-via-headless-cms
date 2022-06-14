@@ -41,6 +41,7 @@ export type Article = Entry & {
   githubRepo?: Maybe<Scalars['String']>;
   image?: Maybe<Asset>;
   linkedFrom?: Maybe<ArticleLinkingCollections>;
+  relatedArticleCollection?: Maybe<ArticleRelatedArticleCollection>;
   slug?: Maybe<Scalars['String']>;
   sys: Sys;
   tagCollection?: Maybe<ArticleTagCollection>;
@@ -101,6 +102,15 @@ export type ArticleImageArgs = {
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
 export type ArticleLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/article) */
+export type ArticleRelatedArticleCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -181,6 +191,7 @@ export type ArticleFilter = {
   githubRepo_not_contains?: InputMaybe<Scalars['String']>;
   githubRepo_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   image_exists?: InputMaybe<Scalars['Boolean']>;
+  relatedArticleCollection_exists?: InputMaybe<Scalars['Boolean']>;
   slug?: InputMaybe<Scalars['String']>;
   slug_contains?: InputMaybe<Scalars['String']>;
   slug_exists?: InputMaybe<Scalars['Boolean']>;
@@ -201,7 +212,16 @@ export type ArticleFilter = {
 
 export type ArticleLinkingCollections = {
   __typename?: 'ArticleLinkingCollections';
+  articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type ArticleLinkingCollectionsArticleCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -234,6 +254,14 @@ export enum ArticleOrder {
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC'
 }
+
+export type ArticleRelatedArticleCollection = {
+  __typename?: 'ArticleRelatedArticleCollection';
+  items: Array<Maybe<Article>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
 
 export type ArticleTagCollection = {
   __typename?: 'ArticleTagCollection';
@@ -1086,6 +1114,8 @@ export type ArticleFromSlugQueryVariables = Exact<{
 
 export type ArticleFromSlugQuery = { __typename?: 'Query', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null };
 
+export type ArticleWithRelatedFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, relatedArticleCollection?: { __typename?: 'ArticleRelatedArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
+
 export type ArticleFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
 
 export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null };
@@ -1098,6 +1128,13 @@ export type IntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type IntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
+
+export type RelatedArticleCollectionQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RelatedArticleCollectionQuery = { __typename?: 'Query', article?: { __typename?: 'Article', relatedArticleCollection?: { __typename?: 'ArticleRelatedArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null };
 
 export type TagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1169,6 +1206,16 @@ export const ArticleFragmentDoc = gql`
   }
 }
     ${TagFragmentDoc}`;
+export const ArticleWithRelatedFragmentDoc = gql`
+    fragment articleWithRelated on Article {
+  ...article
+  relatedArticleCollection {
+    items {
+      ...article
+    }
+  }
+}
+    ${ArticleFragmentDoc}`;
 export const IntroFragmentDoc = gql`
     fragment intro on Intro {
   title
@@ -1212,6 +1259,17 @@ export const IntroCollectionDocument = gql`
   }
 }
     ${IntroFragmentDoc}`;
+export const RelatedArticleCollectionDocument = gql`
+    query RelatedArticleCollection($id: String!) {
+  article(id: $id) {
+    relatedArticleCollection {
+      items {
+        ...article
+      }
+    }
+  }
+}
+    ${ArticleFragmentDoc}`;
 export const TagCollectionDocument = gql`
     query TagCollection {
   tagCollection {
@@ -1279,6 +1337,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     IntroCollection(variables?: IntroCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IntroCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IntroCollectionQuery>(IntroCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IntroCollection', 'query');
+    },
+    RelatedArticleCollection(variables: RelatedArticleCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RelatedArticleCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RelatedArticleCollectionQuery>(RelatedArticleCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RelatedArticleCollection', 'query');
     },
     TagCollection(variables?: TagCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TagCollectionQuery>(TagCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagCollection', 'query');

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { siteName } from '../../lib/constants'
-import { Article, Intro } from '../../schemas/contentful/types'
-import { getAllArticles, getIntroList } from '../../schemas/contentful'
+import { Article, Intro, Pickup } from '../../schemas/contentful/types'
+import { getIntroList, getPickups } from '../../schemas/contentful'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
 import ArticleList from '../../components/article-list'
@@ -9,9 +9,10 @@ import ArticleList from '../../components/article-list'
 type Props = {
   intros: Intro[]
   articles: Article[]
+  pickups: Pickup[]
 }
 
-const Index = ({ intros, articles }: Props) => {
+const Index = ({ intros, articles, pickups }: Props) => {
   return (
     <>
       <Head>
@@ -26,7 +27,7 @@ const Index = ({ intros, articles }: Props) => {
             <Container>
               <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
                 <div>
-                  <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+                  <h3 className="mb-4 text-4xl lg:text-6xl font-bold leading-tight">
                     {intro.title}
                   </h3>
                 </div>
@@ -40,10 +41,16 @@ const Index = ({ intros, articles }: Props) => {
           </section>
         ))}
       <Container>
-        <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-          More Stories
-        </h2>
-        {articles.length > 0 && <ArticleList articles={articles} />}
+        {pickups.map((pickup) => (
+          <>
+            <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
+              {pickup.title}
+            </h2>
+            {pickup.articles.length > 0 && (
+              <ArticleList articles={pickup.articles} />
+            )}
+          </>
+        ))}
       </Container>
     </>
   )
@@ -53,11 +60,11 @@ export default Index
 
 export async function getStaticProps() {
   const intros = await getIntroList()
-  const articles = await getAllArticles()
+  const pickups = await getPickups()
   return {
     props: {
       intros,
-      articles,
+      pickups,
     },
   }
 }

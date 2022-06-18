@@ -1,0 +1,11 @@
+query PickupById($id: String!) {
+  pickup(id: $id) {
+    title
+    description
+    articleCollection {
+      items {
+        ...article
+      }
+    }
+  }
+}

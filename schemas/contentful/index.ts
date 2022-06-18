@@ -5,8 +5,16 @@ import {
   ArticleCollectionQuery,
   IntroCollectionQuery,
   TagCollectionQuery,
+  PickupByIdQuery,
 } from './client.generated'
-import { Article, ArticleWithRelated, Intro, Tag, Visitor } from './types'
+import {
+  Article,
+  ArticleWithRelated,
+  Intro,
+  Pickup,
+  Tag,
+  Visitor,
+} from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
 const client = new GraphQLClient(contentfulEndpoint, {
@@ -31,6 +39,8 @@ type IntroRaw = NonNullable<
 type TagRaw = NonNullable<
   NonNullable<TagCollectionQuery['tagCollection']>['items'][number]
 >
+
+type PickupRaw = NonNullable<NonNullable<PickupByIdQuery['pickup']>>
 
 type VisitorRaw = NonNullable<
   NonNullable<VisitorByUsernameQuery['visitorCollection']>['items'][number]
@@ -80,6 +90,16 @@ function toIntro(raw: IntroRaw): Intro {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
     },
+  }
+}
+
+function toPickup(raw: PickupRaw): Pickup {
+  return {
+    title: nonNullable(raw.title),
+    description: raw.description || '',
+    articles: (raw.articleCollection?.items ?? [])
+      .flatMap((x) => (x === null ? [] : [x]))
+      .map(toArticle),
   }
 }
 
@@ -145,6 +165,19 @@ export async function getTagWithArticles(
     tag: toTag(firstTag),
     articles,
   }
+}
+
+export async function getPickups(): Promise<Pickup[]> {
+  const { PickupIdCollection, PickupById } = await getSdk(client)
+  const { pickupCollection } = await PickupIdCollection()
+  const pickupPromises =
+    pickupCollection?.items
+      .map((raw) => raw?.sys.id)
+      .flatMap((x) => (x == null ? [] : [x]))
+      .map((id) => PickupById({ id })) ?? []
+  return (await Promise.all(pickupPromises)).map(({ pickup }) =>
+    toPickup(nonNullable(pickup)),
+  )
 }
 
 export async function getVisitorByUsername(username: string): Promise<Visitor> {

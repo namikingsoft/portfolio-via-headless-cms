@@ -33,6 +33,12 @@ export type Intro = {
   image: Image
 }
 
+export type Pickup = {
+  title: string
+  description: string
+  articles: Article[]
+}
+
 export type Visitor = {
   username: string
   label: string

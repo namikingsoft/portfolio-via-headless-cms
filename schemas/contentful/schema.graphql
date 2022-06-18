@@ -102,6 +102,7 @@ input ArticleFilter {
 
 type ArticleLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
 }
 
@@ -539,6 +540,71 @@ enum IntroOrder {
 }
 
 """
+Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup)
+"""
+type Pickup implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): PickupLinkingCollections
+  title(locale: String): String
+  description(locale: String): String
+  articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupArticleCollection
+}
+
+type PickupArticleCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Article]!
+}
+
+type PickupCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Pickup]!
+}
+
+input PickupFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  articleCollection_exists: Boolean
+  OR: [PickupFilter]
+  AND: [PickupFilter]
+}
+
+type PickupLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+}
+
+enum PickupOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
 """
 scalar Quality
@@ -546,6 +612,8 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  pickup(id: String!, preview: Boolean, locale: String): Pickup
+  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PickupFilter, order: [PickupOrder]): PickupCollection
   article(id: String!, preview: Boolean, locale: String): Article
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   visitor(id: String!, preview: Boolean, locale: String): Visitor

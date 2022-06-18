@@ -214,6 +214,7 @@ export type ArticleLinkingCollections = {
   __typename?: 'ArticleLinkingCollections';
   articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  pickupCollection?: Maybe<PickupCollection>;
 };
 
 
@@ -226,6 +227,14 @@ export type ArticleLinkingCollectionsArticleCollectionArgs = {
 
 
 export type ArticleLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type ArticleLinkingCollectionsPickupCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -717,6 +726,108 @@ export enum IntroOrder {
   TitleDesc = 'title_DESC'
 }
 
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type Pickup = Entry & {
+  __typename?: 'Pickup';
+  articleCollection?: Maybe<PickupArticleCollection>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PickupLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type PickupArticleCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type PickupDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type PickupLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type PickupTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type PickupArticleCollection = {
+  __typename?: 'PickupArticleCollection';
+  items: Array<Maybe<Article>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type PickupCollection = {
+  __typename?: 'PickupCollection';
+  items: Array<Maybe<Pickup>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type PickupFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PickupFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PickupFilter>>>;
+  articleCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PickupLinkingCollections = {
+  __typename?: 'PickupLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type PickupLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum PickupOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type Query = {
   __typename?: 'Query';
   article?: Maybe<Article>;
@@ -726,6 +837,8 @@ export type Query = {
   entryCollection?: Maybe<EntryCollection>;
   intro?: Maybe<Intro>;
   introCollection?: Maybe<IntroCollection>;
+  pickup?: Maybe<Pickup>;
+  pickupCollection?: Maybe<PickupCollection>;
   tag?: Maybe<Tag>;
   tagCollection?: Maybe<TagCollection>;
   visitor?: Maybe<Visitor>;
@@ -791,6 +904,23 @@ export type QueryIntroCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<IntroFilter>;
+};
+
+
+export type QueryPickupArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryPickupCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PickupOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PickupFilter>;
 };
 
 
@@ -1129,6 +1259,18 @@ export type IntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type IntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
 
+export type PickupByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PickupByIdQuery = { __typename?: 'Query', pickup?: { __typename?: 'Pickup', title?: string | null, description?: string | null, articleCollection?: { __typename?: 'PickupArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null };
+
+export type PickupIdCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PickupIdCollectionQuery = { __typename?: 'Query', pickupCollection?: { __typename?: 'PickupCollection', items: Array<{ __typename?: 'Pickup', sys: { __typename?: 'Sys', id: string } } | null> } | null };
+
 export type RelatedArticleCollectionQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -1259,6 +1401,30 @@ export const IntroCollectionDocument = gql`
   }
 }
     ${IntroFragmentDoc}`;
+export const PickupByIdDocument = gql`
+    query PickupById($id: String!) {
+  pickup(id: $id) {
+    title
+    description
+    articleCollection {
+      items {
+        ...article
+      }
+    }
+  }
+}
+    ${ArticleFragmentDoc}`;
+export const PickupIdCollectionDocument = gql`
+    query PickupIdCollection {
+  pickupCollection {
+    items {
+      sys {
+        id
+      }
+    }
+  }
+}
+    `;
 export const RelatedArticleCollectionDocument = gql`
     query RelatedArticleCollection($id: String!) {
   article(id: $id) {
@@ -1337,6 +1503,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     IntroCollection(variables?: IntroCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IntroCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IntroCollectionQuery>(IntroCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IntroCollection', 'query');
+    },
+    PickupById(variables: PickupByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PickupByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PickupByIdQuery>(PickupByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PickupById', 'query');
+    },
+    PickupIdCollection(variables?: PickupIdCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PickupIdCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PickupIdCollectionQuery>(PickupIdCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PickupIdCollection', 'query');
     },
     RelatedArticleCollection(variables: RelatedArticleCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RelatedArticleCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RelatedArticleCollectionQuery>(RelatedArticleCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RelatedArticleCollection', 'query');

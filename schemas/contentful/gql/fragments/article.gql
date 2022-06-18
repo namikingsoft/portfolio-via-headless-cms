@@ -22,5 +22,5 @@ fragment article on Article {
   sys {
     id
     publishedAt
-  },
+  }
 }

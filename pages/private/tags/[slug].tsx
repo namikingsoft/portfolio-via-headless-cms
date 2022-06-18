@@ -10,7 +10,7 @@ type Props = {
   articles: Article[]
 }
 
-const ArticleIndex = ({ tag, articles }: Props) => {
+const TagIndex = ({ tag, articles }: Props) => {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ const ArticleIndex = ({ tag, articles }: Props) => {
   )
 }
 
-export default ArticleIndex
+export default TagIndex
 
 type Context = {
   params: {

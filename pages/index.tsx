@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { FocusEventHandler, useCallback, useEffect, useState } from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -122,12 +123,10 @@ const Index = () => {
 
 export default Index
 
-export async function getStaticProps(context) {
-  console.log('context', context)
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      // ...(await serverSideTranslations(context.locale, ['common'])),
-      ...(await serverSideTranslations('en', ['common'])),
+      ...(await serverSideTranslations(locale!, ['common'])),
     },
   }
 }

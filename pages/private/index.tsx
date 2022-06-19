@@ -42,14 +42,14 @@ const Index = ({ intros, articles, pickups }: Props) => {
         ))}
       <Container>
         {pickups.map((pickup) => (
-          <>
+          <section key={pickup.title}>
             <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
               {pickup.title}
             </h2>
             {pickup.articles.length > 0 && (
               <ArticleList articles={pickup.articles} />
             )}
-          </>
+          </section>
         ))}
       </Container>
     </>

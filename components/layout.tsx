@@ -44,7 +44,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <div
-        className={cn('min-h-screen', {
+        className={cn('min-h-screen antialiased', {
           'flex flex-col justify-center ': pageType === 'login',
         })}
       >

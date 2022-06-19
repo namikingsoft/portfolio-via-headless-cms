@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app'
+import { appWithTranslation } from 'next-i18next'
 import { Provider } from 'urql'
 import { client } from '../schemas/bff/client'
 import { gtagId } from '../env'
@@ -8,7 +9,7 @@ import Meta from '../components/meta'
 import '../styles/index.css'
 import '../styles/prism.css'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider value={client}>
       <GtagProvider gtagId={gtagId}>
@@ -20,3 +21,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
+
+export default appWithTranslation(MyApp)

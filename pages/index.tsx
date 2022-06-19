@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router'
 import { FocusEventHandler, useCallback, useEffect, useState } from 'react'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../schemas/bff/client'
-import {
-  siteName,
-  passwordLength,
-  redirectUriSearchParamsName,
-} from '../lib/constants'
+import { passwordLength, redirectUriSearchParamsName } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import { parseToFormValidationErrors } from '../schemas/bff/errors'
 import Container from '../components/container'
@@ -20,6 +18,8 @@ const isFormFieldName = (fieldName: string): fieldName is keyof FieldValues =>
   fieldName === 'password'
 
 const Index = () => {
+  const { t } = useTranslation()
+
   const router = useRouter()
   const [redirecting, setRedirecting] = useState(false)
 
@@ -85,7 +85,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>Next.js Blog Example with {siteName}</title>
+        <title>{t('siteName')}</title>
       </Head>
       <Container className="max-w-2xl my-20">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -121,3 +121,13 @@ const Index = () => {
 }
 
 export default Index
+
+export async function getStaticProps(context) {
+  console.log('context', context)
+  return {
+    props: {
+      // ...(await serverSideTranslations(context.locale, ['common'])),
+      ...(await serverSideTranslations('en', ['common'])),
+    },
+  }
+}

@@ -1,6 +1,3 @@
-export const siteName = 'Portfolio'
-export const siteDescription = 'The Engineer Work Experience of Tsubasa Namiki'
-
 export const myEmail = 'namikingsoft@gmail.com'
 
 export const portfolioGitHubUrl =

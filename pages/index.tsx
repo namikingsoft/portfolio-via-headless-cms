@@ -86,7 +86,9 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>{t('siteName')}</title>
+        <title>
+          {t('siteName')} | {t('siteDescription')}
+        </title>
       </Head>
       <Container className="max-w-2xl my-20">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -106,7 +108,7 @@ const Index = () => {
               type="submit"
               disabled={disabled}
             >
-              Login
+              {t('login')}
             </button>
           </div>
           <p className="text-red-500 text-xs italic">

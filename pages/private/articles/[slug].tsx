@@ -1,5 +1,7 @@
 import Head from 'next/head'
-import { siteName } from '../../../lib/constants'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
@@ -17,11 +19,13 @@ type Props = {
 }
 
 const Post = ({ article, content }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
         <title>
-          {article.title} | Next.js Blog Example with {siteName}
+          {article.title} | {t('siteName')}
         </title>
       </Head>
       <article className="mb-32">
@@ -68,36 +72,37 @@ const Post = ({ article, content }: Props) => {
 
 export default Post
 
-type Context = {
-  params: {
-    slug: string
-  }
+type Params = {
+  slug: string
 }
 
-export async function getStaticProps({
-  params: { slug },
-}: Context): Promise<{ props: Props }> {
-  const article = await getArticle(slug)
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+  locale,
+}) => {
+  const article = await getArticle(params!.slug)
   const content = await markdownToHtml(article.content)
   return {
     props: {
       article,
       content,
+      ...(await serverSideTranslations(locale!, ['common'])),
     },
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths<Params> = async ({ locales }) => {
   const articles = await getAllArticles()
 
   return {
-    paths: articles.map((article) => {
-      return {
+    paths: locales!.flatMap((locale) =>
+      articles.map((article) => ({
         params: {
           slug: article.slug,
         },
-      }
-    }),
+        locale,
+      })),
+    ),
     fallback: false,
   }
 }

@@ -1,14 +1,10 @@
 import Link from 'next/link'
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
-import {
-  siteName,
-  siteDescription,
-  portfolioGitHubUrl,
-  myEmail,
-} from '../lib/constants'
+import { portfolioGitHubUrl, myEmail } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
 import Avatar from './avatar'
@@ -19,6 +15,8 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   const router = useRouter()
+
+  const { t } = useTranslation()
 
   const pageType = useMemo(() => {
     if (router.pathname === pagesPath.$url().pathname) return 'login'
@@ -71,13 +69,13 @@ const Layout = ({ children }: Props) => {
                 <Link href={pagesPath.private.$url()}>
                   <a className="hover flex flex-row items-center">
                     <Avatar className="mr-2" email={myEmail} size={32} />
-                    {siteName}
+                    {t('siteName')}
                   </a>
                 </Link>
               ) : (
                 <div className="flex flex-row items-center">
                   <Avatar className="mr-5" email={myEmail} size={100} />
-                  {siteName}
+                  {t('siteName')}
                 </div>
               )}
             </h1>
@@ -89,7 +87,7 @@ const Layout = ({ children }: Props) => {
                 hidden: pageType === 'lower',
               })}
             >
-              {siteDescription}
+              {t('siteDescription')}
             </h4>
             <nav
               className={cn({
@@ -101,7 +99,7 @@ const Layout = ({ children }: Props) => {
                 onClick={onClickLogout}
                 disabled={isLogout}
               >
-                Logout
+                {t('logout')}
               </button>
             </nav>
           </section>
@@ -113,10 +111,10 @@ const Layout = ({ children }: Props) => {
           <Container className="py-28 flex flex-col lg:flex-row items-center">
             <div className="grow">
               <h3 className="inline text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-                {siteName}
+                {t('siteName')}
               </h3>
               <cite className="text-xs block">
-                Copyright ©️ {new Date().getFullYear()} Tsubasa Namiki, Based by{' '}
+                Copyright ©️ Tsubasa Namiki, Based by{' '}
                 <a
                   className="underline"
                   href="https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript"
@@ -133,7 +131,7 @@ const Layout = ({ children }: Props) => {
               href={portfolioGitHubUrl}
               className="grow-0 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"
             >
-              View on GitHub
+              {t('viewOnGitHub')}
             </a>
           </Container>
         </footer>

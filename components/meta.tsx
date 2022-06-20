@@ -1,7 +1,9 @@
 import Head from 'next/head'
-import { siteName } from '../lib/constants'
+import { useTranslation } from 'next-i18next'
 
 const Meta = () => {
+  const { t } = useTranslation()
+
   return (
     <Head>
       <link
@@ -31,10 +33,9 @@ const Meta = () => {
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta
         name="description"
-        content={`A statically generated blog example using Next.js and ${siteName}.`}
+        content={`${t('siteName')} | ${t('siteDescription')}`}
       />
     </Head>
   )

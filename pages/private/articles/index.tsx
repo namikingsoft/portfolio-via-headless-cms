@@ -1,7 +1,9 @@
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
-import { siteName } from '../../../lib/constants'
 import { Article } from '../../../schemas/contentful/types'
 import { getAllArticles } from '../../../schemas/contentful'
 
@@ -10,14 +12,18 @@ type Props = {
 }
 
 const ArticleIndex = ({ articles }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
-        <title>All Articles | Next.js Blog Example with {siteName}</title>
+        <title>
+          {t('allArticles')} | {t('siteName')}
+        </title>
       </Head>
       <Container>
         <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-          All Articles
+          {t('allArticles')}
         </h2>
         {articles.length > 0 && <ArticleList articles={articles} />}
       </Container>
@@ -27,11 +33,12 @@ const ArticleIndex = ({ articles }: Props) => {
 
 export default ArticleIndex
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const articles = await getAllArticles()
   return {
     props: {
       articles,
+      ...(await serverSideTranslations(locale!, ['common'])),
     },
   }
 }

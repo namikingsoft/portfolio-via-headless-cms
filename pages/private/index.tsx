@@ -1,6 +1,8 @@
 import Head from 'next/head'
-import { siteName } from '../../lib/constants'
-import { Article, Intro, Pickup } from '../../schemas/contentful/types'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
+import { Intro, Pickup } from '../../schemas/contentful/types'
 import { getIntroList, getPickups } from '../../schemas/contentful'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
@@ -8,15 +10,18 @@ import ArticleList from '../../components/article-list'
 
 type Props = {
   intros: Intro[]
-  articles: Article[]
   pickups: Pickup[]
 }
 
-const Index = ({ intros, articles, pickups }: Props) => {
+const Index = ({ intros, pickups }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
-        <title>Next.js Blog Example with {siteName}</title>
+        <title>
+          {t('siteName')} | {t('siteDescription')}
+        </title>
       </Head>
       {intros.length > 0 &&
         intros.map((intro) => (
@@ -58,13 +63,14 @@ const Index = ({ intros, articles, pickups }: Props) => {
 
 export default Index
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const intros = await getIntroList()
   const pickups = await getPickups()
   return {
     props: {
       intros,
       pickups,
+      ...(await serverSideTranslations(locale!, ['common'])),
     },
   }
 }

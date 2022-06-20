@@ -10,12 +10,12 @@ import simplePlantUML from '@akebifiky/remark-simple-plantuml'
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
     .use(gfm)
-    .use(toc, { heading: 'toc|目次', maxDepth: 2 })
+    .use(toc, { heading: 'toc|TOC|Table of Contents|目次', maxDepth: 2 })
     .use(math)
     .use(simplePlantUML)
     .use(emoji)
     .use(prism)
-    .use(html, { sanitize: false })
+    .use(html, { sanitize: false }) // cms content only
     .process(markdown)
   return result.toString()
 }

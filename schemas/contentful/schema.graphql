@@ -18,6 +18,7 @@ type Article implements Entry {
   dateIsContinue(locale: String): Boolean
   image(preview: Boolean, locale: String): Asset
   excerpt(locale: String): String
+  company(locale: String): String
   githubRepo(locale: String): String
   content(locale: String): String
   category(preview: Boolean, locale: String): Tag
@@ -79,6 +80,13 @@ input ArticleFilter {
   excerpt_not_in: [String]
   excerpt_contains: String
   excerpt_not_contains: String
+  company_exists: Boolean
+  company: String
+  company_not: String
+  company_in: [String]
+  company_not_in: [String]
+  company_contains: String
+  company_not_contains: String
   githubRepo_exists: Boolean
   githubRepo: String
   githubRepo_not: String
@@ -102,8 +110,8 @@ input ArticleFilter {
 
 type ArticleLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
+  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupCollection
 }
 
 enum ArticleOrder {
@@ -117,6 +125,8 @@ enum ArticleOrder {
   dateEnd_DESC
   dateIsContinue_ASC
   dateIsContinue_DESC
+  company_ASC
+  company_DESC
   githubRepo_ASC
   githubRepo_DESC
   sys_id_ASC
@@ -612,10 +622,10 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
-  pickup(id: String!, preview: Boolean, locale: String): Pickup
-  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PickupFilter, order: [PickupOrder]): PickupCollection
   article(id: String!, preview: Boolean, locale: String): Article
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
+  pickup(id: String!, preview: Boolean, locale: String): Pickup
+  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PickupFilter, order: [PickupOrder]): PickupCollection
   visitor(id: String!, preview: Boolean, locale: String): Visitor
   visitorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: VisitorFilter, order: [VisitorOrder]): VisitorCollection
   intro(id: String!, preview: Boolean, locale: String): Intro

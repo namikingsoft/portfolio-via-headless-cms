@@ -8,6 +8,7 @@ import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
 import Container from '../../../components/container'
 import CoverImage from '../../../components/cover-image'
+import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
 import ArticleList from '../../../components/article-list'
@@ -34,15 +35,18 @@ const Post = ({ article, content }: Props) => {
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
               {article.title}
             </h1>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10">
-              <div className="text-2xl text-slate-500">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10 text-2xl">
+              <div className="text-slate-500">
+                <Company company={article.company} />
+              </div>
+              <div className="text-slate-500">
                 <DateRange
                   date={article.date}
                   dateEnd={article.dateEnd}
                   isContinue={article.dateIsContinue}
                 />
               </div>
-              <div className="text-2xl text-slate-500">
+              <div className="text-slate-500">
                 <GithubLink repo={article.githubRepo} />
               </div>
               <div className="col-span-2">

@@ -6,6 +6,7 @@ fragment article on Article {
   date
   dateEnd
   dateIsContinue
+  company
   githubRepo
   image {
     title

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateRange from './date-range'
+import Company from './company'
 import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 import TagList from './tag-list'
@@ -30,6 +31,9 @@ const ArticlePreview = ({ article }: Props) => {
           <a className="hover:underline">{article.title}</a>
         </Link>
       </h3>
+      <div className="text-lg mb-1">
+        <Company company={article.company} />
+      </div>
       <div className="text-lg mb-4">
         <DateRange
           date={article.date}

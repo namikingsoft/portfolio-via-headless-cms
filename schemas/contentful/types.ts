@@ -16,6 +16,7 @@ export interface Article {
   date: string
   dateEnd?: string
   dateIsContinue: boolean
+  company: string
   githubRepo?: string | null
   publishedAt: string
   image: Image

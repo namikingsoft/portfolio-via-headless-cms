@@ -8,6 +8,7 @@ import { portfolioGitHubUrl, myEmail } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
 import Avatar from './avatar'
+import GtagVisitor from './gtag-visitor'
 
 type Props = {
   children: ReactNode
@@ -104,7 +105,13 @@ const Layout = ({ children }: Props) => {
             </nav>
           </section>
         </Container>
-        <main>{children}</main>
+        <main>
+          {pageType === 'login' ? (
+            children
+          ) : (
+            <GtagVisitor>{children}</GtagVisitor>
+          )}
+        </main>
       </div>
       {pageType !== 'login' && (
         <footer className="bg-accent-1 border-t border-accent-2">

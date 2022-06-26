@@ -5,7 +5,8 @@ export * from './client.generated'
 
 export const client = createClient({
   url: bffGraphQLEndpoint,
-  suspense: true,
+  // Error: ReactDOMServer does not yet support Suspense.
+  // suspense: true,
   exchanges:
     process.env.NODE_ENV === 'development'
       ? [debugExchange, ...defaultExchanges]

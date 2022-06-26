@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, createContext, useContext } from 'react'
-import { useRouter } from 'next/router'
 
 type Props = {
   gtagId: string | undefined
@@ -23,21 +22,6 @@ export const useGtagUserId = (userId: string | undefined) => {
 }
 
 const GtagProvider = ({ gtagId, children }: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      if (gtagId != null)
-        window.gtag('config', gtagId, {
-          page_path: url,
-        })
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-
   return <GtagContext.Provider value={gtagId}>{children}</GtagContext.Provider>
 }
 

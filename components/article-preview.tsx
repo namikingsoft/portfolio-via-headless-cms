@@ -26,25 +26,25 @@ const ArticlePreview = ({ article }: Props) => {
           </Link>
         </div>
       </div>
-      <h3 className="text-3xl mb-3 leading-snug">
+      <h3 className="text-3xl mb-4 leading-snug">
         <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
           <a className="hover:underline">{article.title}</a>
         </Link>
       </h3>
-      <div className="text-lg mb-1">
+      <div className="text-sm mb-1">
         <Company company={article.company} />
       </div>
-      <div className="text-lg mb-4">
+      <div className="text-sm mb-4">
         <DateRange
           date={article.date}
           dateEnd={article.dateEnd}
           isContinue={article.dateIsContinue}
         />
       </div>
-      <div className="mb-4">
+      <div className="text-sm mb-4">
         <TagList article={article} />
       </div>
-      <p className="leading-relaxed mb-4">{article.excerpt}</p>
+      <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>
     </div>
   )
 }

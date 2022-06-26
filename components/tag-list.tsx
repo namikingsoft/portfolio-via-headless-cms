@@ -7,8 +7,7 @@ type Props = {
   article: Article
 }
 
-const baseClassName =
-  'text-xs font-semibold inline-block mt-2 py-1 px-2 rounded'
+const baseClassName = 'font-semibold inline-block mt-2 py-1 px-2 rounded'
 
 const TagList = ({ article }: Props) => {
   return (

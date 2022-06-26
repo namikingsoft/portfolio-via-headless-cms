@@ -49,7 +49,7 @@ const Post = ({ article, content }: Props) => {
               <div className="text-slate-500">
                 <GithubLink repo={article.githubRepo} />
               </div>
-              <div className="col-span-2">
+              <div className="text-sm col-span-2">
                 <TagList article={article} />
               </div>
             </div>

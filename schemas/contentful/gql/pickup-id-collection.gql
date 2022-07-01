@@ -1,5 +1,5 @@
 query PickupIdCollection {
-  pickupCollection {
+  pickupCollection(order: sortNumber_ASC) {
     items {
       sys {
         id

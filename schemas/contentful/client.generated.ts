@@ -749,6 +749,7 @@ export type Pickup = Entry & {
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PickupLinkingCollections>;
+  sortNumber?: Maybe<Scalars['Int']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 };
@@ -772,6 +773,12 @@ export type PickupDescriptionArgs = {
 /** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
 export type PickupLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Article pickup [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/pickup) */
+export type PickupSortNumberArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -808,6 +815,15 @@ export type PickupFilter = {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sortNumber?: InputMaybe<Scalars['Int']>;
+  sortNumber_exists?: InputMaybe<Scalars['Boolean']>;
+  sortNumber_gt?: InputMaybe<Scalars['Int']>;
+  sortNumber_gte?: InputMaybe<Scalars['Int']>;
+  sortNumber_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sortNumber_lt?: InputMaybe<Scalars['Int']>;
+  sortNumber_lte?: InputMaybe<Scalars['Int']>;
+  sortNumber_not?: InputMaybe<Scalars['Int']>;
+  sortNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -832,6 +848,8 @@ export type PickupLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum PickupOrder {
+  SortNumberAsc = 'sortNumber_ASC',
+  SortNumberDesc = 'sortNumber_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1433,7 +1451,7 @@ export const PickupByIdDocument = gql`
     ${ArticleFragmentDoc}`;
 export const PickupIdCollectionDocument = gql`
     query PickupIdCollection {
-  pickupCollection {
+  pickupCollection(order: sortNumber_ASC) {
     items {
       sys {
         id

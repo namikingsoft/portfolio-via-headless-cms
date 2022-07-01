@@ -1,5 +1,5 @@
 .markdown {
-  @apply leading-7 text-gray-700;
+  @apply text-gray-700 text-lg;
 }
 
 .markdown p,
@@ -23,19 +23,24 @@
 }
 
 .markdown h1 {
-  @apply text-7xl mt-32 mb-8 leading-snug font-bold tracking-tight text-gray-900;
+  @apply text-7xl mt-32 mb-9 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h2 {
-  @apply text-5xl mt-32 mb-8 leading-snug font-bold tracking-tight text-gray-900;
+  @apply text-5xl mt-32 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
+}
+
+.markdown h2::before {
+  content: '☑';
+  @apply text-green-600 mr-2;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-20 mb-8 leading-snug font-bold text-gray-800;
+  @apply text-2xl mt-20 mb-9 leading-snug font-bold text-gray-800;
 }
 
 .markdown h4 {
-  @apply text-xl mt-12 mb-6 leading-snug font-bold;
+  @apply text-xl mt-12 mb-7 leading-snug font-bold;
 }
 
 .markdown h1:first-child,

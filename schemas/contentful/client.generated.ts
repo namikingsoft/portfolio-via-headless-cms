@@ -875,6 +875,8 @@ export type Query = {
   pickupCollection?: Maybe<PickupCollection>;
   tag?: Maybe<Tag>;
   tagCollection?: Maybe<TagCollection>;
+  tagGroup?: Maybe<TagGroup>;
+  tagGroupCollection?: Maybe<TagGroupCollection>;
   visitor?: Maybe<Visitor>;
   visitorCollection?: Maybe<VisitorCollection>;
 };
@@ -975,6 +977,23 @@ export type QueryTagCollectionArgs = {
 };
 
 
+export type QueryTagGroupArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryTagGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<TagGroupOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TagGroupFilter>;
+};
+
+
 export type QueryVisitorArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -1045,6 +1064,7 @@ export type Tag = Entry & {
   linkedFrom?: Maybe<TagLinkingCollections>;
   slug?: Maybe<Scalars['String']>;
   sys: Sys;
+  tagGroup?: Maybe<TagGroup>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -1058,6 +1078,13 @@ export type TagLinkedFromArgs = {
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tag) */
 export type TagSlugArgs = {
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tag) */
+export type TagTagGroupArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -1086,6 +1113,8 @@ export type TagFilter = {
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+  tagGroup?: InputMaybe<CfTagGroupNestedFilter>;
+  tagGroup_exists?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
   title_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1094,6 +1123,102 @@ export type TagFilter = {
   title_not_contains?: InputMaybe<Scalars['String']>;
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tagGroup) */
+export type TagGroup = Entry & {
+  __typename?: 'TagGroup';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<TagGroupLinkingCollections>;
+  sortNumber?: Maybe<Scalars['Int']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tagGroup) */
+export type TagGroupLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tagGroup) */
+export type TagGroupSortNumberArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/tagGroup) */
+export type TagGroupTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type TagGroupCollection = {
+  __typename?: 'TagGroupCollection';
+  items: Array<Maybe<TagGroup>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type TagGroupFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TagGroupFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TagGroupFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sortNumber?: InputMaybe<Scalars['Int']>;
+  sortNumber_exists?: InputMaybe<Scalars['Boolean']>;
+  sortNumber_gt?: InputMaybe<Scalars['Int']>;
+  sortNumber_gte?: InputMaybe<Scalars['Int']>;
+  sortNumber_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sortNumber_lt?: InputMaybe<Scalars['Int']>;
+  sortNumber_lte?: InputMaybe<Scalars['Int']>;
+  sortNumber_not?: InputMaybe<Scalars['Int']>;
+  sortNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type TagGroupLinkingCollections = {
+  __typename?: 'TagGroupLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  tagCollection?: Maybe<TagCollection>;
+};
+
+
+export type TagGroupLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type TagGroupLinkingCollectionsTagCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum TagGroupOrder {
+  SortNumberAsc = 'sortNumber_ASC',
+  SortNumberDesc = 'sortNumber_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export type TagLinkingCollections = {
   __typename?: 'TagLinkingCollections';
@@ -1245,6 +1370,29 @@ export enum VisitorOrder {
   UsernameDesc = 'username_DESC'
 }
 
+export type CfTagGroupNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfTagGroupNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfTagGroupNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sortNumber?: InputMaybe<Scalars['Int']>;
+  sortNumber_exists?: InputMaybe<Scalars['Boolean']>;
+  sortNumber_gt?: InputMaybe<Scalars['Int']>;
+  sortNumber_gte?: InputMaybe<Scalars['Int']>;
+  sortNumber_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sortNumber_lt?: InputMaybe<Scalars['Int']>;
+  sortNumber_lte?: InputMaybe<Scalars['Int']>;
+  sortNumber_not?: InputMaybe<Scalars['Int']>;
+  sortNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type CfTagNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfTagNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfTagNestedFilter>>>;
@@ -1257,6 +1405,7 @@ export type CfTagNestedFilter = {
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+  tagGroup_exists?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
   title_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1324,12 +1473,22 @@ export type TagFromSlugQueryVariables = Exact<{
 
 export type TagFromSlugQuery = { __typename?: 'Query', tagCollection?: { __typename?: 'TagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null };
 
+export type TagGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TagGroupCollectionQuery = { __typename?: 'Query', tagGroupCollection?: { __typename?: 'TagGroupCollection', items: Array<{ __typename?: 'TagGroup', title?: string | null } | null> } | null };
+
 export type TagWithArticlesQueryVariables = Exact<{
   tagId: Scalars['String'];
 }>;
 
 
 export type TagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
+
+export type TagWithGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TagWithGroupCollectionQuery = { __typename?: 'Query', tagCollection?: { __typename?: 'TagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, tagGroup?: { __typename?: 'TagGroup', title?: string | null } | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', total: number } | null } | null, sys: { __typename?: 'Sys', id: string } } | null> } | null };
 
 export type VisitorByPasswordQueryVariables = Exact<{
   password: Scalars['String'];
@@ -1489,6 +1648,15 @@ export const TagFromSlugDocument = gql`
   }
 }
     ${TagFragmentDoc}`;
+export const TagGroupCollectionDocument = gql`
+    query TagGroupCollection {
+  tagGroupCollection(order: sortNumber_ASC) {
+    items {
+      title
+    }
+  }
+}
+    `;
 export const TagWithArticlesDocument = gql`
     query TagWithArticles($tagId: String!) {
   tag(id: $tagId) {
@@ -1504,6 +1672,23 @@ export const TagWithArticlesDocument = gql`
 }
     ${TagFragmentDoc}
 ${ArticleFragmentDoc}`;
+export const TagWithGroupCollectionDocument = gql`
+    query TagWithGroupCollection {
+  tagCollection {
+    items {
+      ...tag
+      tagGroup {
+        title
+      }
+      linkedFrom {
+        articleCollection {
+          total
+        }
+      }
+    }
+  }
+}
+    ${TagFragmentDoc}`;
 export const VisitorByPasswordDocument = gql`
     query VisitorByPassword($password: String!) {
   visitorCollection(where: {password: $password, disabled: false}) {
@@ -1554,8 +1739,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     TagFromSlug(variables: TagFromSlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagFromSlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TagFromSlugQuery>(TagFromSlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagFromSlug', 'query');
     },
+    TagGroupCollection(variables?: TagGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagGroupCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TagGroupCollectionQuery>(TagGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagGroupCollection', 'query');
+    },
     TagWithArticles(variables: TagWithArticlesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagWithArticlesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TagWithArticlesQuery>(TagWithArticlesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagWithArticles', 'query');
+    },
+    TagWithGroupCollection(variables?: TagWithGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagWithGroupCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TagWithGroupCollectionQuery>(TagWithGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagWithGroupCollection', 'query');
     },
     VisitorByPassword(variables: VisitorByPasswordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VisitorByPasswordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<VisitorByPasswordQuery>(VisitorByPasswordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VisitorByPassword', 'query');

@@ -5,6 +5,8 @@ import {
   ArticleCollectionQuery,
   IntroCollectionQuery,
   TagCollectionQuery,
+  TagGroupCollectionQuery,
+  TagWithGroupCollectionQuery,
   PickupByIdQuery,
 } from './client.generated'
 import {
@@ -13,6 +15,7 @@ import {
   Intro,
   Pickup,
   Tag,
+  TagGroup,
   Visitor,
 } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
@@ -40,11 +43,26 @@ type TagRaw = NonNullable<
   NonNullable<TagCollectionQuery['tagCollection']>['items'][number]
 >
 
+type TagWithGroupRaw = NonNullable<
+  NonNullable<TagWithGroupCollectionQuery['tagCollection']>['items'][number]
+>
+
+type TagGroupRaw = NonNullable<
+  NonNullable<TagGroupCollectionQuery['tagGroupCollection']>['items'][number]
+>
+
 type PickupRaw = NonNullable<NonNullable<PickupByIdQuery['pickup']>>
 
 type VisitorRaw = NonNullable<
   NonNullable<VisitorByUsernameQuery['visitorCollection']>['items'][number]
 >
+
+type TagGroupWithoutTags = Omit<TagGroup, 'tags'>
+
+interface TagWithGroup extends Tag {
+  total: number
+  groupTitle?: string | null
+}
 
 // NOTE: contentful fields are all nullable even if required
 // https://www.contentfulcommunity.com/t/why-do-required-fields-appear-as-nullable-in-the-graphql-graph/4079
@@ -56,6 +74,21 @@ function nonNullable<T>(x: T | null | undefined) {
 function toTag(raw: TagRaw): Tag {
   return {
     slug: nonNullable(raw.slug),
+    title: nonNullable(raw.title),
+  }
+}
+
+function toTagWithGroup(raw: TagWithGroupRaw): TagWithGroup {
+  return {
+    slug: nonNullable(raw.slug),
+    title: nonNullable(raw.title),
+    total: raw.linkedFrom?.articleCollection?.total ?? 0,
+    groupTitle: raw.tagGroup?.title,
+  }
+}
+
+function toTagGroupWithoutTags(raw: TagGroupRaw): TagGroupWithoutTags {
+  return {
     title: nonNullable(raw.title),
   }
 }
@@ -144,6 +177,23 @@ export async function getTagList(): Promise<Tag[]> {
   return (tagCollection?.items ?? [])
     .flatMap((x) => (x === null ? [] : [x]))
     .map(toTag)
+}
+
+export async function getTagGroupList(): Promise<TagGroup[]> {
+  const { tagGroupCollection } = await getSdk(client).TagGroupCollection()
+  const tagGroupWithoutTags = (tagGroupCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toTagGroupWithoutTags)
+
+  const { tagCollection } = await getSdk(client).TagWithGroupCollection()
+  const tagsWithGroup = (tagCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toTagWithGroup)
+
+  return tagGroupWithoutTags.map(({ title }) => ({
+    title,
+    tags: tagsWithGroup.filter((tag) => tag.groupTitle === title),
+  }))
 }
 
 type TagWithArticles = {

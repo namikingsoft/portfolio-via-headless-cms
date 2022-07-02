@@ -8,6 +8,15 @@ export type Tag = {
   slug: string
 }
 
+interface TagWithTotal extends Tag {
+  total: number
+}
+
+export type TagGroup = {
+  title: string
+  tags: TagWithTotal[]
+}
+
 export interface Article {
   slug: string
   title: string

@@ -1,0 +1,15 @@
+query TagWithGroupCollection {
+  tagCollection {
+    items {
+      ...tag
+      tagGroup {
+        title
+      }
+      linkedFrom {
+        articleCollection {
+          total
+        }
+      }
+    }
+  }
+}

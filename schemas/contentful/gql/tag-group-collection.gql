@@ -1,0 +1,7 @@
+query TagGroupCollection {
+  tagGroupCollection(order: sortNumber_ASC) {
+    items {
+      title
+    }
+  }
+}

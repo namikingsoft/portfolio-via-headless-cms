@@ -21,7 +21,7 @@ const ArticleIndex = ({ articles }: Props) => {
           {t('allArticles')} | {t('siteName')}
         </title>
       </Head>
-      <Container>
+      <Container className="mb-32">
         <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
           {t('allArticles')}
         </h2>

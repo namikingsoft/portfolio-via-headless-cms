@@ -2,18 +2,24 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
-import { Intro, Pickup } from '../../schemas/contentful/types'
-import { getIntroList, getPickups } from '../../schemas/contentful'
+import { Intro, Pickup, TagGroup } from '../../schemas/contentful/types'
+import {
+  getIntroList,
+  getPickups,
+  getTagGroupList,
+} from '../../schemas/contentful'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
 import ArticleList from '../../components/article-list'
+import TagGroupList from '../../components/tag-group-list'
 
 type Props = {
   intros: Intro[]
   pickups: Pickup[]
+  tagGroups: TagGroup[]
 }
 
-const Index = ({ intros, pickups }: Props) => {
+const Index = ({ intros, pickups, tagGroups }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -45,17 +51,18 @@ const Index = ({ intros, pickups }: Props) => {
             </Container>
           </section>
         ))}
-      <Container>
-        {pickups.map((pickup) => (
-          <section key={pickup.title}>
-            <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
-              {pickup.title}
-            </h2>
-            {pickup.articles.length > 0 && (
-              <ArticleList articles={pickup.articles} />
-            )}
-          </section>
-        ))}
+      {pickups.map((pickup) => (
+        <Container key={pickup.title} className="mb-32">
+          <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
+            {pickup.title}
+          </h2>
+          {pickup.articles.length > 0 && (
+            <ArticleList articles={pickup.articles} />
+          )}
+        </Container>
+      ))}
+      <Container className="mb-32">
+        <TagGroupList tagGroups={tagGroups} />
       </Container>
     </>
   )
@@ -66,10 +73,12 @@ export default Index
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const intros = await getIntroList()
   const pickups = await getPickups()
+  const tagGroups = await getTagGroupList()
   return {
     props: {
       intros,
       pickups,
+      tagGroups,
       ...(await serverSideTranslations(locale!, ['common'])),
     },
   }

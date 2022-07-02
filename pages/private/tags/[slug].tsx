@@ -22,7 +22,7 @@ const TagIndex = ({ tag, articles }: Props) => {
           {tag.title} | {t('siteName')}
         </title>
       </Head>
-      <Container>
+      <Container className="mb-32">
         <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
           {tag.title}
         </h2>

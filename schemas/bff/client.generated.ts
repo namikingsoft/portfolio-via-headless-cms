@@ -54,15 +54,15 @@ export type AuthenticateMutationVariables = Exact<{
 
 export type AuthenticateMutation = { __typename?: 'Mutation', authenticate: { __typename?: 'Authentication', token: string } };
 
+export type GetVisitorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVisitorQuery = { __typename?: 'Query', visitor: { __typename?: 'Visitor', username: string, label: string } };
+
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
-
-export type VisitorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type VisitorQuery = { __typename?: 'Query', visitor: { __typename?: 'Visitor', username: string, label: string } };
 
 
 export const AuthenticateDocument = gql`
@@ -76,6 +76,18 @@ export const AuthenticateDocument = gql`
 export function useAuthenticateMutation() {
   return Urql.useMutation<AuthenticateMutation, AuthenticateMutationVariables>(AuthenticateDocument);
 };
+export const GetVisitorDocument = gql`
+    query getVisitor {
+  visitor {
+    username
+    label
+  }
+}
+    `;
+
+export function useGetVisitorQuery(options?: Omit<Urql.UseQueryArgs<GetVisitorQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetVisitorQuery>({ query: GetVisitorDocument, ...options });
+};
 export const LogoutDocument = gql`
     mutation Logout {
   logout
@@ -84,16 +96,4 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
-};
-export const VisitorDocument = gql`
-    query Visitor {
-  visitor {
-    username
-    label
-  }
-}
-    `;
-
-export function useVisitorQuery(options?: Omit<Urql.UseQueryArgs<VisitorQueryVariables>, 'query'>) {
-  return Urql.useQuery<VisitorQuery>({ query: VisitorDocument, ...options });
 };

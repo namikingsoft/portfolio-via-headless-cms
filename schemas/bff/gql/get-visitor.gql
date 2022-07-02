@@ -1,4 +1,4 @@
-query Visitor {
+query getVisitor {
   visitor {
     username
     label

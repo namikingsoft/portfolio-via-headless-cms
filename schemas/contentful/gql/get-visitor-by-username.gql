@@ -1,4 +1,4 @@
-query VisitorByUsername($username: String!) {
+query getVisitorByUsername($username: String!) {
   visitorCollection(where: { username: $username, disabled: false }) {
     items {
       ...visitor

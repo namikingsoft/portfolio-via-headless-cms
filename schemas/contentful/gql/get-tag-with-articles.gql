@@ -1,4 +1,4 @@
-query TagWithArticles($tagId: String!) {
+query getTagWithArticles($tagId: String!) {
   tag(id: $tagId) {
     ...tag
     linkedFrom {

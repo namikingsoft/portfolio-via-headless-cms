@@ -1,4 +1,4 @@
-query IntroCollection {
+query getIntroCollection {
   introCollection {
     items {
       ...intro

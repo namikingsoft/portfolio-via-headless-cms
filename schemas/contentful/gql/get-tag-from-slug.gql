@@ -1,4 +1,4 @@
-query TagFromSlug($slug: String!) {
+query getTagFromSlug($slug: String!) {
   tagCollection(where: { slug: $slug }) {
     items {
       ...tag

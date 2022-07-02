@@ -1,4 +1,4 @@
-query TagWithGroupCollection {
+query getTagWithGroupCollection {
   tagCollection {
     items {
       ...tag

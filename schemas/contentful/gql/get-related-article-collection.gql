@@ -1,4 +1,4 @@
-query RelatedArticleCollection($id: String!) {
+query getRelatedArticleCollection($id: String!) {
   article(id: $id) {
     relatedArticleCollection {
       items {

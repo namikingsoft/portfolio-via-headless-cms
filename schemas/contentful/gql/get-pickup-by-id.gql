@@ -1,4 +1,4 @@
-query PickupById($id: String!) {
+query getPickupById($id: String!) {
   pickup(id: $id) {
     title
     description

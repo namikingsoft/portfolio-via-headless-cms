@@ -1,4 +1,4 @@
-query ArticleCollection {
+query getArticleCollection {
   articleCollection {
     items {
       ...article

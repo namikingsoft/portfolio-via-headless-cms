@@ -1,4 +1,4 @@
-query ArticleFromSlug($slug: String!) {
+query getArticleFromSlug($slug: String!) {
   articleCollection(where: { slug: $slug }) {
     items {
       ...article

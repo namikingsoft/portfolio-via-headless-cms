@@ -1,4 +1,4 @@
-query TagGroupCollection {
+query getTagGroupCollection {
   tagGroupCollection(order: sortNumber_ASC) {
     items {
       title

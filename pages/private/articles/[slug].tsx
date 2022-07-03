@@ -9,6 +9,7 @@ import markdownStyles from '../../../components/markdown-styles.module.css'
 import Section from '../../../components/section'
 import Container from '../../../components/container'
 import CoverImage from '../../../components/cover-image'
+import CoverImageBlock from '../../../components/cover-image-block'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
@@ -57,9 +58,9 @@ const Post = ({ article, content }: Props) => {
               </div>
             </Container>
           </div>
-          <Section>
+          <CoverImageBlock>
             <CoverImage src={article.image.url} alt={article.image.alt} />
-          </Section>
+          </CoverImageBlock>
           <Container narrow>
             <div
               className={markdownStyles.markdown}

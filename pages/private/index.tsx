@@ -11,6 +11,7 @@ import {
 import Section from '../../components/section'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
+import CoverImageBlock from '../../components/cover-image-block'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 
@@ -33,9 +34,9 @@ const Index = ({ intros, pickups, tagGroups }: Props) => {
       {intros.length > 0 &&
         intros.map((intro) => (
           <Section key={intro.title}>
-            <div className="mb-8 md:mb-16">
+            <CoverImageBlock>
               <CoverImage src={intro.image.url} alt={intro.image.alt} />
-            </div>
+            </CoverImageBlock>
             <Container>
               <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
                 <div>

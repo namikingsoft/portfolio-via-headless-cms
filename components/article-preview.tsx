@@ -5,6 +5,7 @@ import Company from './company'
 import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 import TagList from './tag-list'
+import Heading from './heading'
 
 type Props = {
   article: Article
@@ -26,11 +27,11 @@ const ArticlePreview = ({ article }: Props) => {
           </Link>
         </div>
       </div>
-      <h3 className="text-3xl mb-4 leading-snug">
+      <Heading as="h3">
         <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
           <a className="hover:underline">{article.title}</a>
         </Link>
-      </h3>
+      </Heading>
       <div className="text-sm mb-1">
         <Company company={article.company} />
       </div>

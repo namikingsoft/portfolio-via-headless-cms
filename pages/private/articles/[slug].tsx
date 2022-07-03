@@ -15,6 +15,7 @@ import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
 import ArticleList from '../../../components/article-list'
 import TagList from '../../../components/tag-list'
+import Heading from '../../../components/heading'
 
 type Props = {
   article: ArticleWithRelated
@@ -35,9 +36,7 @@ const Post = ({ article, content }: Props) => {
         <Section>
           <div className="py-20">
             <Container>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
-                {article.title}
-              </h1>
+              <Heading as="h1">{article.title}</Heading>
               <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10 text-2xl">
                 <div className="text-slate-500">
                   <Company company={article.company} />

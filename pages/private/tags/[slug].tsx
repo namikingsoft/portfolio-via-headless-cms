@@ -7,6 +7,7 @@ import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
 import { Article, Tag } from '../../../schemas/contentful/types'
 import { getTagWithArticles, getTagList } from '../../../schemas/contentful'
+import Heading from '../../../components/heading'
 
 type Props = {
   tag: Tag
@@ -25,9 +26,7 @@ const TagIndex = ({ tag, articles }: Props) => {
       </Head>
       <Section>
         <Container>
-          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-            {tag.title}
-          </h2>
+          <Heading as="h1">{tag.title}</Heading>
           {articles.length > 0 && <ArticleList articles={articles} />}
         </Container>
       </Section>

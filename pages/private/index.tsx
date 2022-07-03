@@ -14,6 +14,7 @@ import CoverImage from '../../components/cover-image'
 import CoverImageBlock from '../../components/cover-image-block'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
+import Heading from '../../components/heading'
 
 type Props = {
   intros: Intro[]
@@ -40,9 +41,7 @@ const Index = ({ intros, pickups, tagGroups }: Props) => {
             <Container>
               <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
                 <div>
-                  <h3 className="mb-4 text-4xl lg:text-6xl font-bold leading-tight">
-                    {intro.title}
-                  </h3>
+                  <Heading as="h2">{intro.title}</Heading>
                 </div>
                 <div>
                   <p className="text-lg leading-relaxed mb-4">
@@ -56,9 +55,7 @@ const Index = ({ intros, pickups, tagGroups }: Props) => {
       {pickups.map((pickup) => (
         <Section key={pickup.title}>
           <Container>
-            <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
-              {pickup.title}
-            </h2>
+            <Heading as="h2">{pickup.title}</Heading>
             {pickup.articles.length > 0 && (
               <ArticleList articles={pickup.articles} />
             )}

@@ -8,6 +8,7 @@ import {
   getPickups,
   getTagGroupList,
 } from '../../schemas/contentful'
+import Section from '../../components/section'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
 import ArticleList from '../../components/article-list'
@@ -31,7 +32,7 @@ const Index = ({ intros, pickups, tagGroups }: Props) => {
       </Head>
       {intros.length > 0 &&
         intros.map((intro) => (
-          <section key={intro.title}>
+          <Section key={intro.title}>
             <div className="mb-8 md:mb-16">
               <CoverImage src={intro.image.url} alt={intro.image.alt} />
             </div>
@@ -49,21 +50,26 @@ const Index = ({ intros, pickups, tagGroups }: Props) => {
                 </div>
               </div>
             </Container>
-          </section>
+          </Section>
         ))}
       {pickups.map((pickup) => (
-        <Container key={pickup.title} className="mb-32">
-          <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
-            {pickup.title}
-          </h2>
-          {pickup.articles.length > 0 && (
-            <ArticleList articles={pickup.articles} />
-          )}
-        </Container>
+        <Section key={pickup.title}>
+          <Container>
+            <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
+              {pickup.title}
+            </h2>
+            {pickup.articles.length > 0 && (
+              <ArticleList articles={pickup.articles} />
+            )}
+          </Container>
+        </Section>
       ))}
-      <Container className="mb-32">
-        <TagGroupList tagGroups={tagGroups} />
-      </Container>
+
+      <Section>
+        <Container>
+          <TagGroupList tagGroups={tagGroups} />
+        </Container>
+      </Section>
     </>
   )
 }

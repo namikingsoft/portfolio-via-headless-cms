@@ -96,7 +96,15 @@ const Layout = ({ children }: Props) => {
               })}
             >
               <button
-                className="bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:bg-gray-400 disabled:border-gray-400"
+                className={cn(
+                  'text-sm rounded py-1 px-2 disabled:bg-gray-300 disabled:border-gray-300',
+                  {
+                    'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white':
+                      pageType === 'top',
+                    'border border-gray-500  text-gray-500 hover:border-gray-200 hover:bg-gray-200':
+                      pageType === 'lower',
+                  },
+                )}
                 onClick={onClickLogout}
                 disabled={isLogout}
               >

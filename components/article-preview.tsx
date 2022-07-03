@@ -12,7 +12,7 @@ type Props = {
 
 const ArticlePreview = ({ article }: Props) => {
   return (
-    <div>
+    <section>
       <div className="mb-5">
         <div className="sm:mx-0">
           <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
@@ -45,7 +45,7 @@ const ArticlePreview = ({ article }: Props) => {
         <TagList article={article} />
       </div>
       <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>
-    </div>
+    </section>
   )
 }
 

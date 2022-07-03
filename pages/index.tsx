@@ -90,8 +90,8 @@ const Index = () => {
           {t('siteName')} | {t('siteDescription')}
         </title>
       </Head>
-      <Container className="max-w-2xl my-20">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <Container narrow>
+        <form className="my-20" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex border rounded-md overflow-hidden border-teal-500">
             <input
               className="appearance-none border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"

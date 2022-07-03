@@ -30,8 +30,8 @@ const Post = ({ article, content }: Props) => {
           {article.title} | {t('siteName')}
         </title>
       </Head>
-      <Section>
-        <article>
+      <article>
+        <Section>
           <div className="py-20">
             <Container>
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight">
@@ -57,22 +57,26 @@ const Post = ({ article, content }: Props) => {
               </div>
             </Container>
           </div>
-          <div className="mb-8 md:mb-16">
+          <Section>
             <CoverImage src={article.image.url} alt={article.image.alt} />
-          </div>
-          <Container className="max-w-2xl mt-18">
+          </Section>
+          <Container narrow>
             <div
               className={markdownStyles.markdown}
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </Container>
-          {article.relatedArticles.length > 0 && (
-            <Container className="mt-32">
+        </Section>
+      </article>
+      {article.relatedArticles.length > 0 && (
+        <aside>
+          <Section>
+            <Container>
               <ArticleList articles={article.relatedArticles} />
             </Container>
-          )}
-        </article>
-      </Section>
+          </Section>
+        </aside>
+      )}
     </>
   )
 }

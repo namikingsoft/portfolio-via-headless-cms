@@ -7,6 +7,7 @@ import {
   GetTagCollectionQuery,
   GetTagGroupCollectionQuery,
   GetTagWithGroupCollectionQuery,
+  GetSkillRatingCollectionQuery,
   GetPickupByIdQuery,
 } from './client.generated'
 import {
@@ -14,6 +15,7 @@ import {
   ArticleWithRelated,
   Intro,
   Pickup,
+  SkillRating,
   Tag,
   TagGroup,
   Visitor,
@@ -51,6 +53,12 @@ type TagWithGroupRaw = NonNullable<
 
 type TagGroupRaw = NonNullable<
   NonNullable<GetTagGroupCollectionQuery['tagGroupCollection']>['items'][number]
+>
+
+type SkillRatingRaw = NonNullable<
+  NonNullable<
+    GetSkillRatingCollectionQuery['skillRatingCollection']
+  >['items'][number]
 >
 
 type PickupRaw = NonNullable<NonNullable<GetPickupByIdQuery['pickup']>>
@@ -92,6 +100,14 @@ function toTagWithGroup(raw: TagWithGroupRaw): TagWithGroup {
 function toTagGroupWithoutTags(raw: TagGroupRaw): TagGroupWithoutTags {
   return {
     title: nonNullable(raw.title),
+  }
+}
+
+function toSkillRating(raw: SkillRatingRaw): SkillRating {
+  return {
+    title: nonNullable(raw.title),
+    rating: nonNullable(raw.rating),
+    groupTitle: nonNullable(raw.group?.title),
   }
 }
 
@@ -231,6 +247,13 @@ export async function getPickups(): Promise<Pickup[]> {
   return (await Promise.all(pickupPromises)).map(({ pickup }) =>
     toPickup(nonNullable(pickup)),
   )
+}
+
+export async function getSkillRatingList(): Promise<SkillRating[]> {
+  const { skillRatingCollection } = await sdk.getSkillRatingCollection()
+  return (skillRatingCollection?.items ?? [])
+    .flatMap((x) => (x === null ? [] : [x]))
+    .map(toSkillRating)
 }
 
 export async function getVisitorByUsername(username: string): Promise<Visitor> {

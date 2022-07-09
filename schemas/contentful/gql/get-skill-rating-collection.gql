@@ -1,0 +1,11 @@
+query getSkillRatingCollection {
+  skillRatingCollection {
+    items {
+      title
+      rating
+      group {
+        title
+      }
+    }
+  }
+}

@@ -873,6 +873,10 @@ export type Query = {
   introCollection?: Maybe<IntroCollection>;
   pickup?: Maybe<Pickup>;
   pickupCollection?: Maybe<PickupCollection>;
+  skillGroup?: Maybe<SkillGroup>;
+  skillGroupCollection?: Maybe<SkillGroupCollection>;
+  skillRating?: Maybe<SkillRating>;
+  skillRatingCollection?: Maybe<SkillRatingCollection>;
   tag?: Maybe<Tag>;
   tagCollection?: Maybe<TagCollection>;
   tagGroup?: Maybe<TagGroup>;
@@ -960,6 +964,40 @@ export type QueryPickupCollectionArgs = {
 };
 
 
+export type QuerySkillGroupArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QuerySkillGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<SkillGroupOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SkillGroupFilter>;
+};
+
+
+export type QuerySkillRatingArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QuerySkillRatingCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<SkillRatingOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SkillRatingFilter>;
+};
+
+
 export type QueryTagArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -1009,6 +1047,181 @@ export type QueryVisitorCollectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<VisitorFilter>;
 };
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
+export type SkillGroup = Entry & {
+  __typename?: 'SkillGroup';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<SkillGroupLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
+export type SkillGroupLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
+export type SkillGroupTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type SkillGroupCollection = {
+  __typename?: 'SkillGroupCollection';
+  items: Array<Maybe<SkillGroup>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type SkillGroupFilter = {
+  AND?: InputMaybe<Array<InputMaybe<SkillGroupFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<SkillGroupFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type SkillGroupLinkingCollections = {
+  __typename?: 'SkillGroupLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  skillRatingCollection?: Maybe<SkillRatingCollection>;
+};
+
+
+export type SkillGroupLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type SkillGroupLinkingCollectionsSkillRatingCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum SkillGroupOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRating = Entry & {
+  __typename?: 'SkillRating';
+  contentfulMetadata: ContentfulMetadata;
+  group?: Maybe<SkillGroup>;
+  linkedFrom?: Maybe<SkillRatingLinkingCollections>;
+  rating?: Maybe<Scalars['Int']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingGroupArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingRatingArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type SkillRatingCollection = {
+  __typename?: 'SkillRatingCollection';
+  items: Array<Maybe<SkillRating>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type SkillRatingFilter = {
+  AND?: InputMaybe<Array<InputMaybe<SkillRatingFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<SkillRatingFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  group?: InputMaybe<CfSkillGroupNestedFilter>;
+  group_exists?: InputMaybe<Scalars['Boolean']>;
+  rating?: InputMaybe<Scalars['Int']>;
+  rating_exists?: InputMaybe<Scalars['Boolean']>;
+  rating_gt?: InputMaybe<Scalars['Int']>;
+  rating_gte?: InputMaybe<Scalars['Int']>;
+  rating_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  rating_lt?: InputMaybe<Scalars['Int']>;
+  rating_lte?: InputMaybe<Scalars['Int']>;
+  rating_not?: InputMaybe<Scalars['Int']>;
+  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type SkillRatingLinkingCollections = {
+  __typename?: 'SkillRatingLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type SkillRatingLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum SkillRatingOrder {
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export type Sys = {
   __typename?: 'Sys';
@@ -1370,6 +1583,20 @@ export enum VisitorOrder {
   UsernameDesc = 'username_DESC'
 }
 
+export type CfSkillGroupNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfSkillGroupNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfSkillGroupNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type CfTagGroupNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfTagGroupNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfTagGroupNestedFilter>>>;
@@ -1460,6 +1687,11 @@ export type GetRelatedArticleCollectionQueryVariables = Exact<{
 
 
 export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?: { __typename?: 'Article', relatedArticleCollection?: { __typename?: 'ArticleRelatedArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null };
+
+export type GetSkillRatingCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, group?: { __typename?: 'SkillGroup', title?: string | null } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1630,6 +1862,19 @@ export const GetRelatedArticleCollectionDocument = gql`
   }
 }
     ${ArticleFragmentDoc}`;
+export const GetSkillRatingCollectionDocument = gql`
+    query getSkillRatingCollection {
+  skillRatingCollection {
+    items {
+      title
+      rating
+      group {
+        title
+      }
+    }
+  }
+}
+    `;
 export const GetTagCollectionDocument = gql`
     query getTagCollection {
   tagCollection {
@@ -1732,6 +1977,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getRelatedArticleCollection(variables: GetRelatedArticleCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetRelatedArticleCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetRelatedArticleCollectionQuery>(GetRelatedArticleCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRelatedArticleCollection', 'query');
+    },
+    getSkillRatingCollection(variables?: GetSkillRatingCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetSkillRatingCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetSkillRatingCollectionQuery>(GetSkillRatingCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSkillRatingCollection', 'query');
     },
     getTagCollection(variables?: GetTagCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagCollectionQuery>(GetTagCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagCollection', 'query');

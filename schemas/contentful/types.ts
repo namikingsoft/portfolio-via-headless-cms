@@ -17,6 +17,12 @@ export type TagGroup = {
   tags: TagWithTotal[]
 }
 
+export type SkillRating = {
+  title: string
+  rating: number
+  groupTitle: string
+}
+
 export interface Article {
   slug: string
   title: string

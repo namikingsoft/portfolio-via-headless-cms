@@ -107,6 +107,7 @@ function toSkillRating(raw: SkillRatingRaw): SkillRating {
   return {
     title: nonNullable(raw.title),
     rating: nonNullable(raw.rating),
+    description: nonNullable(raw.description),
     groupTitle: nonNullable(raw.group?.title),
   }
 }

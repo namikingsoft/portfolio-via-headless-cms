@@ -1130,11 +1130,18 @@ export enum SkillGroupOrder {
 export type SkillRating = Entry & {
   __typename?: 'SkillRating';
   contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
   group?: Maybe<SkillGroup>;
   linkedFrom?: Maybe<SkillRatingLinkingCollections>;
   rating?: Maybe<Scalars['Int']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1174,6 +1181,13 @@ export type SkillRatingFilter = {
   AND?: InputMaybe<Array<InputMaybe<SkillRatingFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SkillRatingFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   group?: InputMaybe<CfSkillGroupNestedFilter>;
   group_exists?: InputMaybe<Scalars['Boolean']>;
   rating?: InputMaybe<Scalars['Int']>;
@@ -1691,7 +1705,7 @@ export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?:
 export type GetSkillRatingCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, group?: { __typename?: 'SkillGroup', title?: string | null } | null } | null> } | null };
+export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1868,6 +1882,7 @@ export const GetSkillRatingCollectionDocument = gql`
     items {
       title
       rating
+      description
       group {
         title
       }

@@ -750,6 +750,7 @@ type SkillRating implements Entry {
   title(locale: String): String
   rating(locale: String): Int
   group(preview: Boolean, locale: String): SkillGroup
+  description(locale: String): String
 }
 
 type SkillRatingCollection {
@@ -780,6 +781,13 @@ input SkillRatingFilter {
   rating_lt: Int
   rating_lte: Int
   group_exists: Boolean
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
   OR: [SkillRatingFilter]
   AND: [SkillRatingFilter]
 }

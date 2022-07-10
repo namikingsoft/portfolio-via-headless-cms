@@ -3,6 +3,7 @@ query getSkillRatingCollection {
     items {
       title
       rating
+      description
       group {
         title
       }

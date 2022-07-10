@@ -20,6 +20,7 @@ export type TagGroup = {
 export type SkillRating = {
   title: string
   rating: number
+  description: string
   groupTitle: string
 }
 

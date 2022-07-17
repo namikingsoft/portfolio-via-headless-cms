@@ -2,10 +2,16 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
-import { Intro, Pickup, TagGroup } from '../../schemas/contentful/types'
+import {
+  Intro,
+  Pickup,
+  TagGroup,
+  SkillRating,
+} from '../../schemas/contentful/types'
 import {
   getIntroList,
   getPickups,
+  getSkillRatingList,
   getTagGroupList,
 } from '../../schemas/contentful'
 import Section from '../../components/section'
@@ -20,10 +26,13 @@ type Props = {
   intros: Intro[]
   pickups: Pickup[]
   tagGroups: TagGroup[]
+  skillRatings: SkillRating[]
 }
 
-const Index = ({ intros, pickups, tagGroups }: Props) => {
+const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
   const { t } = useTranslation()
+
+  console.log('skillRatings', skillRatings)
 
   return (
     <>
@@ -78,11 +87,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const intros = await getIntroList()
   const pickups = await getPickups()
   const tagGroups = await getTagGroupList()
+  const skillRatings = await getSkillRatingList()
   return {
     props: {
       intros,
       pickups,
       tagGroups,
+      skillRatings,
       ...(await serverSideTranslations(locale!, ['common'])),
     },
   }

@@ -43,9 +43,7 @@ const Index = () => {
 
       const result = await authenticate({ input: { password } })
       if (result.error?.graphQLErrors) {
-        console.log('result.error', result.error?.graphQLErrors)
         const errors = parseToFormValidationErrors(result.error?.graphQLErrors)
-        console.log('errors', errors)
         errors.forEach((err) => {
           if (isFormFieldName(err.fieldName))
             setError(err.fieldName, { message: err.fieldMessage })

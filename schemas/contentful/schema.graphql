@@ -110,8 +110,8 @@ input ArticleFilter {
 
 type ArticleLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
+  pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): PickupCollection
 }
 
 enum ArticleOrder {
@@ -672,6 +672,8 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  article(id: String!, preview: Boolean, locale: String): Article
+  articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   skillRating(id: String!, preview: Boolean, locale: String): SkillRating
   skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillRatingFilter, order: [SkillRatingOrder]): SkillRatingCollection
   skillGroup(id: String!, preview: Boolean, locale: String): SkillGroup
@@ -682,8 +684,6 @@ type Query {
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   pickup(id: String!, preview: Boolean, locale: String): Pickup
   pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PickupFilter, order: [PickupOrder]): PickupCollection
-  article(id: String!, preview: Boolean, locale: String): Article
-  articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   visitor(id: String!, preview: Boolean, locale: String): Visitor
   visitorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: VisitorFilter, order: [VisitorOrder]): VisitorCollection
   intro(id: String!, preview: Boolean, locale: String): Intro

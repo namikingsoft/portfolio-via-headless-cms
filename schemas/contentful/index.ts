@@ -117,7 +117,7 @@ function toArticle(raw: ArticleRaw): Article {
     slug: nonNullable(raw.slug),
     title: nonNullable(raw.title),
     excerpt: nonNullable(raw.excerpt),
-    content: nonNullable(raw.content),
+    content: raw.content ?? '',
     date: nonNullable(raw.date),
     dateEnd: raw.dateEnd,
     dateIsContinue: !!raw.dateIsContinue,

@@ -34,10 +34,10 @@ const Post = ({ article, content }: Props) => {
       </Head>
       <article>
         <Section>
-          <div className="py-20">
+          <div className="py-20 lg:py-24">
             <Container>
               <Heading as="h1">{article.title}</Heading>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10 text-2xl">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10 lg:mt-14 text-2xl">
                 <div className="text-slate-500">
                   <Company company={article.company} />
                 </div>

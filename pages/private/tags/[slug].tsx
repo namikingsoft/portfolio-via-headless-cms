@@ -26,7 +26,9 @@ const TagIndex = ({ tag, articles }: Props) => {
       </Head>
       <Section>
         <Container>
-          <Heading as="h1">{tag.title}</Heading>
+          <div className="py-10">
+            <Heading as="h1">{tag.title}</Heading>
+          </div>
           {articles.length > 0 && <ArticleList articles={articles} />}
         </Container>
       </Section>

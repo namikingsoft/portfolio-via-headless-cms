@@ -27,7 +27,7 @@
 }
 
 .markdown h2 {
-  @apply text-5xl mt-32 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
+  @apply text-4xl mt-32 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h2::before {

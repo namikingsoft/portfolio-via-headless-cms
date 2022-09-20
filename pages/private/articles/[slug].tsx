@@ -37,7 +37,10 @@ const Post = ({ article, content }: Props) => {
           <div className="py-20 lg:py-24">
             <Container>
               <Heading as="h1">{article.title}</Heading>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-10 mt-10 lg:mt-14 text-2xl">
+              <div className="mt-6 text-xs sm:text-sm md:text-base lg:visible text-slate-500">
+                {article.excerpt}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-10 mt-12 lg:mt-20 text-lg md:text-2xl">
                 <div className="text-slate-500">
                   <Company company={article.company} />
                 </div>
@@ -51,7 +54,7 @@ const Post = ({ article, content }: Props) => {
                 <div className="text-slate-500">
                   <GithubLink repo={article.githubRepo} />
                 </div>
-                <div className="text-sm col-span-2">
+                <div className="text-sm md:col-span-2">
                   <TagList article={article} />
                 </div>
               </div>

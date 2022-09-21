@@ -13,7 +13,7 @@ import CoverImageBlock from '../../../components/cover-image-block'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
-import ArticleList from '../../../components/article-list'
+import ArticleListRelative from '../../../components/article-list-relative'
 import TagList from '../../../components/tag-list'
 import Heading from '../../../components/heading'
 
@@ -40,7 +40,7 @@ const Post = ({ article, content }: Props) => {
               <div className="mt-6 text-xs sm:text-sm md:text-base lg:visible text-slate-500">
                 {article.excerpt}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-10 mt-12 lg:mt-20 text-lg md:text-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-6 mt-12 lg:mt-20 text-lg md:text-2xl">
                 <div className="text-slate-500">
                   <Company company={article.company} />
                 </div>
@@ -74,8 +74,8 @@ const Post = ({ article, content }: Props) => {
       {article.relatedArticles.length > 0 && (
         <aside>
           <Section>
-            <Container>
-              <ArticleList articles={article.relatedArticles} />
+            <Container narrow>
+              <ArticleListRelative articles={article.relatedArticles} />
             </Container>
           </Section>
         </aside>

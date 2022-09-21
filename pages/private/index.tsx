@@ -14,10 +14,9 @@ import {
   getSkillRatingList,
   getTagGroupList,
 } from '../../schemas/contentful'
-import Section from '../../components/section'
+import Block from '../../components/block'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
-import CoverImageBlock from '../../components/cover-image-block'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
@@ -43,10 +42,10 @@ const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
       </Head>
       {intros.length > 0 &&
         intros.map((intro) => (
-          <Section key={intro.title}>
-            <CoverImageBlock>
+          <Block key={intro.title}>
+            <Block>
               <CoverImage src={intro.image.url} alt={intro.image.alt} />
-            </CoverImageBlock>
+            </Block>
             <Container>
               <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
                 <div>
@@ -59,24 +58,24 @@ const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
                 </div>
               </div>
             </Container>
-          </Section>
+          </Block>
         ))}
       {pickups.map((pickup) => (
-        <Section key={pickup.title}>
+        <Block key={pickup.title}>
           <Container>
             <Heading as="h2">{pickup.title}</Heading>
             {pickup.articles.length > 0 && (
               <ArticleList articles={pickup.articles} />
             )}
           </Container>
-        </Section>
+        </Block>
       ))}
 
-      <Section>
+      <Block>
         <Container>
           <TagGroupList tagGroups={tagGroups} />
         </Container>
-      </Section>
+      </Block>
     </>
   )
 }

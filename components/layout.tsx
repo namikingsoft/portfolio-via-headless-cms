@@ -7,6 +7,7 @@ import { useLogoutMutation } from '../schemas/bff/client'
 import { portfolioGitHubUrl, myEmail } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
+import Block from './block'
 import Avatar from './avatar'
 import GtagVisitor from './gtag-visitor'
 
@@ -117,7 +118,9 @@ const Layout = ({ children }: Props) => {
           {pageType === 'login' ? (
             children
           ) : (
-            <GtagVisitor>{children}</GtagVisitor>
+            <GtagVisitor>
+              <Block>{children}</Block>
+            </GtagVisitor>
           )}
         </main>
       </div>

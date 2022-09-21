@@ -6,10 +6,9 @@ import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import markdownStyles from '../../../components/markdown-styles.module.css'
-import Section from '../../../components/section'
+import Block from '../../../components/block'
 import Container from '../../../components/container'
 import CoverImage from '../../../components/cover-image'
-import CoverImageBlock from '../../../components/cover-image-block'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
@@ -33,7 +32,7 @@ const Post = ({ article, content }: Props) => {
         </title>
       </Head>
       <article>
-        <Section>
+        <Block>
           <div className="py-20 lg:py-24">
             <Container>
               <Heading as="h1">{article.title}</Heading>
@@ -60,24 +59,24 @@ const Post = ({ article, content }: Props) => {
               </div>
             </Container>
           </div>
-          <CoverImageBlock>
+          <Block>
             <CoverImage src={article.image.url} alt={article.image.alt} />
-          </CoverImageBlock>
+          </Block>
           <Container narrow>
             <div
               className={markdownStyles.markdown}
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </Container>
-        </Section>
+        </Block>
       </article>
       {article.relatedArticles.length > 0 && (
         <aside>
-          <Section>
+          <Block>
             <Container narrow>
               <ArticleListRelative articles={article.relatedArticles} />
             </Container>
-          </Section>
+          </Block>
         </aside>
       )}
     </>

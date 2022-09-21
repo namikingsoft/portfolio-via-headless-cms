@@ -2,7 +2,6 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
-import Section from '../../../components/section'
 import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
 import { Article, Tag } from '../../../schemas/contentful/types'
@@ -24,14 +23,12 @@ const TagIndex = ({ tag, articles }: Props) => {
           {tag.title} | {t('siteName')}
         </title>
       </Head>
-      <Section>
-        <Container>
-          <div className="py-10">
-            <Heading as="h1">{tag.title}</Heading>
-          </div>
-          {articles.length > 0 && <ArticleList articles={articles} />}
-        </Container>
-      </Section>
+      <Container>
+        <div className="py-10">
+          <Heading as="h1">{tag.title}</Heading>
+        </div>
+        {articles.length > 0 && <ArticleList articles={articles} />}
+      </Container>
     </>
   )
 }

@@ -22,12 +22,16 @@
   @apply my-0;
 }
 
+.markdown hr {
+  @apply my-28;
+}
+
 .markdown h1 {
-  @apply text-7xl mt-32 mb-9 leading-snug font-bold tracking-tight text-gray-900;
+  @apply text-7xl mt-28 mb-9 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h2 {
-  @apply text-4xl mt-32 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
+  @apply text-4xl mt-28 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
 }
 
 .markdown h2::before {
@@ -68,10 +72,6 @@
 
 .markdown ol {
   @apply list-decimal ml-5;
-}
-
-.markdown hr {
-  @apply mt-24;
 }
 
 .markdown img {

@@ -26,6 +26,7 @@ const ArticleList = ({ articles }: Props) => {
                     src={article.image.url}
                     alt={article.image.alt}
                     hasHoverStyle
+                    fixedAspectRatio
                   />
                 </a>
               </Link>

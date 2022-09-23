@@ -16,7 +16,7 @@ const ArticleList = ({ articles }: Props) => {
     <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32">
       {articles.map((article) => (
         <section key={article.slug}>
-          <div className="mb-5">
+          <div className="mb-6">
             <div className="sm:mx-0">
               <Link
                 href={pagesPath.private.articles._slug(article.slug).$url()}
@@ -37,6 +37,7 @@ const ArticleList = ({ articles }: Props) => {
               <a className="hover:underline">{article.title}</a>
             </Link>
           </Heading>
+          <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>
           <div className="text-sm mb-1">
             <Company company={article.company} />
           </div>
@@ -50,7 +51,6 @@ const ArticleList = ({ articles }: Props) => {
           <div className="text-sm mb-4">
             <TagList article={article} />
           </div>
-          <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>
         </section>
       ))}
     </div>

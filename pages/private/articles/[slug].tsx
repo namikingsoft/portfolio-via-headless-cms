@@ -36,21 +36,21 @@ const Post = ({ article, content }: Props) => {
           <div className="py-20 lg:py-24">
             <Container>
               <Heading as="h1">{article.title}</Heading>
-              <div className="mt-6 text-xs sm:text-sm md:text-base lg:visible text-slate-500">
+              <div className="mt-6 text-xs sm:text-sm md:text-base lg:visible text-slate-600">
                 {article.excerpt}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-6 mt-12 lg:mt-20 text-lg md:text-2xl">
-                <div className="text-slate-500">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-6 mt-12 lg:mt-20 text-lg md:text-2xl text-slate-500">
+                <div>
                   <Company company={article.company} />
                 </div>
-                <div className="text-slate-500">
+                <div>
                   <DateRange
                     date={article.date}
                     dateEnd={article.dateEnd}
                     isContinue={article.dateIsContinue}
                   />
                 </div>
-                <div className="text-slate-500">
+                <div>
                   <GithubLink repo={article.githubRepo} />
                 </div>
                 <div className="text-sm md:col-span-2">

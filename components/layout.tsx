@@ -102,7 +102,7 @@ const Layout = ({ children }: Props) => {
                   {
                     'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white':
                       pageType === 'top',
-                    'border border-gray-500  text-gray-500 hover:border-gray-200 hover:bg-gray-200':
+                    'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200':
                       pageType === 'lower',
                   },
                 )}
@@ -125,7 +125,7 @@ const Layout = ({ children }: Props) => {
         </main>
       </div>
       {pageType !== 'login' && (
-        <footer className="bg-accent-1 border-t border-accent-2">
+        <footer className="bg-stone-100 border-t border-stone-200">
           <Container>
             <div className="py-28 flex flex-col lg:flex-row items-center">
               <div className="grow">

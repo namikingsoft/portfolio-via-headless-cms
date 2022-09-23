@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body>
+        <body className="bg-stone-50">
           <Main />
           <NextScript />
         </body>

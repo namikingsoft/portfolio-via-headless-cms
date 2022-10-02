@@ -95,6 +95,10 @@
   @apply underline;
 }
 
+.markdown :global code:not(pre code) {
+  @apply bg-stone-200 px-1;
+}
+
 .markdown :global .footnotes {
   @apply mt-32 pt-16 border-t;
 }

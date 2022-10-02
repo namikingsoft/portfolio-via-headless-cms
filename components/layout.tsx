@@ -59,9 +59,9 @@ const Layout = ({ children }: Props) => {
           >
             <h1
               className={cn({
-                'text-6xl md:text-8xl font-bold tracking-tighter leading-tight':
+                'text-6xl md:text-7xl font-bold tracking-tighter leading-tight':
                   pageType === 'login',
-                'text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
+                'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
                   pageType === 'top',
                 'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
                   pageType === 'lower',

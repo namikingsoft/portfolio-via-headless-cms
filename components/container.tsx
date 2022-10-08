@@ -9,7 +9,7 @@ type Props = {
 const Container = ({ narrow, children }: Props) => {
   return (
     <div
-      className={cn('container mx-auto px-6', {
+      className={cn('container mx-auto px-6 lg:px-8 xl:px-10', {
         'max-w-2xl': narrow,
       })}
     >

@@ -66,12 +66,17 @@
   @apply underline decoration-solid;
 }
 
+.markdown ul,
+.markdown ol {
+  @apply ml-6;
+}
+
 .markdown ul {
-  @apply list-disc ml-5;
+  @apply list-disc;
 }
 
 .markdown ol {
-  @apply list-decimal ml-5;
+  @apply list-decimal;
 }
 
 .markdown img {

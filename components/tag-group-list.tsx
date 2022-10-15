@@ -12,7 +12,7 @@ const TagGroupList = ({ tagGroups }: Props) => {
       {tagGroups.map((tagGroup) => (
         <section key={tagGroup.title}>
           <h3 className="mt-5 mb-2 font-bold text-xl">{tagGroup.title}</h3>
-          <ul className="flex flex-row gap-5">
+          <ul className="flex flex-row gap-5 flex-wrap">
             {tagGroup.tags.map((tag) => (
               <li key={tag.slug}>
                 <Link href={pagesPath.private.tags._slug(tag.slug).$url()}>

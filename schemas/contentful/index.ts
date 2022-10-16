@@ -211,7 +211,9 @@ export async function getTagGroupList(): Promise<TagGroup[]> {
 
   return tagGroupWithoutTags.map(({ title }) => ({
     title,
-    tags: tagsWithGroup.filter((tag) => tag.groupTitle === title),
+    tags: tagsWithGroup
+      .filter((tag) => tag.groupTitle === title)
+      .sort((a, b) => b.total - a.total),
   }))
 }
 

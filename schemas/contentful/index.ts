@@ -7,7 +7,7 @@ import {
   GetTagCollectionQuery,
   GetTagGroupCollectionQuery,
   GetTagWithGroupCollectionQuery,
-  GetSkillRatingCollectionQuery,
+  GetSkillGroupCollectionQuery,
   GetPickupByIdQuery,
 } from './client.generated'
 import {
@@ -16,6 +16,7 @@ import {
   Intro,
   Pickup,
   SkillRating,
+  SkillGroup,
   Tag,
   TagGroup,
   Visitor,
@@ -55,9 +56,15 @@ type TagGroupRaw = NonNullable<
   NonNullable<GetTagGroupCollectionQuery['tagGroupCollection']>['items'][number]
 >
 
+type SkillGroupRaw = NonNullable<
+  NonNullable<
+    GetSkillGroupCollectionQuery['skillGroupCollection']
+  >['items'][number]
+>
+
 type SkillRatingRaw = NonNullable<
   NonNullable<
-    GetSkillRatingCollectionQuery['skillRatingCollection']
+    NonNullable<SkillGroupRaw['linkedFrom']>['skillRatingCollection']
   >['items'][number]
 >
 
@@ -108,7 +115,16 @@ function toSkillRating(raw: SkillRatingRaw): SkillRating {
     title: nonNullable(raw.title),
     rating: nonNullable(raw.rating),
     description: nonNullable(raw.description),
-    groupTitle: nonNullable(raw.group?.title),
+  }
+}
+
+function toSkillGroup(raw: SkillGroupRaw): SkillGroup {
+  return {
+    title: nonNullable(raw.title),
+    skillRatings: (raw.linkedFrom?.skillRatingCollection?.items ?? [])
+      .flatMap((x) => (x === null ? [] : [x]))
+      .map(toSkillRating)
+      .sort((a, b) => b.rating - a.rating),
   }
 }
 
@@ -252,12 +268,11 @@ export async function getPickups(): Promise<Pickup[]> {
   )
 }
 
-export async function getSkillRatingList(): Promise<SkillRating[]> {
-  const { skillRatingCollection } = await sdk.getSkillRatingCollection()
-  return (skillRatingCollection?.items ?? [])
+export async function getSkillGroupList(): Promise<SkillGroup[]> {
+  const { skillGroupCollection } = await sdk.getSkillGroupCollection()
+  return (skillGroupCollection?.items ?? [])
     .flatMap((x) => (x === null ? [] : [x]))
-    .filter((x) => !x.group?.disabled)
-    .map(toSkillRating)
+    .map(toSkillGroup)
 }
 
 export async function getVisitorByUsername(username: string): Promise<Visitor> {

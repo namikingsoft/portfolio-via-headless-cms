@@ -21,7 +21,11 @@ export type SkillRating = {
   title: string
   rating: number
   description: string
-  groupTitle: string
+}
+
+export type SkillGroup = {
+  title: string
+  skillRatings: SkillRating[]
 }
 
 export interface Article {

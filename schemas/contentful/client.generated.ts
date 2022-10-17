@@ -1054,6 +1054,7 @@ export type SkillGroup = Entry & {
   contentfulMetadata: ContentfulMetadata;
   disabled?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<SkillGroupLinkingCollections>;
+  sortNumber?: Maybe<Scalars['Int']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 };
@@ -1068,6 +1069,12 @@ export type SkillGroupDisabledArgs = {
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
 export type SkillGroupLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
+export type SkillGroupSortNumberArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1091,6 +1098,15 @@ export type SkillGroupFilter = {
   disabled?: InputMaybe<Scalars['Boolean']>;
   disabled_exists?: InputMaybe<Scalars['Boolean']>;
   disabled_not?: InputMaybe<Scalars['Boolean']>;
+  sortNumber?: InputMaybe<Scalars['Int']>;
+  sortNumber_exists?: InputMaybe<Scalars['Boolean']>;
+  sortNumber_gt?: InputMaybe<Scalars['Int']>;
+  sortNumber_gte?: InputMaybe<Scalars['Int']>;
+  sortNumber_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sortNumber_lt?: InputMaybe<Scalars['Int']>;
+  sortNumber_lte?: InputMaybe<Scalars['Int']>;
+  sortNumber_not?: InputMaybe<Scalars['Int']>;
+  sortNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1126,6 +1142,8 @@ export type SkillGroupLinkingCollectionsSkillRatingCollectionArgs = {
 export enum SkillGroupOrder {
   DisabledAsc = 'disabled_ASC',
   DisabledDesc = 'disabled_DESC',
+  SortNumberAsc = 'sortNumber_ASC',
+  SortNumberDesc = 'sortNumber_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1616,6 +1634,15 @@ export type CfSkillGroupNestedFilter = {
   disabled?: InputMaybe<Scalars['Boolean']>;
   disabled_exists?: InputMaybe<Scalars['Boolean']>;
   disabled_not?: InputMaybe<Scalars['Boolean']>;
+  sortNumber?: InputMaybe<Scalars['Int']>;
+  sortNumber_exists?: InputMaybe<Scalars['Boolean']>;
+  sortNumber_gt?: InputMaybe<Scalars['Int']>;
+  sortNumber_gte?: InputMaybe<Scalars['Int']>;
+  sortNumber_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  sortNumber_lt?: InputMaybe<Scalars['Int']>;
+  sortNumber_lte?: InputMaybe<Scalars['Int']>;
+  sortNumber_not?: InputMaybe<Scalars['Int']>;
+  sortNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1717,10 +1744,10 @@ export type GetRelatedArticleCollectionQueryVariables = Exact<{
 
 export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?: { __typename?: 'Article', relatedArticleCollection?: { __typename?: 'ArticleRelatedArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null };
 
-export type GetSkillRatingCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetSkillGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null, disabled?: boolean | null } | null } | null> } | null };
+export type GetSkillGroupCollectionQuery = { __typename?: 'Query', skillGroupCollection?: { __typename?: 'SkillGroupCollection', items: Array<{ __typename?: 'SkillGroup', title?: string | null, linkedFrom?: { __typename?: 'SkillGroupLinkingCollections', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null } | null> } | null } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1891,16 +1918,19 @@ export const GetRelatedArticleCollectionDocument = gql`
   }
 }
     ${ArticleFragmentDoc}`;
-export const GetSkillRatingCollectionDocument = gql`
-    query getSkillRatingCollection {
-  skillRatingCollection(order: rating_DESC) {
+export const GetSkillGroupCollectionDocument = gql`
+    query getSkillGroupCollection {
+  skillGroupCollection(order: sortNumber_ASC, where: {disabled_not: true}) {
     items {
       title
-      rating
-      description
-      group {
-        title
-        disabled
+      linkedFrom {
+        skillRatingCollection {
+          items {
+            title
+            rating
+            description
+          }
+        }
       }
     }
   }
@@ -2009,8 +2039,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getRelatedArticleCollection(variables: GetRelatedArticleCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetRelatedArticleCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetRelatedArticleCollectionQuery>(GetRelatedArticleCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRelatedArticleCollection', 'query');
     },
-    getSkillRatingCollection(variables?: GetSkillRatingCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetSkillRatingCollectionQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetSkillRatingCollectionQuery>(GetSkillRatingCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSkillRatingCollection', 'query');
+    getSkillGroupCollection(variables?: GetSkillGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetSkillGroupCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetSkillGroupCollectionQuery>(GetSkillGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSkillGroupCollection', 'query');
     },
     getTagCollection(variables?: GetTagCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagCollectionQuery>(GetTagCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagCollection', 'query');

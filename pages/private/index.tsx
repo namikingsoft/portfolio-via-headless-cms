@@ -6,12 +6,12 @@ import {
   Intro,
   Pickup,
   TagGroup,
-  SkillRating,
+  SkillGroup,
 } from '../../schemas/contentful/types'
 import {
   getIntroList,
   getPickups,
-  getSkillRatingList,
+  getSkillGroupList,
   getTagGroupList,
 } from '../../schemas/contentful'
 import Block from '../../components/block'
@@ -20,16 +20,16 @@ import CoverImage from '../../components/cover-image'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
-import SkillRatingList from '../../components/skill-rating-list'
+import SkillGroupList from '../../components/skill-group-list'
 
 type Props = {
   intros: Intro[]
   pickups: Pickup[]
   tagGroups: TagGroup[]
-  skillRatings: SkillRating[]
+  skillGroups: SkillGroup[]
 }
 
-const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
+const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -62,7 +62,7 @@ const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
       <Block>
         <Container>
           <Heading as="h2">{t('skills')}</Heading>
-          <SkillRatingList skillRatings={skillRatings} />
+          <SkillGroupList skillGroups={skillGroups} />
         </Container>
       </Block>
       {pickups.map((pickup) => (
@@ -91,13 +91,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const intros = await getIntroList()
   const pickups = await getPickups()
   const tagGroups = await getTagGroupList()
-  const skillRatings = await getSkillRatingList()
+  const skillGroups = await getSkillGroupList()
   return {
     props: {
       intros,
       pickups,
       tagGroups,
-      skillRatings,
+      skillGroups,
       ...(await serverSideTranslations(locale!, ['common'])),
     },
   }

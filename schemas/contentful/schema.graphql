@@ -286,6 +286,15 @@ input cfSkillGroupNestedFilter {
   disabled_exists: Boolean
   disabled: Boolean
   disabled_not: Boolean
+  sortNumber_exists: Boolean
+  sortNumber: Int
+  sortNumber_not: Int
+  sortNumber_in: [Int]
+  sortNumber_not_in: [Int]
+  sortNumber_gt: Int
+  sortNumber_gte: Int
+  sortNumber_lt: Int
+  sortNumber_lte: Int
   OR: [cfSkillGroupNestedFilter]
   AND: [cfSkillGroupNestedFilter]
 }
@@ -703,6 +712,7 @@ type SkillGroup implements Entry {
   linkedFrom(allowedLocales: [String]): SkillGroupLinkingCollections
   title(locale: String): String
   disabled(locale: String): Boolean
+  sortNumber(locale: String): Int
 }
 
 type SkillGroupCollection {
@@ -725,6 +735,15 @@ input SkillGroupFilter {
   disabled_exists: Boolean
   disabled: Boolean
   disabled_not: Boolean
+  sortNumber_exists: Boolean
+  sortNumber: Int
+  sortNumber_not: Int
+  sortNumber_in: [Int]
+  sortNumber_not_in: [Int]
+  sortNumber_gt: Int
+  sortNumber_gte: Int
+  sortNumber_lt: Int
+  sortNumber_lte: Int
   OR: [SkillGroupFilter]
   AND: [SkillGroupFilter]
 }
@@ -739,6 +758,8 @@ enum SkillGroupOrder {
   title_DESC
   disabled_ASC
   disabled_DESC
+  sortNumber_ASC
+  sortNumber_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC

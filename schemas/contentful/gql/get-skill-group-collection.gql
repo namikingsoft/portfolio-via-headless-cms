@@ -1,0 +1,19 @@
+query getSkillGroupCollection {
+  skillGroupCollection(
+    order: sortNumber_ASC
+    where: { disabled_not: true }
+  ) {
+    items{
+      title
+      linkedFrom {
+        skillRatingCollection {
+          items {
+      			title
+     				rating
+      			description
+    			}
+        }
+      }
+    }
+  }
+}

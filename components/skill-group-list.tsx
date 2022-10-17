@@ -1,25 +1,17 @@
 import { MdStar, MdStarOutline } from 'react-icons/md'
-import { SkillRating } from '../schemas/contentful/types'
+import { SkillGroup } from '../schemas/contentful/types'
 
 type Props = {
-  skillRatings: SkillRating[]
+  skillGroups: SkillGroup[]
 }
 
-const SkillRatingList = ({ skillRatings }: Props) => {
-  const skillGroups = Array.from(
-    skillRatings.reduce((acc, x) => {
-      const xs = acc.get(x.groupTitle)
-      if (xs) xs.push(x)
-      else acc.set(x.groupTitle, [x])
-      return acc
-    }, new Map<string, SkillRating[]>()),
-  )
+const SkillRatingList = ({ skillGroups }: Props) => {
   return (
     <>
-      {skillGroups.map(([groupTitle, skillRatings]) => (
-        <section key={groupTitle}>
-          <h3 className="mt-5 mb-2 font-bold text-xl">{groupTitle}</h3>
-          {skillRatings.map((skillRating) => (
+      {skillGroups.map((skillGroup) => (
+        <section key={skillGroup.title}>
+          <h3 className="mt-5 mb-2 font-bold text-xl">{skillGroup.title}</h3>
+          {skillGroup.skillRatings.map((skillRating) => (
             <dl key={skillRating.title}>
               <dt>{skillRating.title}</dt>
               <dd>

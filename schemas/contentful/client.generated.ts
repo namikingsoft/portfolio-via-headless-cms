@@ -1893,7 +1893,7 @@ export const GetRelatedArticleCollectionDocument = gql`
     ${ArticleFragmentDoc}`;
 export const GetSkillRatingCollectionDocument = gql`
     query getSkillRatingCollection {
-  skillRatingCollection {
+  skillRatingCollection(order: rating_DESC) {
     items {
       title
       rating

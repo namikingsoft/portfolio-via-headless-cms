@@ -256,6 +256,7 @@ export async function getSkillRatingList(): Promise<SkillRating[]> {
   const { skillRatingCollection } = await sdk.getSkillRatingCollection()
   return (skillRatingCollection?.items ?? [])
     .flatMap((x) => (x === null ? [] : [x]))
+    .filter((x) => !x.group?.disabled)
     .map(toSkillRating)
 }
 

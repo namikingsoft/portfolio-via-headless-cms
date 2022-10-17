@@ -20,6 +20,7 @@ import CoverImage from '../../components/cover-image'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
+import SkillRatingList from '../../components/skill-rating-list'
 
 type Props = {
   intros: Intro[]
@@ -30,8 +31,6 @@ type Props = {
 
 const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
   const { t } = useTranslation()
-
-  console.log('skillRatings', skillRatings)
 
   return (
     <>
@@ -60,6 +59,12 @@ const Index = ({ intros, pickups, tagGroups, skillRatings }: Props) => {
             </Container>
           </Block>
         ))}
+      <Block>
+        <Container>
+          <Heading as="h2">{t('skills')}</Heading>
+          <SkillRatingList skillRatings={skillRatings} />
+        </Container>
+      </Block>
       {pickups.map((pickup) => (
         <Block key={pickup.title}>
           <Container>

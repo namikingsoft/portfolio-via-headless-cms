@@ -283,6 +283,9 @@ input cfSkillGroupNestedFilter {
   title_not_in: [String]
   title_contains: String
   title_not_contains: String
+  disabled_exists: Boolean
+  disabled: Boolean
+  disabled_not: Boolean
   OR: [cfSkillGroupNestedFilter]
   AND: [cfSkillGroupNestedFilter]
 }
@@ -672,16 +675,16 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  skillGroup(id: String!, preview: Boolean, locale: String): SkillGroup
+  skillGroupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillGroupFilter, order: [SkillGroupOrder]): SkillGroupCollection
+  tag(id: String!, preview: Boolean, locale: String): Tag
+  tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   article(id: String!, preview: Boolean, locale: String): Article
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   skillRating(id: String!, preview: Boolean, locale: String): SkillRating
   skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillRatingFilter, order: [SkillRatingOrder]): SkillRatingCollection
-  skillGroup(id: String!, preview: Boolean, locale: String): SkillGroup
-  skillGroupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillGroupFilter, order: [SkillGroupOrder]): SkillGroupCollection
   tagGroup(id: String!, preview: Boolean, locale: String): TagGroup
   tagGroupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagGroupFilter, order: [TagGroupOrder]): TagGroupCollection
-  tag(id: String!, preview: Boolean, locale: String): Tag
-  tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   pickup(id: String!, preview: Boolean, locale: String): Pickup
   pickupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PickupFilter, order: [PickupOrder]): PickupCollection
   visitor(id: String!, preview: Boolean, locale: String): Visitor
@@ -699,6 +702,7 @@ type SkillGroup implements Entry {
   contentfulMetadata: ContentfulMetadata!
   linkedFrom(allowedLocales: [String]): SkillGroupLinkingCollections
   title(locale: String): String
+  disabled(locale: String): Boolean
 }
 
 type SkillGroupCollection {
@@ -718,6 +722,9 @@ input SkillGroupFilter {
   title_not_in: [String]
   title_contains: String
   title_not_contains: String
+  disabled_exists: Boolean
+  disabled: Boolean
+  disabled_not: Boolean
   OR: [SkillGroupFilter]
   AND: [SkillGroupFilter]
 }
@@ -730,6 +737,8 @@ type SkillGroupLinkingCollections {
 enum SkillGroupOrder {
   title_ASC
   title_DESC
+  disabled_ASC
+  disabled_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC

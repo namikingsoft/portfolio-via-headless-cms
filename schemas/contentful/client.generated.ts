@@ -1052,9 +1052,16 @@ export type QueryVisitorCollectionArgs = {
 export type SkillGroup = Entry & {
   __typename?: 'SkillGroup';
   contentfulMetadata: ContentfulMetadata;
+  disabled?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<SkillGroupLinkingCollections>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillGroup) */
+export type SkillGroupDisabledArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1081,6 +1088,9 @@ export type SkillGroupFilter = {
   AND?: InputMaybe<Array<InputMaybe<SkillGroupFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SkillGroupFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled_exists?: InputMaybe<Scalars['Boolean']>;
+  disabled_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1114,6 +1124,8 @@ export type SkillGroupLinkingCollectionsSkillRatingCollectionArgs = {
 };
 
 export enum SkillGroupOrder {
+  DisabledAsc = 'disabled_ASC',
+  DisabledDesc = 'disabled_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1601,6 +1613,9 @@ export type CfSkillGroupNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfSkillGroupNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfSkillGroupNestedFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled_exists?: InputMaybe<Scalars['Boolean']>;
+  disabled_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1705,7 +1720,7 @@ export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?:
 export type GetSkillRatingCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null } | null } | null> } | null };
+export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null, disabled?: boolean | null } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1885,6 +1900,7 @@ export const GetSkillRatingCollectionDocument = gql`
       description
       group {
         title
+        disabled
       }
     }
   }

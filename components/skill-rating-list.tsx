@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { MdStar, MdStarOutline } from 'react-icons/md'
 import { SkillRating } from '../schemas/contentful/types'
 

@@ -20,6 +20,7 @@ import {
   Tag,
   TagGroup,
   Visitor,
+  RatingRange,
 } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
@@ -113,7 +114,7 @@ function toTagGroupWithoutTags(raw: TagGroupRaw): TagGroupWithoutTags {
 function toSkillRating(raw: SkillRatingRaw): SkillRating {
   return {
     title: nonNullable(raw.title),
-    rating: nonNullable(raw.rating),
+    rating: nonNullable(raw.rating) as RatingRange,
     description: nonNullable(raw.description),
   }
 }

@@ -17,9 +17,11 @@ export type TagGroup = {
   tags: TagWithTotal[]
 }
 
+export type RatingRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+
 export type SkillRating = {
   title: string
-  rating: number
+  rating: RatingRange
   description: string
 }
 

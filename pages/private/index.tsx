@@ -61,7 +61,7 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
         ))}
       <Block>
         <Container>
-          <Heading as="h2">{t('skills')}</Heading>
+          <h2 className="hidden">{t('skills')}</h2>
           <SkillGroupList skillGroups={skillGroups} />
         </Container>
       </Block>

@@ -1,4 +1,4 @@
-import { MdStar, MdStarHalf, MdStarOutline } from 'react-icons/md'
+import { MdStar } from 'react-icons/md'
 import { calcStarType } from '../lib/calcStarType'
 import { SkillGroup } from '../schemas/contentful/types'
 
@@ -17,7 +17,6 @@ const SkillRatingList = ({ skillGroups }: Props) => {
           <h3 className="self-start font-bold text-xl text-white bg-yellow-800 p-6 whitespace-nowrap shadow-xl -skew-x-6">
             {skillGroup.title}
           </h3>
-
           <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-5">
             {skillGroup.skillRatings.map((skillRating) => (
               <div key={skillRating.title}>
@@ -29,9 +28,26 @@ const SkillRatingList = ({ skillGroups }: Props) => {
                         case 'full':
                           return <MdStar key={pos} className="inline" />
                         case 'half':
-                          return <MdStarHalf key={pos} className="inline" />
+                          return (
+                            <span className="inline-block relative">
+                              <MdStar
+                                key={pos}
+                                className="inline"
+                                style={{ clipPath: 'inset(0 50% 0 0)' }}
+                              />
+                              <MdStar
+                                key={pos}
+                                className="inline text-gray-300 absolute bottom-0 left-0 -z-10"
+                              />
+                            </span>
+                          )
                         default:
-                          return <MdStarOutline key={pos} className="inline" />
+                          return (
+                            <MdStar
+                              key={pos}
+                              className="inline text-gray-300"
+                            />
+                          )
                       }
                     })}
                   </dd>

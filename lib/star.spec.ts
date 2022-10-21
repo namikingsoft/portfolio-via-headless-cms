@@ -1,4 +1,4 @@
-import { calcStarType } from './calcStarType'
+import { calcStarType } from './star'
 
 test('calcStarType', () => {
   expect(calcStarType(1, 1)).toBe('half')

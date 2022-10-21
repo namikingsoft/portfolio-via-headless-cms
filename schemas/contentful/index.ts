@@ -225,6 +225,8 @@ export async function getTagGroupList(): Promise<TagGroup[]> {
   const tagsWithGroup = (tagCollection?.items ?? [])
     .flatMap((x) => (x === null ? [] : [x]))
     .map(toTagWithGroup)
+    // exclude tag without articles
+    .filter((x) => x.total > 0)
 
   return tagGroupWithoutTags.map(({ title }) => ({
     title,

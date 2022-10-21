@@ -8,7 +8,7 @@ type Props = {
 
 const SkillRatingList = ({ skillGroups }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-14">
+    <div className="grid grid-cols-1 gap-16">
       {skillGroups.map((skillGroup) => (
         <section
           key={skillGroup.title}
@@ -17,7 +17,7 @@ const SkillRatingList = ({ skillGroups }: Props) => {
           <h3 className="self-start font-bold text-xl text-white bg-yellow-800 p-6 whitespace-nowrap shadow-xl -skew-x-6">
             {skillGroup.title}
           </h3>
-          <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-5">
+          <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-5">
             {skillGroup.skillRatings.map((skillRating) => (
               <div key={skillRating.title}>
                 <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">

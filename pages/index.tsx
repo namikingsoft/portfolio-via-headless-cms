@@ -26,7 +26,7 @@ const Index = () => {
 
   const [result, authenticate] = useAuthenticateMutation()
 
-  const disabled = result.fetching || redirecting
+  const loading = result.fetching || redirecting
 
   const {
     register,
@@ -90,23 +90,29 @@ const Index = () => {
       </Head>
       <Container narrow>
         <form className="my-20" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex border rounded-md overflow-hidden border-teal-500">
+          <div className="flex rounded-md overflow-hidden">
             <input
-              className="appearance-none border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+              className="appearance-none border-none bg-slate-200 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
               type="password"
               placeholder="Paste password"
               aria-label="Password"
               onFocus={onFocus}
               onPaste={onPaste}
-              disabled={disabled}
+              disabled={loading}
               {...register('password')}
             />
             <button
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400"
+              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400 w-16"
               type="submit"
-              disabled={disabled}
+              disabled={loading}
             >
-              {t('login')}
+              {loading ? (
+                <div className="flex justify-center">
+                  <div className="animate-spin h-5 w-5 border-2 opacity-50 border-white rounded-full border-t-transparent"></div>
+                </div>
+              ) : (
+                t('login')
+              )}
             </button>
           </div>
           <p className="text-red-500 text-xs italic">

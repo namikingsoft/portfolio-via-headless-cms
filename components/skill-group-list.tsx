@@ -1,6 +1,6 @@
-import { MdStar } from 'react-icons/md'
-import { calcStarType } from '../lib/calcStarType'
+import { calcStarType } from '../lib/star'
 import { SkillGroup } from '../schemas/contentful/types'
+import Star from './star'
 
 type Props = {
   skillGroups: SkillGroup[]
@@ -8,7 +8,7 @@ type Props = {
 
 const SkillRatingList = ({ skillGroups }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-16">
+    <div className="grid grid-cols-2 gap-16">
       {skillGroups.map((skillGroup) => (
         <section
           key={skillGroup.title}
@@ -17,39 +17,18 @@ const SkillRatingList = ({ skillGroups }: Props) => {
           <h3 className="self-start font-bold text-xl text-white bg-yellow-800 p-6 whitespace-nowrap shadow-xl -skew-x-6">
             {skillGroup.title}
           </h3>
-          <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-5">
+          <div className="flex-grow grid grid-cols-1 gap-x-12 gap-y-5">
             {skillGroup.skillRatings.map((skillRating) => (
               <div key={skillRating.title}>
                 <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">
                   <dt className="font-bold text-lg">{skillRating.title}</dt>
                   <dd className="text-2xl text-yellow-500 drop-shadow-sm text-right whitespace-nowrap">
-                    {([1, 2, 3, 4, 5] as const).map((pos) => {
-                      switch (calcStarType(pos, skillRating.rating)) {
-                        case 'full':
-                          return <MdStar key={pos} className="inline" />
-                        case 'half':
-                          return (
-                            <span className="inline-block relative">
-                              <MdStar
-                                key={pos}
-                                className="inline"
-                                style={{ clipPath: 'inset(0 50% 0 0)' }}
-                              />
-                              <MdStar
-                                key={pos}
-                                className="inline text-gray-300 absolute bottom-0 left-0 -z-10"
-                              />
-                            </span>
-                          )
-                        default:
-                          return (
-                            <MdStar
-                              key={pos}
-                              className="inline text-gray-300"
-                            />
-                          )
-                      }
-                    })}
+                    {([1, 2, 3, 4, 5] as const).map((pos) => (
+                      <Star
+                        key={pos}
+                        type={calcStarType(pos, skillRating.rating)}
+                      />
+                    ))}
                   </dd>
                 </dl>
                 <p className="text-gray-700">{skillRating.description}</p>

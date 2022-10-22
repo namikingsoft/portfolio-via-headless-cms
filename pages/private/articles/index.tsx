@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
+import Heading from '../../../components/heading'
 import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
 import { Article } from '../../../schemas/contentful/types'
@@ -22,9 +23,9 @@ const ArticleIndex = ({ articles }: Props) => {
         </title>
       </Head>
       <Container>
-        <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-          {t('allArticles')}
-        </h2>
+        <div className="py-10">
+          <Heading as="h1">{t('allArticles')}</Heading>
+        </div>
         {articles.length > 0 && <ArticleList articles={articles} />}
       </Container>
     </>

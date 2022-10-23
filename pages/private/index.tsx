@@ -62,12 +62,14 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
             </Container>
           </Block>
         ))}
+
       <Block>
         <Container>
           <h2 className="hidden">{t('skills')}</h2>
           <SkillGroupList skillGroups={skillGroups} />
         </Container>
       </Block>
+
       {pickups.map((pickup) => (
         <Block key={pickup.title}>
           <Container>

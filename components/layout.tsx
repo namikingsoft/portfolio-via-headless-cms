@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import { FaGithub } from 'react-icons/fa'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
 import { portfolioGitHubUrl, myEmail } from '../lib/constants'
@@ -57,7 +58,7 @@ const Layout = ({ children }: Props) => {
             <section
               className={cn({
                 'flex flex-col items-center': pageType === 'login',
-                'flex flex-col md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
+                'flex flex-col gap-5 md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
                   pageType === 'top',
                 'flex flex-row items-center py-6': pageType === 'lower',
               })}
@@ -133,8 +134,8 @@ const Layout = ({ children }: Props) => {
       {pageType !== 'login' && (
         <footer className="bg-stone-100 border-t border-stone-200">
           <Container>
-            <div className="py-28 flex flex-col lg:flex-row items-center">
-              <div className="grow">
+            <div className="py-28 flex flex-col gap-5 md:flex-row items-center">
+              <div className="grow text-center md:text-left">
                 <h3 className="inline text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
                   {t('siteName')}
                 </h3>
@@ -154,8 +155,9 @@ const Layout = ({ children }: Props) => {
               </div>
               <a
                 href={portfolioGitHubUrl}
-                className="grow-0 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"
+                className="inline-flex items-center gap-2 grow-0 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"
               >
+                <FaGithub size={20} />
                 {t('viewOnGitHub')}
               </a>
             </div>

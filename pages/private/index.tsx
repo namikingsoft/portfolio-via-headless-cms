@@ -89,7 +89,7 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
         <Container>
           <div className="text-center">
             <Link href={pagesPath.private.articles.$url()}>
-              <a className="inline-flex gap-2 items-center border border-stone-200 px-10 py-4 bg-white hover:bg-slate-50">
+              <a className="inline-flex gap-2 items-center border border-stone-200 px-12 py-5 bg-white hover:bg-slate-50">
                 <MdOutlineArticle className="inline" size={20} />
                 {t('allArticles')}
               </a>

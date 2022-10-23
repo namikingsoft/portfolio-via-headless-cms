@@ -45,75 +45,81 @@ const Layout = ({ children }: Props) => {
     <>
       <div
         className={cn('min-h-screen antialiased', {
-          'flex flex-col justify-center ': pageType === 'login',
+          'flex flex-col justify-center': pageType === 'login',
         })}
       >
-        <Container>
-          <section
-            className={cn({
-              'flex flex-col items-center': pageType === 'login',
-              'flex flex-col md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
-                pageType === 'top',
-              'flex flex-row items-center my-6': pageType === 'lower',
-            })}
-          >
-            <h1
+        <div
+          className={cn({
+            'md:sticky lg:top-0': pageType === 'lower',
+          })}
+        >
+          <Container>
+            <section
               className={cn({
-                'text-6xl md:text-7xl font-bold tracking-tighter leading-tight':
-                  pageType === 'login',
-                'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
+                'flex flex-col items-center': pageType === 'login',
+                'flex flex-col md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
                   pageType === 'top',
-                'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
-                  pageType === 'lower',
+                'flex flex-row items-center py-6': pageType === 'lower',
               })}
             >
-              {pageType === 'lower' ? (
-                <Link href={pagesPath.private.$url()}>
-                  <a className="hover flex flex-row items-center">
-                    <Avatar className="mr-2" email={myEmail} size={32} />
-                    {t('siteName')}
-                  </a>
-                </Link>
-              ) : (
-                <div className="flex flex-row items-center">
-                  <Avatar className="mr-5" email={myEmail} size={100} />
-                  {t('siteName')}
-                </div>
-              )}
-            </h1>
-            <h4
-              className={cn({
-                'text-lg mt-5': pageType === 'login',
-                'text-center md:text-left text-lg md:pl-8 mx-5':
-                  pageType === 'top',
-                hidden: pageType === 'lower',
-              })}
-            >
-              {t('siteDescription')}
-            </h4>
-            <nav
-              className={cn({
-                hidden: pageType === 'login',
-              })}
-            >
-              <button
-                className={cn(
-                  'text-sm rounded py-1 px-2 disabled:bg-gray-300 disabled:border-gray-300',
-                  {
-                    'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white':
-                      pageType === 'top',
-                    'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200':
-                      pageType === 'lower',
-                  },
-                )}
-                onClick={onClickLogout}
-                disabled={isLogout}
+              <h1
+                className={cn({
+                  'text-6xl md:text-7xl font-bold tracking-tighter leading-tight':
+                    pageType === 'login',
+                  'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
+                    pageType === 'top',
+                  'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight grow':
+                    pageType === 'lower',
+                })}
               >
-                {t('logout')}
-              </button>
-            </nav>
-          </section>
-        </Container>
+                {pageType === 'lower' ? (
+                  <Link href={pagesPath.private.$url()}>
+                    <a className="hover flex flex-row items-center">
+                      <Avatar className="mr-2" email={myEmail} size={32} />
+                      {t('siteName')}
+                    </a>
+                  </Link>
+                ) : (
+                  <div className="flex flex-row items-center">
+                    <Avatar className="mr-5" email={myEmail} size={100} />
+                    {t('siteName')}
+                  </div>
+                )}
+              </h1>
+              <h4
+                className={cn({
+                  'text-lg mt-5': pageType === 'login',
+                  'text-center md:text-left text-lg md:pl-8 mx-5':
+                    pageType === 'top',
+                  hidden: pageType === 'lower',
+                })}
+              >
+                {t('siteDescription')}
+              </h4>
+              <nav
+                className={cn({
+                  hidden: pageType === 'login',
+                })}
+              >
+                <button
+                  className={cn(
+                    'text-sm rounded py-1 px-2 disabled:bg-gray-300 disabled:border-gray-300',
+                    {
+                      'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white':
+                        pageType === 'top',
+                      'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200':
+                        pageType === 'lower',
+                    },
+                  )}
+                  onClick={onClickLogout}
+                  disabled={isLogout}
+                >
+                  {t('logout')}
+                </button>
+              </nav>
+            </section>
+          </Container>
+        </div>
         <main>
           {pageType === 'login' ? (
             children

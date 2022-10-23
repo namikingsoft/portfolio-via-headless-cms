@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { MdOutlineArticle } from 'react-icons/md'
 import {
   Intro,
   Pickup,
@@ -14,6 +16,7 @@ import {
   getSkillGroupList,
   getTagGroupList,
 } from '../../schemas/contentful'
+import { pagesPath } from '../../lib/$path'
 import Block from '../../components/block'
 import Container from '../../components/container'
 import CoverImage from '../../components/cover-image'
@@ -79,6 +82,19 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
       <Block>
         <Container>
           <TagGroupList tagGroups={tagGroups} />
+        </Container>
+      </Block>
+
+      <Block>
+        <Container>
+          <div className="text-center">
+            <Link href={pagesPath.private.articles.$url()}>
+              <a className="inline-flex gap-2 items-center border border-stone-200 px-10 py-4 bg-white hover:bg-slate-50">
+                <MdOutlineArticle className="inline" size={20} />
+                {t('allArticles')}
+              </a>
+            </Link>
+          </div>
         </Container>
       </Block>
     </>

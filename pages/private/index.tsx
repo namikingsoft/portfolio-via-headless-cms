@@ -11,7 +11,7 @@ import {
   SkillGroup,
 } from '../../schemas/contentful/types'
 import {
-  getIntroList,
+  getIntro,
   getPickups,
   getSkillGroupList,
   getTagGroupList,
@@ -26,13 +26,13 @@ import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
 
 type Props = {
-  intros: Intro[]
+  intro: Intro
   pickups: Pickup[]
   tagGroups: TagGroup[]
   skillGroups: SkillGroup[]
 }
 
-const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
+const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -42,26 +42,22 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
           {t('siteName')} | {t('siteDescription')}
         </title>
       </Head>
-      {intros.length > 0 &&
-        intros.map((intro) => (
-          <Block key={intro.title}>
-            <Block>
-              <CoverImage src={intro.image.url} alt={intro.image.alt} />
-            </Block>
-            <Container>
-              <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-                <div>
-                  <Heading as="h2">{intro.title}</Heading>
-                </div>
-                <div>
-                  <p className="text-lg leading-relaxed mb-4">
-                    {intro.content}
-                  </p>
-                </div>
-              </div>
-            </Container>
-          </Block>
-        ))}
+
+      <Block>
+        <Block>
+          <CoverImage src={intro.image.url} alt={intro.image.alt} />
+        </Block>
+        <Container>
+          <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
+            <div>
+              <Heading as="h2">{intro.title}</Heading>
+            </div>
+            <div>
+              <p className="text-lg leading-relaxed mb-4">{intro.content}</p>
+            </div>
+          </div>
+        </Container>
+      </Block>
 
       <Block>
         <Container>
@@ -106,13 +102,13 @@ const Index = ({ intros, pickups, tagGroups, skillGroups }: Props) => {
 export default Index
 
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
-  const intros = await getIntroList()
+  const intro = await getIntro()
   const pickups = await getPickups()
   const tagGroups = await getTagGroupList()
   const skillGroups = await getSkillGroupList()
   return {
     props: {
-      intros,
+      intro,
       pickups,
       tagGroups,
       skillGroups,

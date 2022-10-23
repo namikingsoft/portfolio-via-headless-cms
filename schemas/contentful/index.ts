@@ -201,11 +201,13 @@ export async function getArticle(slug: string): Promise<ArticleWithRelated> {
   return { ...toArticle(articleRaw), relatedArticles }
 }
 
-export async function getIntroList(): Promise<Intro[]> {
+export async function getIntro(): Promise<Intro> {
   const { introCollection } = await sdk.getIntroCollection()
-  return (introCollection?.items ?? [])
-    .flatMap((x) => (x === null ? [] : [x]))
-    .map(toIntro)
+  return nonNullable(
+    (introCollection?.items ?? [])
+      .flatMap((x) => (x === null ? [] : [x]))
+      .map(toIntro)[0],
+  )
 }
 
 export async function getTagList(): Promise<Tag[]> {

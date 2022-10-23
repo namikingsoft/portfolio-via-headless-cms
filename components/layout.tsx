@@ -51,6 +51,7 @@ const Layout = ({ children }: Props) => {
       >
         <div
           className={cn({
+            'absolute z-10 w-full': pageType === 'top',
             'md:sticky lg:top-0': pageType === 'lower',
           })}
         >
@@ -58,7 +59,7 @@ const Layout = ({ children }: Props) => {
             <section
               className={cn({
                 'flex flex-col items-center': pageType === 'login',
-                'flex flex-col gap-5 md:flex-row items-center md:justify-between mt-16 mb-16 md:mb-12':
+                'flex flex-col gap-5 md:flex-row items-center justify-between pt-20':
                   pageType === 'top',
                 'flex flex-row items-center py-6 justify-between':
                   pageType === 'lower',
@@ -68,7 +69,7 @@ const Layout = ({ children }: Props) => {
                 className={cn({
                   'text-6xl md:text-7xl font-bold tracking-tighter leading-tight':
                     pageType === 'login',
-                  'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8 grow':
+                  'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8':
                     pageType === 'top',
                   'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight rounded-lg backdrop-blur-sm p-0.5':
                     pageType === 'lower',

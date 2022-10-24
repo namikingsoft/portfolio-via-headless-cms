@@ -19,11 +19,13 @@ import {
 import { pagesPath } from '../../lib/$path'
 import Block from '../../components/block'
 import Container from '../../components/container'
+import Markdown from '../../components/markdown'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
+import markdownToHtml from '../../lib/markdownToHtml'
 
 type Props = {
   intro: Intro
@@ -56,8 +58,8 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
             <div>
               <Heading as="h2">{intro.title}</Heading>
             </div>
-            <div>
-              <p className="text-lg leading-relaxed mb-4">{intro.content}</p>
+            <div className="text-lg leading-relaxed">
+              <Markdown content={intro.content} />
             </div>
           </div>
         </Container>
@@ -118,7 +120,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const skillGroups = await getSkillGroupList()
   return {
     props: {
-      intro,
+      intro: {
+        ...intro,
+        content: await markdownToHtml(intro.content),
+      },
       pickups,
       tagGroups,
       skillGroups,

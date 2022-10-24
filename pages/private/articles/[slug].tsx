@@ -5,10 +5,10 @@ import { useTranslation } from 'next-i18next'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
-import markdownStyles from '../../../components/markdown-styles.module.css'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
 import CoverImage from '../../../components/cover-image'
+import Markdown from '../../../components/markdown'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
 import GithubLink from '../../../components/github-link'
@@ -63,10 +63,9 @@ const Post = ({ article, content }: Props) => {
             <CoverImage src={article.image.url} alt={article.image.alt} />
           </Block>
           <Container narrow>
-            <div
-              className={markdownStyles.markdown}
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+            <div className="text-gray-700 text-lg">
+              <Markdown content={content} />
+            </div>
           </Container>
         </Block>
       </article>

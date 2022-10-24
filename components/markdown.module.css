@@ -1,11 +1,7 @@
-.markdown {
-  @apply text-gray-700 text-lg;
-}
-
-.markdown p,
-.markdown ul,
-.markdown ol,
-.markdown blockquote {
+.markdown p:not(:first-child),
+.markdown ul:not(:first-child),
+.markdown ol:not(:first-child),
+.markdown blockquote:not(:first-child) {
   @apply my-8;
 }
 

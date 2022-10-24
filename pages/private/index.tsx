@@ -23,6 +23,7 @@ import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
+import FeatureList from '../../components/feature-list'
 
 type Props = {
   intro: Intro
@@ -59,6 +60,12 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
               <p className="text-lg leading-relaxed mb-4">{intro.content}</p>
             </div>
           </div>
+        </Container>
+      </Block>
+
+      <Block>
+        <Container>
+          <FeatureList features={intro.features} />
         </Container>
       </Block>
 

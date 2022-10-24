@@ -51,7 +51,7 @@ const Layout = ({ children }: Props) => {
       >
         <div
           className={cn({
-            'absolute z-10 w-full': pageType === 'top',
+            'absolute z-10 w-full drop-shadow-lg': pageType === 'top',
             'md:sticky lg:top-0': pageType === 'lower',
           })}
         >

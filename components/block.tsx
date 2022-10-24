@@ -5,7 +5,7 @@ type Props = {
 }
 
 const Block = ({ children }: Props) => {
-  return <div className="first:mt-0 my-24">{children}</div>
+  return <div className="first:mt-0 my-36">{children}</div>
 }
 
 export default Block

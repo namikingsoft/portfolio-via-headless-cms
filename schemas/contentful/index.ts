@@ -21,6 +21,7 @@ import {
   TagGroup,
   Visitor,
   RatingRange,
+  Feature,
 } from './types'
 import { contentfulEndpoint, contentfulAccessToken } from '../../env'
 
@@ -43,6 +44,10 @@ type ArticleRaw = NonNullable<
 
 type IntroRaw = NonNullable<
   NonNullable<GetIntroCollectionQuery['introCollection']>['items'][number]
+>
+
+type FeatureRaw = NonNullable<
+  NonNullable<IntroRaw['featureCollection']>['items'][number]
 >
 
 type TagRaw = NonNullable<
@@ -152,6 +157,17 @@ function toArticle(raw: ArticleRaw): Article {
   }
 }
 
+function toFeature(raw: FeatureRaw): Feature {
+  return {
+    title: nonNullable(raw.title),
+    content: nonNullable(raw.content),
+    image: {
+      url: nonNullable(raw.image?.url),
+      alt: nonNullable(raw.image?.title),
+    },
+  }
+}
+
 function toIntro(raw: IntroRaw): Intro {
   return {
     title: nonNullable(raw.title),
@@ -160,6 +176,9 @@ function toIntro(raw: IntroRaw): Intro {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
     },
+    features: (raw.featureCollection?.items ?? [])
+      .flatMap((x) => (x === null ? [] : [x]))
+      .map(toFeature),
   }
 }
 

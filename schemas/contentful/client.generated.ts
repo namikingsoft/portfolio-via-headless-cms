@@ -448,6 +448,7 @@ export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  featureCollection?: Maybe<FeatureCollection>;
   introCollection?: Maybe<IntroCollection>;
 };
 
@@ -461,6 +462,14 @@ export type AssetLinkingCollectionsArticleCollectionArgs = {
 
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsFeatureCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -553,6 +562,107 @@ export enum EntryOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/feature) */
+export type Feature = Entry & {
+  __typename?: 'Feature';
+  content?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  image?: Maybe<Asset>;
+  linkedFrom?: Maybe<FeatureLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/feature) */
+export type FeatureContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/feature) */
+export type FeatureImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/feature) */
+export type FeatureLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/feature) */
+export type FeatureTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type FeatureCollection = {
+  __typename?: 'FeatureCollection';
+  items: Array<Maybe<Feature>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type FeatureFilter = {
+  AND?: InputMaybe<Array<InputMaybe<FeatureFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<FeatureFilter>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type FeatureLinkingCollections = {
+  __typename?: 'FeatureLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  introCollection?: Maybe<IntroCollection>;
+};
+
+
+export type FeatureLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type FeatureLinkingCollectionsIntroCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum FeatureOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export enum ImageFormat {
@@ -655,6 +765,7 @@ export type Intro = Entry & {
   __typename?: 'Intro';
   content?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
+  featureCollection?: Maybe<IntroFeatureCollection>;
   image?: Maybe<Asset>;
   linkedFrom?: Maybe<IntroLinkingCollections>;
   sys: Sys;
@@ -665,6 +776,15 @@ export type Intro = Entry & {
 /** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
 export type IntroContentArgs = {
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroFeatureCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -694,6 +814,14 @@ export type IntroCollection = {
   total: Scalars['Int'];
 };
 
+export type IntroFeatureCollection = {
+  __typename?: 'IntroFeatureCollection';
+  items: Array<Maybe<Feature>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
 export type IntroFilter = {
   AND?: InputMaybe<Array<InputMaybe<IntroFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<IntroFilter>>>;
@@ -705,6 +833,7 @@ export type IntroFilter = {
   content_not_contains?: InputMaybe<Scalars['String']>;
   content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  featureCollection_exists?: InputMaybe<Scalars['Boolean']>;
   image_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
@@ -869,6 +998,8 @@ export type Query = {
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  feature?: Maybe<Feature>;
+  featureCollection?: Maybe<FeatureCollection>;
   intro?: Maybe<Intro>;
   introCollection?: Maybe<IntroCollection>;
   pickup?: Maybe<Pickup>;
@@ -927,6 +1058,23 @@ export type QueryEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<EntryFilter>;
+};
+
+
+export type QueryFeatureArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryFeatureCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FeatureOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FeatureFilter>;
 };
 
 
@@ -1702,7 +1850,7 @@ export type ArticleWithRelatedFragment = { __typename?: 'Article', slug?: string
 
 export type ArticleFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
 
-export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null };
+export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
 
 export type TagFragment = { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } };
 
@@ -1723,7 +1871,7 @@ export type GetArticleFromSlugQuery = { __typename?: 'Query', articleCollection?
 export type GetIntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetIntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
+export type GetIntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null } | null> } | null };
 
 export type GetPickupByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -1847,6 +1995,16 @@ export const IntroFragmentDoc = gql`
   image {
     title
     url
+  }
+  featureCollection(limit: 3) {
+    items {
+      title
+      content
+      image {
+        title
+        url
+      }
+    }
   }
 }
     `;

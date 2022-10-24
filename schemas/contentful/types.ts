@@ -50,10 +50,17 @@ export interface ArticleWithRelated extends Article {
   relatedArticles: Article[]
 }
 
+export type Feature = {
+  title: string
+  content: string
+  image: Image
+}
+
 export type Intro = {
   title: string
   content: string
   image: Image
+  features: Feature[]
 }
 
 export type Pickup = {

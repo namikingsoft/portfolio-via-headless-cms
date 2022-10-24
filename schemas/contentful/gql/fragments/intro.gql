@@ -5,4 +5,14 @@ fragment intro on Intro {
     title
     url
   }
+  featureCollection(limit: 3) {
+    items {
+      title
+      content
+      image {
+        title
+        url
+      }
+    }
+  }
 }

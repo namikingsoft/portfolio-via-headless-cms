@@ -20,6 +20,7 @@ import { pagesPath } from '../../lib/$path'
 import Block from '../../components/block'
 import Container from '../../components/container'
 import Markdown from '../../components/markdown'
+import FillImage from '../../components/fill-image'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
 import Heading from '../../components/heading'
@@ -47,10 +48,11 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
 
       <Block>
         <Block>
-          <img
+          <FillImage
             src={intro.image.url}
             alt={intro.image.alt}
-            className="sepia contrast-50 brightness-110 object-cover object-top aspect-video shadow-medium"
+            aspectRatio="video"
+            className="sepia contrast-50 brightness-110 shadow-medium"
           />
         </Block>
         <Container>

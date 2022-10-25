@@ -1,4 +1,5 @@
 import cn from 'classnames'
+import FillImage from './fill-image'
 
 type Props = {
   src: string
@@ -9,9 +10,10 @@ type Props = {
 
 const CoverImage = ({ src, alt, hasHoverStyle, fixedAspectRatio }: Props) => {
   return (
-    <img
+    <FillImage
       src={src}
       alt={alt}
+      aspectRatio={fixedAspectRatio ? 'video' : 'retain'}
       className={cn({
         'shadow-medium': !hasHoverStyle,
         'shadow-small hover:shadow-medium transition-shadow duration-200':

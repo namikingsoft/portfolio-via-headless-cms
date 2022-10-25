@@ -1,0 +1,11 @@
+.retainAspectRatio span,
+.retainAspectRatio div {
+  position: unset !important;
+}
+
+.retainAspectRatio img {
+  position: relative !important;
+  width: 100% !important;
+  height: unset !important;
+  z-index: -1;
+}

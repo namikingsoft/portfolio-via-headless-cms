@@ -14,7 +14,7 @@ const SkillRatingList = ({ skillGroups }: Props) => {
           key={skillGroup.title}
           className="flex flex-row items-stretch gap-7 sm:gap-14"
         >
-          <h3 className="self-start font-bold text:lg sm:text-xl text-white bg-yellow-800 p-4 sm:p-6 whitespace-nowrap shadow-xl -skew-x-6">
+          <h3 className="self-start font-bold text:lg sm:text-xl text-white bg-teal-500 p-4 sm:p-6 whitespace-nowrap shadow-xl -skew-x-6">
             {skillGroup.title}
           </h3>
           <div className="flex-grow flex flex-col gap-3">
@@ -22,7 +22,7 @@ const SkillRatingList = ({ skillGroups }: Props) => {
               <div key={skillRating.title}>
                 <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">
                   <dt className="font-bold text-lg">{skillRating.title}</dt>
-                  <dd className="text-2xl text-yellow-500 drop-shadow-sm text-right whitespace-nowrap">
+                  <dd className="text-3xl text-yellow-500 drop-shadow-sm text-right whitespace-nowrap">
                     {([1, 2, 3, 4, 5] as const).map((pos) => (
                       <Star
                         key={pos}

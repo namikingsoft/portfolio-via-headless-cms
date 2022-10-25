@@ -11,7 +11,6 @@ const fernet = new FernetLike({
   cryptoKey,
   randomBytes: () => iv,
   getCurrentDate: () => new Date(unixtime),
-  // @ts-expect-error Web Crypto API for DI
   crypto: webcrypto,
 })
 
@@ -20,7 +19,6 @@ const fernetExpired = new FernetLike({
   cryptoKey,
   randomBytes: () => iv,
   getCurrentDate: () => new Date(unixtime + 61 * 1000),
-  // @ts-expect-error Web Crypto API for DI
   crypto: webcrypto,
 })
 

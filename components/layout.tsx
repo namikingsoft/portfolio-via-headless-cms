@@ -34,7 +34,7 @@ const Layout = ({ children }: Props) => {
   const onClickLogout = useCallback(async () => {
     try {
       setIsLogout(true)
-      if (await logout()) {
+      if (await logout({})) {
         router.push(pagesPath.$url().pathname)
       }
     } finally {

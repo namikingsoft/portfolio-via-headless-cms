@@ -8,6 +8,5 @@ import {
 export const fernet = new FernetLike({
   signerKey,
   cryptoKey,
-  // @ts-expect-error no type
   crypto: webcrypto,
 })

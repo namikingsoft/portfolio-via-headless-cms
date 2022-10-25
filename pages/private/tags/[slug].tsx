@@ -19,9 +19,7 @@ const TagIndex = ({ tag, articles }: Props) => {
   return (
     <>
       <Head>
-        <title>
-          {tag.title} | {t('siteName')}
-        </title>
+        <title>{`${tag.title} | ${t('siteName')}`}</title>
       </Head>
       <Container>
         <div className="py-10">

@@ -18,9 +18,7 @@ const ArticleIndex = ({ articles }: Props) => {
   return (
     <>
       <Head>
-        <title>
-          {t('allArticles')} | {t('siteName')}
-        </title>
+        <title>{`${t('allArticles')} | ${t('siteName')}`}</title>
       </Head>
       <Container>
         <div className="py-10">

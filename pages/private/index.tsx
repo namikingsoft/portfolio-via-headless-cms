@@ -41,9 +41,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
   return (
     <>
       <Head>
-        <title>
-          {t('siteName')} | {t('siteDescription')}
-        </title>
+        <title>{`${t('siteName')} | ${t('siteDescription')}`}</title>
       </Head>
 
       <Block>

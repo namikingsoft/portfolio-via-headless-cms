@@ -84,9 +84,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>
-          {t('siteName')} | {t('siteDescription')}
-        </title>
+        <title>{`${t('siteName')} | ${t('siteDescription')}`}</title>
       </Head>
       <Container narrow>
         <form className="my-20" onSubmit={handleSubmit(onSubmit)}>

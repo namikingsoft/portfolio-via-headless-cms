@@ -27,9 +27,7 @@ const Post = ({ article, content }: Props) => {
   return (
     <>
       <Head>
-        <title>
-          {article.title} | {t('siteName')}
-        </title>
+        <title>{`${article.title} | ${t('siteName')}`}</title>
       </Head>
       <article>
         <Block>

@@ -4,6 +4,7 @@
     "dev": "next -p 3456",
     "build": "next build",
     "start": "next start",
+    "update": "npx npm-check --update",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "typecheck": "tsc",
     "test": "jest"

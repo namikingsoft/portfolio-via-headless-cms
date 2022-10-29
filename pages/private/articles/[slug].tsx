@@ -58,7 +58,12 @@ const Post = ({ article, content }: Props) => {
             </Container>
           </div>
           <Block>
-            <CoverImage src={article.image.url} alt={article.image.alt} />
+            <CoverImage
+              src={article.image.url}
+              alt={article.image.alt}
+              type="detail"
+              aspectRatio={article.image.width / article.image.height}
+            />
           </Block>
           <Container narrow>
             <div className="text-gray-700 text-lg">

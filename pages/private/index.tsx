@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
@@ -58,35 +57,24 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
       </Head>
 
       <Block>
-        <div
-          className={`w-screen h-screen relative ${
-            clientDimension == null
-              ? 'aspect-video'
-              : `aspect-[${clientDimension.width}]/${clientDimension.height}`
-          }`}
-        >
-          <Image
-            src={intro.backgroundImage.url}
-            alt={intro.backgroundImage.alt}
-            layout="fill"
-            className="sepia contrast-50 brightness-110 shadow-medium -z-10"
-            objectFit="cover"
-            objectPosition="center"
-          />
-        </div>
+        <FillImage
+          src={intro.backgroundImage.url}
+          alt={intro.backgroundImage.alt}
+          className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
+          aspectRatio={
+            clientDimension && clientDimension.width / clientDimension.height
+          }
+          objectPosition="center"
+        />
         <Container>
-          <div className="relative z-10 -mt-52 p-0.5 overflow-hidden">
+          <div className="relative z-10 -mt-72 p-0.5 overflow-hidden">
             <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-16 rounded-xl shadow-lg">
               <div>
-                <div className="relative shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-7 -ml-7">
-                  <Image
-                    src={intro.portraitImage.url}
-                    alt={intro.portraitImage.alt}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="top"
-                  />
-                </div>
+                <FillImage
+                  src={intro.portraitImage.url}
+                  alt={intro.portraitImage.alt}
+                  className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-7 -ml-7"
+                />
                 <a
                   href={intro.githubUrl}
                   target="_blank"
@@ -96,7 +84,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                   <FaGithub className="text-xl" />
                   GitHub
                 </a>
-                <h2 className="text-6xl font-bold inline-flex flex-row-reverse gap-9 my-10">
+                <h2 className="text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12 mb-10">
                   <ruby>
                     {intro.firstName}
                     <rt>{intro.firstNameRuby}</rt>

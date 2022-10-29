@@ -36,7 +36,7 @@ const ArticleListRelative = ({ articles }: Props) => {
                   <CoverImage
                     src={article.image.url}
                     alt={article.image.alt}
-                    hasHoverStyle
+                    type="thumbnail"
                   />
                 </a>
               </Link>

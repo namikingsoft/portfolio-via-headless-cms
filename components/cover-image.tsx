@@ -1,25 +1,34 @@
 import cn from 'classnames'
 import FillImage from './fill-image'
 
-type Props = {
+interface BaseProps {
   src: string
   alt: string
-  hasHoverStyle?: boolean
-  fixedAspectRatio?: boolean
 }
 
-const CoverImage = ({ src, alt, hasHoverStyle, fixedAspectRatio }: Props) => {
+interface ThumbnailProps extends BaseProps {
+  type: 'thumbnail'
+}
+
+interface DetailProps extends BaseProps {
+  type: 'detail'
+  aspectRatio: number
+}
+
+type Props = ThumbnailProps | DetailProps
+
+const CoverImage = ({ src, alt, type, ...aspect }: Props) => {
+  const hasHoverStyle = type === 'thumbnail'
   return (
     <FillImage
       src={src}
       alt={alt}
-      aspectRatio={fixedAspectRatio ? 'video' : 'retain'}
       className={cn({
         'shadow-medium': !hasHoverStyle,
         'shadow-small hover:shadow-medium transition-shadow duration-200':
           hasHoverStyle,
-        'object-cover object-top aspect-video': fixedAspectRatio,
       })}
+      {...aspect}
     />
   )
 }

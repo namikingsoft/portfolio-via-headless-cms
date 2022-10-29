@@ -25,8 +25,7 @@ const ArticleList = ({ articles }: Props) => {
                   <CoverImage
                     src={article.image.url}
                     alt={article.image.alt}
-                    hasHoverStyle
-                    fixedAspectRatio
+                    type="thumbnail"
                   />
                 </a>
               </Link>

@@ -1,4 +1,6 @@
 fragment image on Asset {
   title
   url
+  width
+  height
 }

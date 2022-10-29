@@ -149,6 +149,8 @@ function toArticle(raw: ArticleRaw): Article {
     image: {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
+      width: nonNullable(raw.image?.width),
+      height: nonNullable(raw.image?.height),
     },
     category: toTag(nonNullable(raw.category)),
     tags: (raw.tagCollection?.items ?? [])
@@ -164,6 +166,8 @@ function toFeature(raw: FeatureRaw): Feature {
     image: {
       url: nonNullable(raw.image?.url),
       alt: nonNullable(raw.image?.title),
+      width: nonNullable(raw.image?.width),
+      height: nonNullable(raw.image?.height),
     },
   }
 }
@@ -180,10 +184,14 @@ function toIntro(raw: IntroRaw): Intro {
     portraitImage: {
       url: nonNullable(raw.portraitImage?.url),
       alt: nonNullable(raw.portraitImage?.title),
+      width: nonNullable(raw.portraitImage?.width),
+      height: nonNullable(raw.portraitImage?.height),
     },
     backgroundImage: {
       url: nonNullable(raw.backgroundImage?.url),
       alt: nonNullable(raw.backgroundImage?.title),
+      width: nonNullable(raw.backgroundImage?.width),
+      height: nonNullable(raw.backgroundImage?.height),
     },
     features: (raw.featureCollection?.items ?? [])
       .flatMap((x) => (x === null ? [] : [x]))

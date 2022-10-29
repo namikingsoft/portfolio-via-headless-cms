@@ -7,20 +7,17 @@ fragment intro on Intro {
   lastNameRuby
   githubUrl
   portraitImage {
-    title
-    url
+    ...image
   }
   backgroundImage {
-    title
-    url
+    ...image
   }
   featureCollection(limit: 3) {
     items {
       title
       content
       image {
-        title
-        url
+        ...image
       }
     }
   }

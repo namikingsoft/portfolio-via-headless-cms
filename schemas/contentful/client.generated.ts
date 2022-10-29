@@ -2057,6 +2057,8 @@ export type ArticleWithRelatedFragment = { __typename?: 'Article', slug?: string
 
 export type ArticleFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
 
+export type ImageFragment = { __typename?: 'Asset', title?: string | null, url?: string | null };
+
 export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, githubUrl?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null } | null } | null> } | null };
 
 export type TagFragment = { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } };
@@ -2147,6 +2149,12 @@ export type GetVisitorByUsernameQueryVariables = Exact<{
 
 export type GetVisitorByUsernameQuery = { __typename?: 'Query', visitorCollection?: { __typename?: 'VisitorCollection', items: Array<{ __typename?: 'Visitor', username?: string | null, label?: string | null } | null> } | null };
 
+export const ImageFragmentDoc = gql`
+    fragment image on Asset {
+  title
+  url
+}
+    `;
 export const TagFragmentDoc = gql`
     fragment tag on Tag {
   slug
@@ -2168,8 +2176,7 @@ export const ArticleFragmentDoc = gql`
   company
   githubRepo
   image {
-    title
-    url
+    ...image
   }
   category {
     ...tag
@@ -2184,7 +2191,8 @@ export const ArticleFragmentDoc = gql`
     publishedAt
   }
 }
-    ${TagFragmentDoc}`;
+    ${ImageFragmentDoc}
+${TagFragmentDoc}`;
 export const ArticleWithRelatedFragmentDoc = gql`
     fragment articleWithRelated on Article {
   ...article
@@ -2205,25 +2213,22 @@ export const IntroFragmentDoc = gql`
   lastNameRuby
   githubUrl
   portraitImage {
-    title
-    url
+    ...image
   }
   backgroundImage {
-    title
-    url
+    ...image
   }
   featureCollection(limit: 3) {
     items {
       title
       content
       image {
-        title
-        url
+        ...image
       }
     }
   }
 }
-    `;
+    ${ImageFragmentDoc}`;
 export const VisitorFragmentDoc = gql`
     fragment visitor on Visitor {
   username

@@ -9,8 +9,7 @@ fragment article on Article {
   company
   githubRepo
   image {
-    title
-    url
+    ...image
   }
   category {
     ...tag

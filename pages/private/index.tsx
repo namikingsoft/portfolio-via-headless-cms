@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { MdOutlineArticle } from 'react-icons/md'
+import { FaGithub } from 'react-icons/fa'
 import {
   Intro,
   Pickup,
@@ -27,6 +29,7 @@ import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
+import { useEffect, useState } from 'react'
 
 type Props = {
   intro: Intro
@@ -35,8 +38,18 @@ type Props = {
   skillGroups: SkillGroup[]
 }
 
+type Dimension = {
+  width: number
+  height: number
+}
+
 const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
   const { t } = useTranslation()
+  const [clientDimension, setClientDimention] = useState<Dimension>()
+
+  useEffect(() => {
+    setClientDimention({ width: window.innerWidth, height: window.innerHeight })
+  })
 
   return (
     <>
@@ -45,21 +58,58 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
       </Head>
 
       <Block>
-        <Block>
-          <FillImage
-            src={intro.image.url}
-            alt={intro.image.alt}
-            aspectRatio="video"
-            className="sepia contrast-50 brightness-110 shadow-medium"
+        <div
+          className={`w-screen h-screen relative ${
+            clientDimension == null
+              ? 'aspect-video'
+              : `aspect-[${clientDimension.width}]/${clientDimension.height}`
+          }`}
+        >
+          <Image
+            src={intro.backgroundImage.url}
+            alt={intro.backgroundImage.alt}
+            layout="fill"
+            className="sepia contrast-50 brightness-110 shadow-medium -z-10"
+            objectFit="cover"
+            objectPosition="center"
           />
-        </Block>
+        </div>
         <Container>
-          <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-            <div>
-              <Heading as="h2">{intro.title}</Heading>
-            </div>
-            <div className="text-lg leading-relaxed">
-              <Markdown content={intro.content} />
+          <div className="relative z-10 -mt-52 p-0.5 overflow-hidden">
+            <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-16 rounded-xl shadow-lg">
+              <div>
+                <div className="relative shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-7 -ml-7">
+                  <Image
+                    src={intro.portraitImage.url}
+                    alt={intro.portraitImage.alt}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition="top"
+                  />
+                </div>
+                <a
+                  href={intro.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 py-1.5 font-bold text-md bg-black hover:bg-teal-500 transition shadow-md -rotate-45 text-white absolute top-12 -left-12 border-t border-b border-white w-56"
+                >
+                  <FaGithub className="text-xl" />
+                  GitHub
+                </a>
+                <h2 className="text-6xl font-bold inline-flex flex-row-reverse gap-9 my-10">
+                  <ruby>
+                    {intro.firstName}
+                    <rt>{intro.firstNameRuby}</rt>
+                  </ruby>
+                  <ruby>
+                    {intro.lastName}
+                    <rt>{intro.lastNameRuby}</rt>
+                  </ruby>
+                </h2>
+              </div>
+              <div className="text-lg leading-relaxed">
+                <Markdown content={intro.content} />
+              </div>
             </div>
           </div>
         </Container>

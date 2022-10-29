@@ -172,9 +172,18 @@ function toIntro(raw: IntroRaw): Intro {
   return {
     title: nonNullable(raw.title),
     content: nonNullable(raw.content),
-    image: {
-      url: nonNullable(raw.image?.url),
-      alt: nonNullable(raw.image?.title),
+    firstName: nonNullable(raw.firstName),
+    firstNameRuby: nonNullable(raw.firstNameRuby),
+    lastName: nonNullable(raw.lastName),
+    lastNameRuby: nonNullable(raw.lastNameRuby),
+    githubUrl: nonNullable(raw.githubUrl),
+    portraitImage: {
+      url: nonNullable(raw.portraitImage?.url),
+      alt: nonNullable(raw.portraitImage?.title),
+    },
+    backgroundImage: {
+      url: nonNullable(raw.backgroundImage?.url),
+      alt: nonNullable(raw.backgroundImage?.title),
     },
     features: (raw.featureCollection?.items ?? [])
       .flatMap((x) => (x === null ? [] : [x]))

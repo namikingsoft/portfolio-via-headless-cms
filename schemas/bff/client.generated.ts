@@ -86,7 +86,7 @@ export const GetVisitorDocument = gql`
     `;
 
 export function useGetVisitorQuery(options?: Omit<Urql.UseQueryArgs<GetVisitorQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetVisitorQuery>({ query: GetVisitorDocument, ...options });
+  return Urql.useQuery<GetVisitorQuery, GetVisitorQueryVariables>({ query: GetVisitorDocument, ...options });
 };
 export const LogoutDocument = gql`
     mutation Logout {

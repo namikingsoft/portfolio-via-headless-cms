@@ -59,7 +59,13 @@ export type Feature = {
 export type Intro = {
   title: string
   content: string
-  image: Image
+  firstName: string
+  firstNameRuby: string
+  lastName: string
+  lastNameRuby: string
+  githubUrl: string
+  portraitImage: Image
+  backgroundImage: Image
   features: Feature[]
 }
 

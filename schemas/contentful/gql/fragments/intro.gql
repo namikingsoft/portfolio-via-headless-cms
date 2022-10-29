@@ -1,7 +1,16 @@
 fragment intro on Intro {
   title
   content
-  image {
+  firstName
+  firstNameRuby
+  lastName
+  lastNameRuby
+  githubUrl
+  portraitImage {
+    title
+    url
+  }
+  backgroundImage {
     title
     url
   }

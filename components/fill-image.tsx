@@ -1,31 +1,32 @@
 import Image from 'next/image'
 import cn from 'classnames'
-import styles from './fill-image.module.css'
-
-type AspectRatio = 'video' | 'retain'
 
 type Props = {
   src: string
   alt: string
-  aspectRatio: AspectRatio
+  aspectRatio?: number
+  objectPosition?: 'top' | 'center'
   className?: string
 }
 
-const FillImage = ({ src, alt, aspectRatio, className }: Props) => {
+const FillImage = ({
+  src,
+  alt,
+  aspectRatio,
+  objectPosition = 'top',
+  className,
+}: Props) => {
   return (
     <div
-      className={cn(className, 'relative', {
-        'aspect-video': aspectRatio === 'video',
-        [styles.retainAspectRatio]: aspectRatio === 'retain',
-      })}
+      className={cn({ 'aspect-video': !aspectRatio }, className, 'relative')}
+      style={{ aspectRatio }}
     >
       <Image
         src={src}
         alt={alt}
         layout="fill"
-        className={cn({
-          'object-cover object-top': aspectRatio === 'video',
-        })}
+        objectFit="cover"
+        objectPosition={objectPosition}
       />
     </div>
   )

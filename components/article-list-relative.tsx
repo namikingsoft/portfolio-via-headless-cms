@@ -19,9 +19,10 @@ const ArticleListRelative = ({ articles }: Props) => {
             <div className="flex-auto">
               <h3 className="text-2xl mb-4">
                 <Link
+                  className="hover:underline"
                   href={pagesPath.private.articles._slug(article.slug).$url()}
                 >
-                  <a className="hover:underline">{article.title}</a>
+                  {article.title}
                 </Link>
               </h3>
               <p className="col-span-2 leading-7 text-gray-700">
@@ -30,15 +31,14 @@ const ArticleListRelative = ({ articles }: Props) => {
             </div>
             <div className="flex-none sm:w-40">
               <Link
+                className="hover"
                 href={pagesPath.private.articles._slug(article.slug).$url()}
               >
-                <a className="hover">
-                  <CoverImage
-                    src={article.image.url}
-                    alt={article.image.alt}
-                    type="thumbnail"
-                  />
-                </a>
+                <CoverImage
+                  src={article.image.url}
+                  alt={article.image.alt}
+                  type="thumbnail"
+                />
               </Link>
             </div>
           </div>

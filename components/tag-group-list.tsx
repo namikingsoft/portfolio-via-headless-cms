@@ -15,10 +15,11 @@ const TagGroupList = ({ tagGroups }: Props) => {
           <ul className="flex flex-row gap-x-5 gap-y-2 flex-wrap mb-7">
             {tagGroup.tags.map((tag) => (
               <li key={tag.slug}>
-                <Link href={pagesPath.private.tags._slug(tag.slug).$url()}>
-                  <a className="hover hover:underline">
-                    {tag.title} <span className="font-thin">({tag.total})</span>
-                  </a>
+                <Link
+                  className="hover hover:underline"
+                  href={pagesPath.private.tags._slug(tag.slug).$url()}
+                >
+                  {tag.title} <span className="font-thin">({tag.total})</span>
                 </Link>
               </li>
             ))}

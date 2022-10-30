@@ -14,24 +14,22 @@ const TagList = ({ article }: Props) => {
     <div className="-mt-2">
       <Link
         key={article.category.slug}
+        className="hover last:mr-0 mr-3"
         href={pagesPath.private.tags._slug(article.category.slug).$url()}
       >
-        <a className="hover last:mr-0 mr-3">
-          <span className={cn(baseClassName, 'text-green-600 bg-green-200 ')}>
-            {article.category.title}
-          </span>
-        </a>
+        <span className={cn(baseClassName, 'text-green-600 bg-green-200 ')}>
+          {article.category.title}
+        </span>
       </Link>
       {article.tags.map((tag) => (
         <Link
+          className="hover last:mr-0 mr-2"
           key={tag.slug}
           href={pagesPath.private.tags._slug(tag.slug).$url()}
         >
-          <a className="hover last:mr-0 mr-2">
-            <span className={cn(baseClassName, 'text-slate-600 bg-slate-200')}>
-              {tag.title}
-            </span>
-          </a>
+          <span className={cn(baseClassName, 'text-slate-600 bg-slate-200')}>
+            {tag.title}
+          </span>
         </Link>
       ))}
     </div>

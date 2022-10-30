@@ -76,11 +76,12 @@ const Layout = ({ children }: Props) => {
                 })}
               >
                 {pageType === 'lower' ? (
-                  <Link href={pagesPath.private.$url()}>
-                    <a className="hover flex flex-row items-center">
-                      <Avatar className="mr-2" email={myEmail} size={32} />
-                      {t('siteName')}
-                    </a>
+                  <Link
+                    className="hover flex flex-row items-center"
+                    href={pagesPath.private.$url()}
+                  >
+                    <Avatar className="mr-2" email={myEmail} size={32} />
+                    {t('siteName')}
                   </Link>
                 ) : (
                   <div className="flex flex-row items-center">

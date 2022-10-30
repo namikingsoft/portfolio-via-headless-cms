@@ -19,21 +19,23 @@ const ArticleList = ({ articles }: Props) => {
           <div className="mb-6">
             <div className="sm:mx-0">
               <Link
+                className="hover"
                 href={pagesPath.private.articles._slug(article.slug).$url()}
               >
-                <a className="hover">
-                  <CoverImage
-                    src={article.image.url}
-                    alt={article.image.alt}
-                    type="thumbnail"
-                  />
-                </a>
+                <CoverImage
+                  src={article.image.url}
+                  alt={article.image.alt}
+                  type="thumbnail"
+                />
               </Link>
             </div>
           </div>
           <Heading as="h3">
-            <Link href={pagesPath.private.articles._slug(article.slug).$url()}>
-              <a className="hover:underline">{article.title}</a>
+            <Link
+              className="hover:underline"
+              href={pagesPath.private.articles._slug(article.slug).$url()}
+            >
+              {article.title}
             </Link>
           </Heading>
           <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>

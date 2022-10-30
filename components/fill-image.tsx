@@ -27,11 +27,10 @@ const FillImage = ({
       width={width}
       height={height}
       className={cn(
-        className,
-        `object-cover ${
-          objectPosition === 'top' ? 'object-top' : 'object-center'
-        }`,
+        'object-cover min-w-full',
         { 'aspect-video': !aspectRatio },
+        objectPosition === 'top' ? 'object-top' : 'object-center',
+        className,
       )}
       style={{ aspectRatio }}
     />

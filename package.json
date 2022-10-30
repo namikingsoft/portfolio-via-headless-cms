@@ -45,6 +45,7 @@
     "@graphql-codegen/typescript-operations": "2.5.5",
     "@graphql-codegen/typescript-resolvers": "2.7.5",
     "@graphql-codegen/typescript-urql": "3.7.2",
+    "@next/eslint-plugin-next": "13.0.0",
     "@types/blueimp-md5": "2.18.0",
     "@types/cookie": "0.5.1",
     "@types/gtag.js": "0.0.12",

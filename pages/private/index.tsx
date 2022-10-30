@@ -28,7 +28,6 @@ import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
-import { useEffect, useState } from 'react'
 
 type Props = {
   intro: Intro
@@ -37,18 +36,8 @@ type Props = {
   skillGroups: SkillGroup[]
 }
 
-type Dimension = {
-  width: number
-  height: number
-}
-
 const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
   const { t } = useTranslation()
-  const [clientDimension, setClientDimention] = useState<Dimension>()
-
-  useEffect(() => {
-    setClientDimention({ width: window.innerWidth, height: window.innerHeight })
-  })
 
   return (
     <>
@@ -63,9 +52,6 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
           width={intro.backgroundImage.width}
           height={intro.backgroundImage.height}
           className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
-          aspectRatio={
-            clientDimension && clientDimension.width / clientDimension.height
-          }
           objectPosition="center"
         />
         <Container>

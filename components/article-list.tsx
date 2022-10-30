@@ -25,6 +25,8 @@ const ArticleList = ({ articles }: Props) => {
                 <CoverImage
                   src={article.image.url}
                   alt={article.image.alt}
+                  width={article.image.width}
+                  height={article.image.height}
                   type="thumbnail"
                 />
               </Link>

@@ -4,6 +4,8 @@ import cn from 'classnames'
 type Props = {
   src: string
   alt: string
+  width: number
+  height: number
   aspectRatio?: number
   objectPosition?: 'top' | 'center'
   className?: string
@@ -12,23 +14,27 @@ type Props = {
 const FillImage = ({
   src,
   alt,
+  width,
+  height,
   aspectRatio,
   objectPosition = 'top',
   className,
 }: Props) => {
   return (
-    <div
-      className={cn({ 'aspect-video': !aspectRatio }, className, 'relative')}
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={cn(
+        className,
+        `object-cover ${
+          objectPosition === 'top' ? 'object-top' : 'object-center'
+        }`,
+        { 'aspect-video': !aspectRatio },
+      )}
       style={{ aspectRatio }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        layout="fill"
-        objectFit="cover"
-        objectPosition={objectPosition}
-      />
-    </div>
+    />
   )
 }
 

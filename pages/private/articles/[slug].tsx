@@ -61,6 +61,8 @@ const Post = ({ article, content }: Props) => {
             <CoverImage
               src={article.image.url}
               alt={article.image.alt}
+              width={article.image.width}
+              height={article.image.height}
               type="detail"
               aspectRatio={article.image.width / article.image.height}
             />

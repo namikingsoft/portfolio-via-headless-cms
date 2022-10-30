@@ -60,6 +60,8 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
         <FillImage
           src={intro.backgroundImage.url}
           alt={intro.backgroundImage.alt}
+          width={intro.backgroundImage.width}
+          height={intro.backgroundImage.height}
           className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
           aspectRatio={
             clientDimension && clientDimension.width / clientDimension.height
@@ -73,6 +75,8 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                 <FillImage
                   src={intro.portraitImage.url}
                   alt={intro.portraitImage.alt}
+                  width={intro.portraitImage.width}
+                  height={intro.portraitImage.height}
                   className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-7 -ml-7"
                 />
                 <a

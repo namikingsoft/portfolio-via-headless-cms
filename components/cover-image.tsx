@@ -4,6 +4,8 @@ import FillImage from './fill-image'
 interface BaseProps {
   src: string
   alt: string
+  width: number
+  height: number
 }
 
 interface ThumbnailProps extends BaseProps {
@@ -17,12 +19,14 @@ interface DetailProps extends BaseProps {
 
 type Props = ThumbnailProps | DetailProps
 
-const CoverImage = ({ src, alt, type, ...aspect }: Props) => {
+const CoverImage = ({ src, alt, width, height, type, ...aspect }: Props) => {
   const hasHoverStyle = type === 'thumbnail'
   return (
     <FillImage
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       className={cn({
         'shadow-medium': !hasHoverStyle,
         'shadow-small hover:shadow-medium transition-shadow duration-200':

@@ -55,15 +55,15 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
           objectPosition="center"
         />
         <Container>
-          <div className="relative z-10 -mt-72 p-0.5 overflow-hidden">
-            <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-16 rounded-xl shadow-lg">
+          <div className="relative z-10 -mt-72 md:-mt-64 p-0.5 overflow-hidden">
+            <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-12 sm:p-16 rounded-xl shadow-lg">
               <div>
                 <FillImage
                   src={intro.portraitImage.url}
                   alt={intro.portraitImage.alt}
                   width={intro.portraitImage.width}
                   height={intro.portraitImage.height}
-                  className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-7 -ml-7"
+                  className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-2 -ml-2 sm:-mt-7 sm:-ml-7"
                 />
                 <a
                   href={intro.githubUrl}
@@ -74,7 +74,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                   <FaGithub className="text-xl" />
                   GitHub
                 </a>
-                <h2 className="text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12 mb-10">
+                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12 mb-10">
                   <ruby>
                     {intro.firstName}
                     <rt>{intro.firstNameRuby}</rt>

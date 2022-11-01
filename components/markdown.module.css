@@ -97,7 +97,7 @@
 }
 
 .markdown :global code:not(pre code) {
-  @apply bg-stone-200 px-1;
+  @apply bg-stone-200 px-1 whitespace-nowrap;
 }
 
 .markdown :global .footnotes {

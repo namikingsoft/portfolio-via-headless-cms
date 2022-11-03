@@ -5,7 +5,7 @@
 /* eslint-disable @next/next/no-img-element -- for test */
 
 import { render, fireEvent } from '@testing-library/react'
-import { useZoomImage } from './useZoomImage'
+import useZoomImage from './use-zoom-image'
 
 const Usage = () => {
   const zoomImage = useZoomImage('a[href$=".png"]')

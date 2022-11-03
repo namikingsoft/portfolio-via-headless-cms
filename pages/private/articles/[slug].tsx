@@ -4,7 +4,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
-import { useZoomImage } from '../../../lib/useZoomImage'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
@@ -16,6 +15,7 @@ import GithubLink from '../../../components/github-link'
 import ArticleListRelative from '../../../components/article-list-relative'
 import TagList from '../../../components/tag-list'
 import Heading from '../../../components/heading'
+import useZoomImage from '../../../components/use-zoom-image'
 
 type Props = {
   article: ArticleWithRelated

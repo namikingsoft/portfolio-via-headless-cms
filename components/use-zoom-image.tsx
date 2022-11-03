@@ -43,7 +43,7 @@ const ZoomImage = ({ src, onClose }: Props) => {
   )
 }
 
-export const useZoomImage = (selector: string): ReactNode => {
+const useZoomImage = (selector: string): ReactNode => {
   const [zoomImageSrc, setZoomImageSrc] = useState<string>()
 
   useEffect(() => {
@@ -90,3 +90,5 @@ export const useZoomImage = (selector: string): ReactNode => {
     )
   )
 }
+
+export default useZoomImage

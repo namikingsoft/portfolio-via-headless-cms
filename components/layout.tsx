@@ -146,9 +146,9 @@ const Layout = ({ children }: Props) => {
                   Copyright ©️ Tsubasa Namiki, Based by{' '}
                   <a
                     className="underline"
-                    href="https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript"
+                    href="https://github.com/vercel/next.js/tree/canary/examples/blog-starter"
                   >
-                    blog-starter-typescript
+                    blog-starter
                   </a>{' '}
                   using{' '}
                   <a className="underline" href="https://nextjs.org/">

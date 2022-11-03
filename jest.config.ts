@@ -6,7 +6,7 @@
 export default {
   clearMocks: true,
   transform: {
-    '^.+\\.(ts|tsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   setupFilesAfterEnv: ['<rootDir>test/check-assertions-number.ts'],
 }

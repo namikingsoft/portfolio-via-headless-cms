@@ -7,7 +7,7 @@ import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
-import CoverImage from '../../../components/cover-image'
+import ThumbnailImage from '../../../components/thumbnail-image'
 import Markdown from '../../../components/markdown'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
@@ -29,60 +29,64 @@ const Post = ({ article, content }: Props) => {
       <Head>
         <title>{`${article.title} | ${t('siteName')}`}</title>
       </Head>
-      <article>
-        <Block>
-          <div className="py-20 lg:py-28">
+      <Block>
+        <article>
+          <div className="mt-16 lg:mt-20">
             <Container>
               <Heading as="h1">{article.title}</Heading>
-              <div className="mt-6 text-xs sm:text-sm md:text-base lg:visible text-slate-600">
+              <div className="mt-6 text-base lg:visible text-slate-600">
                 {article.excerpt}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-y-6 mt-16 lg:mt-28 text-lg md:text-2xl text-slate-500">
-                <div>
-                  <Company company={article.company} />
+              <div className="flex flex-col md:flex-row gap-12 mt-16 lg:mt-24 text-slate-500">
+                <div className="flex-none w-1/2 lg:w-2/5">
+                  <a href={article.image.url}>
+                    <ThumbnailImage
+                      src={article.image.url}
+                      alt={article.image.alt}
+                      width={article.image.width}
+                      height={article.image.height}
+                      aspectRatio={article.image.width / article.image.height}
+                    />
+                  </a>
                 </div>
-                <div>
-                  <DateRange
-                    date={article.date}
-                    dateEnd={article.dateEnd}
-                    isContinue={article.dateIsContinue}
-                  />
-                </div>
-                <div>
-                  <GithubLink repo={article.githubRepo} />
-                </div>
-                <div className="text-sm md:col-span-2">
-                  <TagList article={article} />
+                <div className="flex flex-col gap-2 lg:gap-5 text-lg md:text-xl lg:text-2xl">
+                  <div>
+                    <Company company={article.company} />
+                  </div>
+                  <div>
+                    <DateRange
+                      date={article.date}
+                      dateEnd={article.dateEnd}
+                      isContinue={article.dateIsContinue}
+                    />
+                  </div>
+                  <div>
+                    <GithubLink repo={article.githubRepo} />
+                  </div>
+                  <div className="text-sm md:col-span-2">
+                    <TagList article={article} />
+                  </div>
                 </div>
               </div>
             </Container>
           </div>
-          <Block>
-            <CoverImage
-              src={article.image.url}
-              alt={article.image.alt}
-              width={article.image.width}
-              height={article.image.height}
-              type="detail"
-              aspectRatio={article.image.width / article.image.height}
-            />
-          </Block>
           <Container narrow>
-            <div className="text-gray-700 text-lg">
+            <div className="text-gray-700 text-lg mt-16 md:mt-32 lg:mt-44">
               <Markdown content={content} />
             </div>
           </Container>
-        </Block>
-      </article>
+        </article>
+      </Block>
       {article.relatedArticles.length > 0 && (
-        <aside>
-          <Block>
+        <Block>
+          <aside>
             <Container narrow>
               <ArticleListRelative articles={article.relatedArticles} />
             </Container>
-          </Block>
-        </aside>
+          </aside>
+        </Block>
       )}
+      {zoomImage}
     </>
   )
 }

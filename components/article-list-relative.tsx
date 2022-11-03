@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import CoverImage from './cover-image'
+import ThumbnailImage from './thumbnail-image'
 import DateRange from './date-range'
 import Company from './company'
 import { Article } from '../schemas/contentful/types'
@@ -34,12 +34,11 @@ const ArticleListRelative = ({ articles }: Props) => {
                 className="hover"
                 href={pagesPath.private.articles._slug(article.slug).$url()}
               >
-                <CoverImage
+                <ThumbnailImage
                   src={article.image.url}
                   alt={article.image.alt}
                   width={article.image.width}
                   height={article.image.height}
-                  type="thumbnail"
                 />
               </Link>
             </div>

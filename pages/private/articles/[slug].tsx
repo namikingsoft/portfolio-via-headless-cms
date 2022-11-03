@@ -42,8 +42,8 @@ const Post = ({ article, content }: Props) => {
               <div className="mt-6 text-base lg:visible text-slate-600">
                 {article.excerpt}
               </div>
-              <div className="flex flex-col md:flex-row gap-12 mt-16 lg:mt-24 text-slate-500">
-                <div className="flex-none w-1/2 lg:w-2/5">
+              <div className="flex flex-col md:flex-row gap-12 mt-12 lg:mt-24 text-slate-500">
+                <div className="flex-none md:w-1/2 lg:w-2/5">
                   <a href={article.image.url}>
                     <ThumbnailImage
                       src={article.image.url}
@@ -76,7 +76,7 @@ const Post = ({ article, content }: Props) => {
             </Container>
           </div>
           <Container narrow>
-            <div className="text-gray-700 text-lg mt-16 md:mt-32 lg:mt-44">
+            <div className="text-gray-700 text-lg mt-16 md:mt-28 lg:mt-44">
               <Markdown content={content} />
             </div>
           </Container>

@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
+import { useZoomImage } from '../../../lib/useZoomImage'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
@@ -23,6 +24,10 @@ type Props = {
 
 const Post = ({ article, content }: Props) => {
   const { t } = useTranslation()
+
+  const zoomImage = useZoomImage(
+    'a[href$=".png"], a[href$=".svg"], a[href$=".jpg"], a[href$=".gif"], a[href$=".webp"]',
+  )
 
   return (
     <>

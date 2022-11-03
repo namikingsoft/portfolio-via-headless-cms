@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
   try {
     const visitorToken = req.cookies.get(visitorTokenCookieName)
     if (!visitorToken) throw new Error('Visitor token not found')
-    await fernet.verify(visitorToken)
+    await fernet.verify(visitorToken.value)
     return NextResponse.next()
   } catch (err) {
     const url = req.nextUrl.clone()

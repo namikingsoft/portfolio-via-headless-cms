@@ -22,9 +22,9 @@ const FeatureList = ({ features }: Props) => {
               }}
               className="w-48 md:w-40"
             />
-            <h4 className="text-4xl md:text-3xl font-bold md:text-center">
+            <h3 className="text-4xl md:text-3xl font-bold md:text-center">
               {feature.title}
-            </h4>
+            </h3>
           </div>
           <p>{feature.content}</p>
         </div>

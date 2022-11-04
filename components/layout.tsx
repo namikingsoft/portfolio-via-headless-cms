@@ -90,7 +90,7 @@ const Layout = ({ children }: Props) => {
                   </div>
                 )}
               </h1>
-              <h4
+              <h2
                 className={cn({
                   'text-lg mt-5': pageType === 'login',
                   'text-center md:text-left text-lg md:pl-8 mx-5':
@@ -99,7 +99,7 @@ const Layout = ({ children }: Props) => {
                 })}
               >
                 {t('siteDescription')}
-              </h4>
+              </h2>
               <nav
                 className={cn({
                   hidden: pageType === 'login',

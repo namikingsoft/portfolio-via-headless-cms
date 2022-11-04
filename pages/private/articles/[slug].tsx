@@ -39,9 +39,9 @@ const Post = ({ article, content }: Props) => {
           <div className="mt-16 lg:mt-20">
             <Container>
               <Heading as="h1">{article.title}</Heading>
-              <div className="mt-6 text-base lg:visible text-slate-600">
+              <h2 className="mt-6 text-base lg:visible text-slate-600">
                 {article.excerpt}
-              </div>
+              </h2>
               <div className="flex flex-col md:flex-row gap-12 mt-12 lg:mt-24 text-slate-500">
                 <div className="flex-none md:w-1/2 lg:w-2/5">
                   <a href={article.image.url}>

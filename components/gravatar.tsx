@@ -9,11 +9,11 @@ type Props = {
   alt?: string
 }
 
-const Avatar = ({ className, email, size = 320, alt = 'Avatar' }: Props) => {
+const Gravatar = ({ className, email, size = 320, alt = 'Avatar' }: Props) => {
   const src = useMemo(() => calcGravatarUrl(email, size), [email, size])
   return (
     <img className={cn('rounded-full inline', className)} src={src} alt={alt} />
   )
 }
 
-export default Avatar
+export default Gravatar

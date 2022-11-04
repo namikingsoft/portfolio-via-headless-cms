@@ -9,7 +9,7 @@ import { portfolioGitHubUrl, myEmail } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
 import Block from './block'
-import Avatar from './avatar'
+import Gravatar from './gravatar'
 import GtagVisitor from './gtag-visitor'
 
 type Props = {
@@ -80,12 +80,12 @@ const Layout = ({ children }: Props) => {
                     className="hover flex flex-row items-center"
                     href={pagesPath.private.$url()}
                   >
-                    <Avatar className="mr-2" email={myEmail} size={32} />
+                    <Gravatar className="mr-2" email={myEmail} size={32} />
                     {t('siteName')}
                   </Link>
                 ) : (
                   <div className="flex flex-row items-center">
-                    <Avatar className="mr-5" email={myEmail} size={100} />
+                    <Gravatar className="mr-5" email={myEmail} size={100} />
                     {t('siteName')}
                   </div>
                 )}

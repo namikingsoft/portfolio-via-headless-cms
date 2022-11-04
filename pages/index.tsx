@@ -100,7 +100,7 @@ const Index = () => {
               {...register('password')}
             />
             <button
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400 w-16"
+              className="flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400 w-16"
               type="submit"
               disabled={loading}
             >

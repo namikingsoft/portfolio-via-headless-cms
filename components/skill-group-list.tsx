@@ -14,7 +14,7 @@ const SkillRatingList = ({ skillGroups }: Props) => {
           key={skillGroup.title}
           className="flex flex-row items-stretch gap-7 sm:gap-14"
         >
-          <h3 className="self-start font-bold text:lg sm:text-xl text-white bg-teal-500 p-4 sm:p-6 whitespace-nowrap shadow-xl -skew-x-6">
+          <h3 className="self-start font-bold text:lg sm:text-xl text-white bg-teal-700 p-4 sm:p-6 whitespace-nowrap shadow-xl -skew-x-6">
             {skillGroup.title}
           </h3>
           <div className="flex-grow flex flex-col gap-3">

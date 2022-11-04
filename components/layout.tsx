@@ -109,7 +109,7 @@ const Layout = ({ children }: Props) => {
                   className={cn(
                     'text-sm rounded py-1 px-2 disabled:bg-gray-300 disabled:border-gray-300',
                     {
-                      'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white':
+                      'bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 border-4 text-white':
                         pageType === 'top',
                       'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200':
                         pageType === 'lower',

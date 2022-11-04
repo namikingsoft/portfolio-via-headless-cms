@@ -3,6 +3,6 @@ const { i18n } = require('./next-i18next.config')
 module.exports = {
   i18n,
   images: {
-    domains: ['images.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'www.gravatar.com'],
   },
 }

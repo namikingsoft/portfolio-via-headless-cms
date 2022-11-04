@@ -5,11 +5,11 @@ import { useTranslation } from 'next-i18next'
 import { FaGithub } from 'react-icons/fa'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
-import { portfolioGitHubUrl, myEmail } from '../lib/constants'
+import { portfolioGitHubUrl } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
 import Block from './block'
-import Gravatar from './gravatar'
+import MyAvatar from './my-avatar'
 import GtagVisitor from './gtag-visitor'
 
 type Props = {
@@ -77,15 +77,15 @@ const Layout = ({ children }: Props) => {
               >
                 {pageType === 'lower' ? (
                   <Link
-                    className="hover flex flex-row items-center"
+                    className="hover flex flex-row items-center gap-2"
                     href={pagesPath.private.$url()}
                   >
-                    <Gravatar className="mr-2" email={myEmail} size={32} />
+                    <MyAvatar size={32} />
                     {t('siteName')}
                   </Link>
                 ) : (
-                  <div className="flex flex-row items-center">
-                    <Gravatar className="mr-5" email={myEmail} size={100} />
+                  <div className="flex flex-row items-center gap-5">
+                    <MyAvatar size={100} />
                     {t('siteName')}
                   </div>
                 )}

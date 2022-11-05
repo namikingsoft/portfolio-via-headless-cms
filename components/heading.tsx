@@ -10,7 +10,7 @@ const Heading = ({ as: Component, children }: Props) => {
   return (
     <Component
       className={cn({
-        'text-6xl lg:text-7xl font-bold tracking-tighter leading-tight':
+        'text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-10':
           Component === 'h1',
         'mb-10 text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter leading-tight':
           Component === 'h2',

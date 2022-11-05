@@ -24,7 +24,6 @@ import Markdown from '../../components/markdown'
 import FillImage from '../../components/fill-image'
 import ArticleList from '../../components/article-list'
 import TagGroupList from '../../components/tag-group-list'
-import Heading from '../../components/heading'
 import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
@@ -109,7 +108,12 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
       {pickups.map((pickup) => (
         <Block key={pickup.title}>
           <Container>
-            <Heading as="h2">{pickup.title}</Heading>
+            <h2 className="text-center text-4xl font-bold mb-7">
+              {pickup.title}
+            </h2>
+            <div className="text-center mb-24 leading-7">
+              <Markdown type="lite">{pickup.description}</Markdown>
+            </div>
             {pickup.articles.length > 0 && (
               <ArticleList articles={pickup.articles} />
             )}
@@ -153,7 +157,12 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
         ...intro,
         content: await markdownToHtml(intro.content),
       },
-      pickups,
+      pickups: await Promise.all(
+        pickups.map(async (pickup) => ({
+          ...pickup,
+          description: await markdownToHtml(pickup.description),
+        })),
+      ),
       tagGroups,
       skillGroups,
       ...(await serverSideTranslations(locale!, ['common'])),

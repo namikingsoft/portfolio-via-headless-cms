@@ -125,20 +125,17 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
         <Container>
           <TagGroupList tagGroups={tagGroups} />
         </Container>
-      </Block>
-
-      <Block>
-        <Container>
-          <div className="text-center">
-            <Link
-              className="inline-flex gap-2 items-center border border-stone-200 px-12 py-5 bg-white hover:bg-slate-50"
-              href={pagesPath.private.articles.$url()}
-            >
-              <MdOutlineArticle className="inline" size={20} />
-              {t('allArticles')}
-            </Link>
-          </div>
-        </Container>
+        <div className="text-center mt-20">
+          <Link
+            className="inline-flex rounded items-center border overflow-hidden border-stone-200 transition bg-white group hover:bg-slate-50"
+            href={pagesPath.private.articles.$url()}
+          >
+            <div className="flex-none bg-teal-700 group-hover:bg-teal-900 transition text-white p-4">
+              <MdOutlineArticle className="inline" size={38} />
+            </div>
+            <div className="grow px-8 text-center">{t('allArticles')}</div>
+          </Link>
+        </div>
       </Block>
     </>
   )

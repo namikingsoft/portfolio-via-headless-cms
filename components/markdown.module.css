@@ -1,113 +1,121 @@
-.markdown p:not(:first-child),
-.markdown ul:not(:first-child),
-.markdown ol:not(:first-child),
-.markdown blockquote:not(:first-child) {
-  @apply my-8;
-}
-
-.markdown li {
+.base li {
   @apply my-1;
 }
 
-.markdown ul+ul,
-.markdown ol+ol {
+.base ul+ul,
+.base ol+ol {
   @apply mt-0;
 }
 
-.markdown li ul {
+.base li ul {
   @apply my-0;
 }
 
-.markdown hr {
+.base hr {
   @apply my-28;
 }
 
-.markdown h1 {
+.base h1 {
   @apply text-7xl mt-28 mb-9 leading-snug font-bold tracking-tight text-gray-900;
 }
 
-.markdown h2 {
+.base h2 {
   @apply text-4xl mt-28 mb-9 -indent-12 leading-snug font-bold tracking-tight text-gray-900;
 }
 
-.markdown h2::before {
+.base h2::before {
   content: '☑';
   @apply text-green-600 mr-2;
 }
 
-.markdown h3 {
+.base h3 {
   @apply text-2xl mt-20 mb-9 leading-snug font-bold text-gray-800;
 }
 
-.markdown h4 {
+.base h4 {
   @apply text-lg mt-12 mb-7 leading-snug font-bold;
 }
 
-.markdown h1:first-child,
-.markdown h2:first-child,
-.markdown h3:first-child,
-.markdown h4:first-child {
+.base h1:first-child,
+.base h2:first-child,
+.base h3:first-child,
+.base h4:first-child {
   @apply mt-0;
 }
 
-.markdown img {
+.base img {
   @apply block text-center;
 }
 
-.markdown a {
+.base a {
   @apply text-sky-700;
 }
 
-.markdown a:hover {
+.base a:hover {
   @apply underline decoration-solid;
 }
 
-.markdown ul,
-.markdown ol {
+.base ul,
+.base ol {
   @apply ml-6;
 }
 
-.markdown ul {
+.base ul {
   @apply list-disc;
 }
 
-.markdown ol {
+.base ol {
   @apply list-decimal;
 }
 
-.markdown img {
+.base img {
   @apply block mx-auto my-1;
 }
 
-.markdown td,
-.markdown th {
+.base td,
+.base th {
   @apply p-2 border border-gray-300;
 }
 
-.markdown i {
+.base i {
   @apply not-italic;
 }
 
-.markdown summary {
+.base summary {
   @apply cursor-pointer;
 }
 
-.markdown summary:hover {
+.base summary:hover {
   @apply underline;
 }
 
-.markdown :global code:not(pre code) {
+.base :global code:not(pre code) {
   @apply bg-stone-200 px-1 whitespace-nowrap;
 }
 
-.markdown :global .footnotes {
+.base :global .footnotes {
   @apply mt-32 pt-16 border-t;
 }
 
-.markdown :global .footnotes p {
+.base :global .footnotes p {
   @apply m-3;
 }
 
-.markdown :global #footnote-label {
+.base :global #footnote-label {
   @apply hidden;
+}
+
+.detail p:not(:first-child),
+.detail ul:not(:first-child),
+.detail ol:not(:first-child),
+.detail blockquote:not(:first-child) {
+  @apply my-8;
+}
+
+
+.lite p:not(:first-child),
+.lite ul:not(:first-child),
+.lite ol:not(:first-child),
+.lite blockquote:not(:first-child) {
+  @apply my-4;
 }

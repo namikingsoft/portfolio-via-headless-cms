@@ -77,7 +77,7 @@ const Post = ({ article, content }: Props) => {
           </div>
           <Container narrow>
             <div className="text-gray-700 text-lg mt-16 md:mt-28 lg:mt-44">
-              <Markdown content={content} />
+              <Markdown type="detail">{content}</Markdown>
             </div>
           </Container>
         </article>

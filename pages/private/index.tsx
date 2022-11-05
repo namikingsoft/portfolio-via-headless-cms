@@ -86,7 +86,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                 </h2>
               </div>
               <div className="text-lg leading-relaxed">
-                <Markdown content={intro.content} />
+                <Markdown type="lite">{intro.content}</Markdown>
               </div>
             </div>
           </div>

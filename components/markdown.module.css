@@ -55,7 +55,7 @@
 }
 
 .markdown a {
-  @apply text-sky-500;
+  @apply text-sky-700;
 }
 
 .markdown a:hover {

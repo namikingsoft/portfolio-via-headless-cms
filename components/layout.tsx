@@ -107,11 +107,11 @@ const Layout = ({ children }: Props) => {
               >
                 <button
                   className={cn(
-                    'text-sm rounded py-1 px-2 disabled:bg-gray-300 disabled:border-gray-300',
+                    'text-sm rounded disabled:bg-gray-300 disabled:border-gray-300',
                     {
-                      'bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 border-4 text-white':
+                      'bg-teal-700 hover:bg-teal-900 text-white py-2 px-3':
                         pageType === 'top',
-                      'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200':
+                      'border border-gray-500 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200 py-1 px-2':
                         pageType === 'lower',
                     },
                   )}

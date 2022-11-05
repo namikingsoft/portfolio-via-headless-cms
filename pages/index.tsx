@@ -88,9 +88,9 @@ const Index = () => {
       </Head>
       <Container narrow>
         <form className="my-20" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex rounded-md overflow-hidden">
+          <div className="flex rounded-md overflow-hidden h-10">
             <input
-              className="appearance-none border-none bg-slate-200 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+              className="appearance-none border-none bg-slate-200 w-full text-gray-700 text-md px-4 leading-tight focus:outline-none"
               type="password"
               placeholder="Paste password"
               aria-label="Password"
@@ -100,17 +100,17 @@ const Index = () => {
               {...register('password')}
             />
             <button
-              className="flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 text-sm border-4 text-white py-1 px-2 rounded-r disabled:bg-gray-400 disabled:border-gray-400 w-16"
+              className="flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 text-white text-center rounded-r disabled:bg-gray-400"
               type="submit"
               disabled={loading}
             >
-              {loading ? (
-                <div className="flex justify-center">
+              <div className="flex justify-center w-16 text-base">
+                {loading ? (
                   <div className="animate-spin h-5 w-5 border-2 opacity-50 border-white rounded-full border-t-transparent"></div>
-                </div>
-              ) : (
-                t('login')
-              )}
+                ) : (
+                  t('login')
+                )}
+              </div>
             </button>
           </div>
           <p className="text-red-500 text-xs italic">

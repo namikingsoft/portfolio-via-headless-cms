@@ -16,6 +16,7 @@ import ArticleListRelative from '../../../components/article-list-relative'
 import TagList from '../../../components/tag-list'
 import Heading from '../../../components/heading'
 import useZoomImage from '../../../components/use-zoom-image'
+import useLazyStylesheet from '../../../components/use-lazy-stylesheet'
 
 type Props = {
   article: ArticleWithRelated
@@ -28,6 +29,17 @@ const Post = ({ article, content }: Props) => {
   const zoomImage = useZoomImage(
     'a[href$=".png"], a[href$=".svg"], a[href$=".jpg"], a[href$=".gif"], a[href$=".webp"]',
   )
+
+  useLazyStylesheet({
+    href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css',
+  })
+
+  useLazyStylesheet({
+    href: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css',
+    integrity:
+      'sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC',
+    crossOrigin: 'anonymous',
+  })
 
   return (
     <>

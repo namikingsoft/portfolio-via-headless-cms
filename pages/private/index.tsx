@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import jimp from 'jimp'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
@@ -29,7 +30,10 @@ import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
 
 type Props = {
-  intro: Intro
+  intro: Intro & {
+    backgroundImageBlurDataUri: string
+    portraitImageBlurDataUri: string
+  }
   pickups: Pickup[]
   tagGroups: TagGroup[]
   skillGroups: SkillGroup[]
@@ -50,6 +54,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
           alt={intro.backgroundImage.alt}
           width={intro.backgroundImage.width}
           height={intro.backgroundImage.height}
+          blurSrc={intro.backgroundImageBlurDataUri}
           className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
           objectPosition="center"
           priority
@@ -63,6 +68,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                   alt={intro.portraitImage.alt}
                   width={intro.portraitImage.width}
                   height={intro.portraitImage.height}
+                  blurSrc={intro.portraitImageBlurDataUri}
                   priority
                   className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-2 -ml-2 sm:-mt-7 sm:-ml-7"
                 />
@@ -145,6 +151,11 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
 
 export default Index
 
+const createDataUriBlurImage = async (url: string): Promise<string> => {
+  const image = await jimp.read(url)
+  return image.resize(64, jimp.AUTO).blur(1).getBase64Async(jimp.MIME_PNG)
+}
+
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const intro = await getIntro()
   const pickups = await getPickups()
@@ -155,6 +166,12 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       intro: {
         ...intro,
         content: await markdownToHtml(intro.content),
+        backgroundImageBlurDataUri: await createDataUriBlurImage(
+          intro.backgroundImage.url,
+        ),
+        portraitImageBlurDataUri: await createDataUriBlurImage(
+          intro.portraitImage.url,
+        ),
       },
       pickups: await Promise.all(
         pickups.map(async (pickup) => ({

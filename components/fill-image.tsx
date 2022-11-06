@@ -9,6 +9,7 @@ type Props = {
   aspectRatio?: number
   objectPosition?: 'top' | 'center'
   priority?: boolean
+  blurSrc?: string
   className?: string
 }
 
@@ -17,18 +18,23 @@ const FillImage = ({
   alt,
   width,
   height,
-  aspectRatio,
+  aspectRatio = 16 / 9,
   objectPosition = 'top',
   priority,
+  blurSrc,
   className,
 }: Props) => {
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      sizes="
+    <div
+      className={cn(className, 'bg-cover')}
+      style={{ backgroundImage: `url(${blurSrc})` }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes="
         (max-width: 640px) 640px,
         (max-width: 800px) 800px,
         (max-width: 1024px) 1024px,
@@ -39,15 +45,14 @@ const FillImage = ({
         (max-width: 2560px) 2560px,
         3840px
       "
-      priority={priority}
-      className={cn(
-        'object-cover min-w-full',
-        { 'aspect-video': !aspectRatio },
-        objectPosition === 'top' ? 'object-top' : 'object-center',
-        className,
-      )}
-      style={{ aspectRatio }}
-    />
+        priority={priority}
+        className={cn(
+          'object-cover min-w-full min-h-full',
+          objectPosition === 'top' ? 'object-top' : 'object-center',
+        )}
+        style={{ aspectRatio }}
+      />
+    </div>
   )
 }
 

@@ -6,9 +6,17 @@ type Props = {
   width: number
   height: number
   aspectRatio?: number
+  priority?: boolean
 }
 
-const ThumbImage = ({ src, alt, width, height, aspectRatio }: Props) => {
+const ThumbImage = ({
+  src,
+  alt,
+  width,
+  height,
+  aspectRatio,
+  priority,
+}: Props) => {
   return (
     <FillImage
       src={src}
@@ -17,6 +25,7 @@ const ThumbImage = ({ src, alt, width, height, aspectRatio }: Props) => {
       height={height}
       className="shadow-small hover:shadow-medium transition-shadow duration-200"
       aspectRatio={aspectRatio}
+      priority={priority}
     />
   )
 }

@@ -51,6 +51,7 @@ const Post = ({ article, content }: Props) => {
                       width={article.image.width}
                       height={article.image.height}
                       aspectRatio={article.image.width / article.image.height}
+                      priority
                     />
                   </a>
                 </div>

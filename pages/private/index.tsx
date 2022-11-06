@@ -52,6 +52,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
           height={intro.backgroundImage.height}
           className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
           objectPosition="center"
+          priority
         />
         <Container>
           <div className="relative z-10 -mt-72 md:-mt-64 p-0.5 overflow-hidden">
@@ -62,6 +63,7 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
                   alt={intro.portraitImage.alt}
                   width={intro.portraitImage.width}
                   height={intro.portraitImage.height}
+                  priority
                   className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-2 -ml-2 sm:-mt-7 sm:-ml-7"
                 />
                 <a

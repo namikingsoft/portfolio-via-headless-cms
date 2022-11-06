@@ -8,6 +8,7 @@ type Props = {
   height: number
   aspectRatio?: number
   objectPosition?: 'top' | 'center'
+  priority?: boolean
   className?: string
 }
 
@@ -18,6 +19,7 @@ const FillImage = ({
   height,
   aspectRatio,
   objectPosition = 'top',
+  priority,
   className,
 }: Props) => {
   return (
@@ -37,6 +39,7 @@ const FillImage = ({
         (max-width: 2560px) 2560px,
         3840px
       "
+      priority={priority}
       className={cn(
         'object-cover min-w-full',
         { 'aspect-video': !aspectRatio },

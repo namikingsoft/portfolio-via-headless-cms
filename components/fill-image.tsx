@@ -43,8 +43,9 @@ const FillImage = ({
 "
       priority={priority}
       className={cn(
-        'object-cover min-w-full min-h-full',
+        !blurSrc ? className : undefined,
         objectPosition === 'top' ? 'object-top' : 'object-center',
+        'object-cover min-w-full min-h-full',
       )}
       style={{ aspectRatio }}
     />
@@ -52,7 +53,7 @@ const FillImage = ({
 
   return blurSrc ? (
     <div
-      className={cn(className, 'bg-cover')}
+      className={cn(blurSrc ? className : undefined, 'bg-cover')}
       style={{ backgroundImage: `url(${blurSrc})` }}
     >
       {imageElement}

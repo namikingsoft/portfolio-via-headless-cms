@@ -108,6 +108,7 @@
 .detail p:not(:first-child),
 .detail ul:not(:first-child),
 .detail ol:not(:first-child),
+.detail video:not(:first-child),
 .detail blockquote:not(:first-child) {
   @apply my-8;
 }
@@ -116,6 +117,7 @@
 .lite p:not(:first-child),
 .lite ul:not(:first-child),
 .lite ol:not(:first-child),
+.lite video:not(:first-child),
 .lite blockquote:not(:first-child) {
   @apply my-4;
 }

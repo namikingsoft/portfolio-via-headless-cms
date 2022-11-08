@@ -121,6 +121,7 @@ function toSkillRating(raw: SkillRatingRaw): SkillRating {
     title: nonNullable(raw.title),
     rating: nonNullable(raw.rating) as RatingRange,
     description: nonNullable(raw.description),
+    relatedTagSlug: raw.relatedTag?.slug ?? null,
   }
 }
 

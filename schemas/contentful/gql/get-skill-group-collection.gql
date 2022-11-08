@@ -11,6 +11,9 @@ query getSkillGroupCollection {
       			title
      				rating
       			description
+            relatedTag {
+              slug
+            }
     			}
         }
       }

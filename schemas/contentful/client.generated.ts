@@ -1436,6 +1436,7 @@ export type SkillRating = Entry & {
   group?: Maybe<SkillGroup>;
   linkedFrom?: Maybe<SkillRatingLinkingCollections>;
   rating?: Maybe<Scalars['Int']>;
+  relatedTag?: Maybe<Tag>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 };
@@ -1463,6 +1464,13 @@ export type SkillRatingLinkedFromArgs = {
 /** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
 export type SkillRatingRatingArgs = {
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/skillRating) */
+export type SkillRatingRelatedTagArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -1501,6 +1509,8 @@ export type SkillRatingFilter = {
   rating_lte?: InputMaybe<Scalars['Int']>;
   rating_not?: InputMaybe<Scalars['Int']>;
   rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  relatedTag?: InputMaybe<CfTagNestedFilter>;
+  relatedTag_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1753,6 +1763,7 @@ export type TagLinkingCollections = {
   __typename?: 'TagLinkingCollections';
   articleCollection?: Maybe<ArticleCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  skillRatingCollection?: Maybe<SkillRatingCollection>;
 };
 
 
@@ -1765,6 +1776,14 @@ export type TagLinkingCollectionsArticleCollectionArgs = {
 
 
 export type TagLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type TagLinkingCollectionsSkillRatingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2104,7 +2123,7 @@ export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?:
 export type GetSkillGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSkillGroupCollectionQuery = { __typename?: 'Query', skillGroupCollection?: { __typename?: 'SkillGroupCollection', items: Array<{ __typename?: 'SkillGroup', title?: string | null, linkedFrom?: { __typename?: 'SkillGroupLinkingCollections', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null } | null> } | null } | null } | null> } | null };
+export type GetSkillGroupCollectionQuery = { __typename?: 'Query', skillGroupCollection?: { __typename?: 'SkillGroupCollection', items: Array<{ __typename?: 'SkillGroup', title?: string | null, linkedFrom?: { __typename?: 'SkillGroupLinkingCollections', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, relatedTag?: { __typename?: 'Tag', slug?: string | null } | null } | null> } | null } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2310,6 +2329,9 @@ export const GetSkillGroupCollectionDocument = gql`
             title
             rating
             description
+            relatedTag {
+              slug
+            }
           }
         }
       }

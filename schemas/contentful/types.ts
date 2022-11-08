@@ -25,6 +25,7 @@ export type SkillRating = {
   title: string
   rating: RatingRange
   description: string
+  relatedTagSlug: string | null
 }
 
 export type SkillGroup = {

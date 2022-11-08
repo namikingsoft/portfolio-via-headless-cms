@@ -815,18 +815,18 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  skillRating(id: String!, preview: Boolean, locale: String): SkillRating
+  skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillRatingFilter, order: [SkillRatingOrder]): SkillRatingCollection
+  tag(id: String!, preview: Boolean, locale: String): Tag
+  tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   intro(id: String!, preview: Boolean, locale: String): Intro
   introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
   zzzInternalMemo(id: String!, preview: Boolean, locale: String): ZzzInternalMemo
   zzzInternalMemoCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ZzzInternalMemoFilter, order: [ZzzInternalMemoOrder]): ZzzInternalMemoCollection
   feature(id: String!, preview: Boolean, locale: String): Feature
   featureCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: FeatureFilter, order: [FeatureOrder]): FeatureCollection
-  skillRating(id: String!, preview: Boolean, locale: String): SkillRating
-  skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillRatingFilter, order: [SkillRatingOrder]): SkillRatingCollection
   skillGroup(id: String!, preview: Boolean, locale: String): SkillGroup
   skillGroupCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillGroupFilter, order: [SkillGroupOrder]): SkillGroupCollection
-  tag(id: String!, preview: Boolean, locale: String): Tag
-  tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
   article(id: String!, preview: Boolean, locale: String): Article
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ArticleFilter, order: [ArticleOrder]): ArticleCollection
   tagGroup(id: String!, preview: Boolean, locale: String): TagGroup
@@ -916,6 +916,7 @@ type SkillRating implements Entry {
   rating(locale: String): Int
   group(preview: Boolean, locale: String): SkillGroup
   description(locale: String): String
+  relatedTag(preview: Boolean, locale: String): Tag
 }
 
 type SkillRatingCollection {
@@ -927,6 +928,7 @@ type SkillRatingCollection {
 
 input SkillRatingFilter {
   group: cfSkillGroupNestedFilter
+  relatedTag: cfTagNestedFilter
   sys: SysFilter
   contentfulMetadata: ContentfulMetadataFilter
   title_exists: Boolean
@@ -953,6 +955,7 @@ input SkillRatingFilter {
   description_not_in: [String]
   description_contains: String
   description_not_contains: String
+  relatedTag_exists: Boolean
   OR: [SkillRatingFilter]
   AND: [SkillRatingFilter]
 }
@@ -1127,6 +1130,7 @@ enum TagGroupOrder {
 
 type TagLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): SkillRatingCollection
   articleCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ArticleCollection
 }
 

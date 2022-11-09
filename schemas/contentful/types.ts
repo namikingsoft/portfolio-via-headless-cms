@@ -21,16 +21,16 @@ export type TagGroup = {
 
 export type RatingRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 
+export type SkillGroup = {
+  title: string
+}
+
 export type SkillRating = {
   title: string
   rating: RatingRange
   description: string
-  relatedTagSlug: string | null
-}
-
-export type SkillGroup = {
-  title: string
-  skillRatings: SkillRating[]
+  group: SkillGroup
+  relatedTag: Tag | null
 }
 
 export interface Article {

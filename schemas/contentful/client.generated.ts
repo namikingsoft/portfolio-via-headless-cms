@@ -2080,6 +2080,8 @@ export type ImageFragment = { __typename?: 'Asset', title?: string | null, url?:
 
 export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, githubUrl?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null };
 
+export type SkillRatingFragment = { __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null, sortNumber?: number | null } | null, relatedTag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null };
+
 export type TagFragment = { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } };
 
 export type VisitorFragment = { __typename?: 'Visitor', username?: string | null, label?: string | null };
@@ -2123,7 +2125,12 @@ export type GetRelatedArticleCollectionQuery = { __typename?: 'Query', article?:
 export type GetSkillGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSkillGroupCollectionQuery = { __typename?: 'Query', skillGroupCollection?: { __typename?: 'SkillGroupCollection', items: Array<{ __typename?: 'SkillGroup', title?: string | null, linkedFrom?: { __typename?: 'SkillGroupLinkingCollections', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, relatedTag?: { __typename?: 'Tag', slug?: string | null } | null } | null> } | null } | null } | null> } | null };
+export type GetSkillGroupCollectionQuery = { __typename?: 'Query', skillGroupCollection?: { __typename?: 'SkillGroupCollection', items: Array<{ __typename?: 'SkillGroup', title?: string | null, linkedFrom?: { __typename?: 'SkillGroupLinkingCollections', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null } | null> } | null } | null } | null> } | null };
+
+export type GetSkillRatingCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSkillRatingCollectionQuery = { __typename?: 'Query', skillRatingCollection?: { __typename?: 'SkillRatingCollection', items: Array<{ __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null, sortNumber?: number | null } | null, relatedTag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null };
 
 export type GetTagCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2250,6 +2257,20 @@ export const IntroFragmentDoc = gql`
   }
 }
     ${ImageFragmentDoc}`;
+export const SkillRatingFragmentDoc = gql`
+    fragment skillRating on SkillRating {
+  title
+  rating
+  description
+  group {
+    title
+    sortNumber
+  }
+  relatedTag {
+    ...tag
+  }
+}
+    ${TagFragmentDoc}`;
 export const VisitorFragmentDoc = gql`
     fragment visitor on Visitor {
   username
@@ -2327,11 +2348,6 @@ export const GetSkillGroupCollectionDocument = gql`
         skillRatingCollection {
           items {
             title
-            rating
-            description
-            relatedTag {
-              slug
-            }
           }
         }
       }
@@ -2339,6 +2355,15 @@ export const GetSkillGroupCollectionDocument = gql`
   }
 }
     `;
+export const GetSkillRatingCollectionDocument = gql`
+    query getSkillRatingCollection {
+  skillRatingCollection(order: rating_DESC) {
+    items {
+      ...skillRating
+    }
+  }
+}
+    ${SkillRatingFragmentDoc}`;
 export const GetTagCollectionDocument = gql`
     query getTagCollection {
   tagCollection {
@@ -2444,6 +2469,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getSkillGroupCollection(variables?: GetSkillGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetSkillGroupCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetSkillGroupCollectionQuery>(GetSkillGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSkillGroupCollection', 'query');
+    },
+    getSkillRatingCollection(variables?: GetSkillRatingCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetSkillRatingCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetSkillRatingCollectionQuery>(GetSkillRatingCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getSkillRatingCollection', 'query');
     },
     getTagCollection(variables?: GetTagCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagCollectionQuery>(GetTagCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagCollection', 'query');

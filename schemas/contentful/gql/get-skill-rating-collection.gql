@@ -1,0 +1,9 @@
+query getSkillRatingCollection {
+  skillRatingCollection(
+    order: rating_DESC
+  ) {
+    items{
+      ...skillRating
+    }
+  }
+}

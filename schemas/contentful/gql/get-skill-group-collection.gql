@@ -8,12 +8,7 @@ query getSkillGroupCollection {
       linkedFrom {
         skillRatingCollection {
           items {
-      			title
-     				rating
-      			description
-            relatedTag {
-              slug
-            }
+            title
     			}
         }
       }

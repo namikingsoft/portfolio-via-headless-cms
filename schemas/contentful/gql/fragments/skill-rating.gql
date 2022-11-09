@@ -1,0 +1,12 @@
+fragment skillRating on SkillRating {
+  title
+  rating
+  description
+  group {
+    title
+    sortNumber
+  }
+  relatedTag {
+    ...tag
+  }
+}

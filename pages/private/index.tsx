@@ -11,11 +11,13 @@ import {
   Pickup,
   TagGroup,
   SkillGroup,
+  SkillRating,
 } from '../../schemas/contentful/types'
 import {
   getIntro,
   getPickups,
   getSkillGroupList,
+  getSkillRatingList,
   getTagGroupList,
 } from '../../schemas/contentful'
 import { pagesPath } from '../../lib/$path'
@@ -37,9 +39,16 @@ type Props = {
   pickups: Pickup[]
   tagGroups: TagGroup[]
   skillGroups: SkillGroup[]
+  skillRatings: SkillRating[]
 }
 
-const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
+const Index = ({
+  intro,
+  pickups,
+  tagGroups,
+  skillGroups,
+  skillRatings,
+}: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -109,7 +118,10 @@ const Index = ({ intro, pickups, tagGroups, skillGroups }: Props) => {
       <Block>
         <Container>
           <h2 className="hidden">{t('skills')}</h2>
-          <SkillGroupList skillGroups={skillGroups} />
+          <SkillGroupList
+            skillGroups={skillGroups}
+            skillRatings={skillRatings}
+          />
         </Container>
       </Block>
 
@@ -161,6 +173,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const pickups = await getPickups()
   const tagGroups = await getTagGroupList()
   const skillGroups = await getSkillGroupList()
+  const skillRatings = await getSkillRatingList()
   return {
     props: {
       intro: {
@@ -181,6 +194,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       ),
       tagGroups,
       skillGroups,
+      skillRatings,
       ...(await serverSideTranslations(locale!, ['common'])),
     },
   }

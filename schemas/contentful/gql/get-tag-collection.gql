@@ -1,5 +1,7 @@
 query getTagCollection {
-  tagCollection {
+  tagCollection(
+    limit: 1000
+  ) {
     items {
       ...tag
     }

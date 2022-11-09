@@ -2366,7 +2366,7 @@ export const GetSkillRatingCollectionDocument = gql`
     ${SkillRatingFragmentDoc}`;
 export const GetTagCollectionDocument = gql`
     query getTagCollection {
-  tagCollection {
+  tagCollection(limit: 1000) {
     items {
       ...tag
     }

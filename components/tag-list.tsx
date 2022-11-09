@@ -17,7 +17,12 @@ const TagList = ({ article }: Props) => {
         className="hover last:mr-0 mr-3"
         href={pagesPath.private.tags._slug(article.category.slug).$url()}
       >
-        <span className={cn(baseClassName, 'text-green-800 bg-green-200 ')}>
+        <span
+          className={cn(
+            baseClassName,
+            'text-green-800 bg-green-200 hover:bg-green-300 transition-colors',
+          )}
+        >
           {article.category.title}
         </span>
       </Link>
@@ -27,7 +32,12 @@ const TagList = ({ article }: Props) => {
           key={tag.slug}
           href={pagesPath.private.tags._slug(tag.slug).$url()}
         >
-          <span className={cn(baseClassName, 'text-slate-600 bg-slate-200')}>
+          <span
+            className={cn(
+              baseClassName,
+              'text-slate-600 bg-slate-200 hover:bg-slate-300 transition-colors',
+            )}
+          >
             {tag.title}
           </span>
         </Link>

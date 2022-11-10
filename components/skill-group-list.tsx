@@ -1,6 +1,9 @@
+import { FaTag } from 'react-icons/fa'
 import { calcStarType } from '../lib/star'
 import { SkillGroup, SkillRating } from '../schemas/contentful/types'
+import { pagesPath } from '../lib/$path'
 import Star from './star'
+import Link from 'next/link'
 
 type Props = {
   skillGroups: SkillGroup[]
@@ -24,7 +27,23 @@ const SkillRatingList = ({ skillGroups, skillRatings }: Props) => {
               .map((skillRating) => (
                 <div key={skillRating.title}>
                   <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">
-                    <dt className="font-bold text-lg">{skillRating.title}</dt>
+                    <dt className="font-bold text-lg">
+                      {skillRating.relatedTag ? (
+                        <Link
+                          className="group"
+                          href={pagesPath.private.tags
+                            ._slug(skillRating.relatedTag.slug)
+                            .$url()}
+                        >
+                          <span className="group-hover:underline">
+                            {skillRating.title}
+                          </span>
+                          <FaTag className="inline-block text-sm ml-1 mb-2 group-hover:text-teal-700" />
+                        </Link>
+                      ) : (
+                        skillRating.title
+                      )}
+                    </dt>
                     <dd className="text-3xl text-yellow-500 drop-shadow-sm text-right whitespace-nowrap">
                       {([1, 2, 3, 4, 5] as const).map((pos) => (
                         <Star

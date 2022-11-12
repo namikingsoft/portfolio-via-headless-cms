@@ -613,11 +613,14 @@ type Intro implements Entry {
   lastNameRuby(locale: String): String
   firstName(locale: String): String
   firstNameRuby(locale: String): String
+  position(locale: String): String
   dateOfBirth(locale: String): String
   githubUrl(locale: String): String
   portraitImage(preview: Boolean, locale: String): Asset
   backgroundImage(preview: Boolean, locale: String): Asset
   content(locale: String): String
+  featureTitle(locale: String): String
+  featureDescription(locale: String): String
   featureCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): IntroFeatureCollection
 }
 
@@ -673,6 +676,13 @@ input IntroFilter {
   firstNameRuby_not_in: [String]
   firstNameRuby_contains: String
   firstNameRuby_not_contains: String
+  position_exists: Boolean
+  position: String
+  position_not: String
+  position_in: [String]
+  position_not_in: [String]
+  position_contains: String
+  position_not_contains: String
   dateOfBirth_exists: Boolean
   dateOfBirth: String
   dateOfBirth_not: String
@@ -696,6 +706,20 @@ input IntroFilter {
   content_not_in: [String]
   content_contains: String
   content_not_contains: String
+  featureTitle_exists: Boolean
+  featureTitle: String
+  featureTitle_not: String
+  featureTitle_in: [String]
+  featureTitle_not_in: [String]
+  featureTitle_contains: String
+  featureTitle_not_contains: String
+  featureDescription_exists: Boolean
+  featureDescription: String
+  featureDescription_not: String
+  featureDescription_in: [String]
+  featureDescription_not_in: [String]
+  featureDescription_contains: String
+  featureDescription_not_contains: String
   featureCollection_exists: Boolean
   OR: [IntroFilter]
   AND: [IntroFilter]
@@ -716,10 +740,14 @@ enum IntroOrder {
   firstName_DESC
   firstNameRuby_ASC
   firstNameRuby_DESC
+  position_ASC
+  position_DESC
   dateOfBirth_ASC
   dateOfBirth_DESC
   githubUrl_ASC
   githubUrl_DESC
+  featureTitle_ASC
+  featureTitle_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
@@ -815,12 +843,12 @@ scalar Quality
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  intro(id: String!, preview: Boolean, locale: String): Intro
+  introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
   skillRating(id: String!, preview: Boolean, locale: String): SkillRating
   skillRatingCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillRatingFilter, order: [SkillRatingOrder]): SkillRatingCollection
   tag(id: String!, preview: Boolean, locale: String): Tag
   tagCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TagFilter, order: [TagOrder]): TagCollection
-  intro(id: String!, preview: Boolean, locale: String): Intro
-  introCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: IntroFilter, order: [IntroOrder]): IntroCollection
   zzzInternalMemo(id: String!, preview: Boolean, locale: String): ZzzInternalMemo
   zzzInternalMemoCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ZzzInternalMemoFilter, order: [ZzzInternalMemoOrder]): ZzzInternalMemoCollection
   feature(id: String!, preview: Boolean, locale: String): Feature

@@ -5,7 +5,10 @@ fragment intro on Intro {
   firstNameRuby
   lastName
   lastNameRuby
+  position
   githubUrl
+  featureTitle
+  featureDescription
   portraitImage {
     ...image
   }

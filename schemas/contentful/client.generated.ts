@@ -768,6 +768,8 @@ export type Intro = Entry & {
   contentfulMetadata: ContentfulMetadata;
   dateOfBirth?: Maybe<Scalars['String']>;
   featureCollection?: Maybe<IntroFeatureCollection>;
+  featureDescription?: Maybe<Scalars['String']>;
+  featureTitle?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   firstNameRuby?: Maybe<Scalars['String']>;
   githubUrl?: Maybe<Scalars['String']>;
@@ -775,6 +777,7 @@ export type Intro = Entry & {
   lastNameRuby?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<IntroLinkingCollections>;
   portraitImage?: Maybe<Asset>;
+  position?: Maybe<Scalars['String']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 };
@@ -805,6 +808,18 @@ export type IntroFeatureCollectionArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroFeatureDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroFeatureTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -852,6 +867,12 @@ export type IntroPortraitImageArgs = {
 
 
 /** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
+export type IntroPositionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Top page sections [See type definition](https://app.contentful.com/spaces/t7esxj10x2zh/content_types/intro) */
 export type IntroTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -892,6 +913,20 @@ export type IntroFilter = {
   dateOfBirth_not_contains?: InputMaybe<Scalars['String']>;
   dateOfBirth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   featureCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  featureDescription?: InputMaybe<Scalars['String']>;
+  featureDescription_contains?: InputMaybe<Scalars['String']>;
+  featureDescription_exists?: InputMaybe<Scalars['Boolean']>;
+  featureDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featureDescription_not?: InputMaybe<Scalars['String']>;
+  featureDescription_not_contains?: InputMaybe<Scalars['String']>;
+  featureDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featureTitle?: InputMaybe<Scalars['String']>;
+  featureTitle_contains?: InputMaybe<Scalars['String']>;
+  featureTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  featureTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featureTitle_not?: InputMaybe<Scalars['String']>;
+  featureTitle_not_contains?: InputMaybe<Scalars['String']>;
+  featureTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   firstName?: InputMaybe<Scalars['String']>;
   firstNameRuby?: InputMaybe<Scalars['String']>;
   firstNameRuby_contains?: InputMaybe<Scalars['String']>;
@@ -928,6 +963,13 @@ export type IntroFilter = {
   lastName_not_contains?: InputMaybe<Scalars['String']>;
   lastName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   portraitImage_exists?: InputMaybe<Scalars['Boolean']>;
+  position?: InputMaybe<Scalars['String']>;
+  position_contains?: InputMaybe<Scalars['String']>;
+  position_exists?: InputMaybe<Scalars['Boolean']>;
+  position_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  position_not?: InputMaybe<Scalars['String']>;
+  position_not_contains?: InputMaybe<Scalars['String']>;
+  position_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -954,6 +996,8 @@ export type IntroLinkingCollectionsEntryCollectionArgs = {
 export enum IntroOrder {
   DateOfBirthAsc = 'dateOfBirth_ASC',
   DateOfBirthDesc = 'dateOfBirth_DESC',
+  FeatureTitleAsc = 'featureTitle_ASC',
+  FeatureTitleDesc = 'featureTitle_DESC',
   FirstNameRubyAsc = 'firstNameRuby_ASC',
   FirstNameRubyDesc = 'firstNameRuby_DESC',
   FirstNameAsc = 'firstName_ASC',
@@ -964,6 +1008,8 @@ export enum IntroOrder {
   LastNameRubyDesc = 'lastNameRuby_DESC',
   LastNameAsc = 'lastName_ASC',
   LastNameDesc = 'lastName_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2078,7 +2124,7 @@ export type ArticleFragment = { __typename?: 'Article', slug?: string | null, ti
 
 export type ImageFragment = { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null };
 
-export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, githubUrl?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null };
+export type IntroFragment = { __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, position?: string | null, githubUrl?: string | null, featureTitle?: string | null, featureDescription?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null };
 
 export type SkillRatingFragment = { __typename?: 'SkillRating', title?: string | null, rating?: number | null, description?: string | null, group?: { __typename?: 'SkillGroup', title?: string | null, sortNumber?: number | null } | null, relatedTag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null };
 
@@ -2101,7 +2147,7 @@ export type GetArticleFromSlugQuery = { __typename?: 'Query', articleCollection?
 export type GetIntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetIntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, githubUrl?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null } | null> } | null };
+export type GetIntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, position?: string | null, githubUrl?: string | null, featureTitle?: string | null, featureDescription?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null } | null> } | null };
 
 export type GetPickupByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2239,7 +2285,10 @@ export const IntroFragmentDoc = gql`
   firstNameRuby
   lastName
   lastNameRuby
+  position
   githubUrl
+  featureTitle
+  featureDescription
   portraitImage {
     ...image
   }

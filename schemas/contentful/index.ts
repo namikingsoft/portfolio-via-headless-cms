@@ -179,7 +179,10 @@ function toIntro(raw: IntroRaw): Intro {
     firstNameRuby: nonNullable(raw.firstNameRuby),
     lastName: nonNullable(raw.lastName),
     lastNameRuby: nonNullable(raw.lastNameRuby),
+    position: nonNullable(raw.position),
     githubUrl: nonNullable(raw.githubUrl),
+    featureTitle: nonNullable(raw.featureTitle),
+    featureDescription: nonNullable(raw.featureDescription),
     portraitImage: {
       url: nonNullable(raw.portraitImage?.url),
       alt: nonNullable(raw.portraitImage?.title),

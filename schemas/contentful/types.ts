@@ -66,9 +66,12 @@ export type Intro = {
   firstNameRuby: string
   lastName: string
   lastNameRuby: string
+  position: string
   githubUrl: string
   portraitImage: Image
   backgroundImage: Image
+  featureTitle: string
+  featureDescription: string
   features: Feature[]
 }
 

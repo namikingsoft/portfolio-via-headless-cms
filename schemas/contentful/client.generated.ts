@@ -2328,7 +2328,7 @@ export const VisitorFragmentDoc = gql`
     `;
 export const GetArticleCollectionDocument = gql`
     query getArticleCollection {
-  articleCollection {
+  articleCollection(order: date_DESC) {
     items {
       ...article
     }

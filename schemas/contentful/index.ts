@@ -285,17 +285,13 @@ export async function getTagWithArticles(
   slug: string,
 ): Promise<TagWithArticles> {
   const { tagCollection } = await sdk.getTagFromSlug({ slug })
-  const firstTag = nonNullable(tagCollection?.items?.[0])
-  const { tag } = await sdk.getTagWithArticles({
-    tagId: firstTag.sys.id,
-  })
-  const articleCollection = tag?.linkedFrom?.articleCollection
-  const articles = (articleCollection?.items ?? [])
-    .flatMap((x) => (x === null ? [] : [x]))
-    .map(toArticle)
+  const firstTag = toTag(nonNullable(tagCollection?.items?.[0]))
+  const allArticles = await getAllArticles()
   return {
-    tag: toTag(firstTag),
-    articles,
+    tag: firstTag,
+    articles: allArticles.filter((article) =>
+      article.tags.some((tag) => tag.slug === firstTag.slug),
+    ),
   }
 }
 

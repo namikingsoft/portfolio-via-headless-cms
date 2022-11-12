@@ -2195,13 +2195,6 @@ export type GetTagGroupCollectionQueryVariables = Exact<{ [key: string]: never; 
 
 export type GetTagGroupCollectionQuery = { __typename?: 'Query', tagGroupCollection?: { __typename?: 'TagGroupCollection', items: Array<{ __typename?: 'TagGroup', title?: string | null } | null> } | null };
 
-export type GetTagWithArticlesQueryVariables = Exact<{
-  tagId: Scalars['String'];
-}>;
-
-
-export type GetTagWithArticlesQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', slug?: string | null, title?: string | null, linkedFrom?: { __typename?: 'TagLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null, sys: { __typename?: 'Sys', id: string } } | null };
-
 export type GetTagWithGroupCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2440,21 +2433,6 @@ export const GetTagGroupCollectionDocument = gql`
   }
 }
     `;
-export const GetTagWithArticlesDocument = gql`
-    query getTagWithArticles($tagId: String!) {
-  tag(id: $tagId) {
-    ...tag
-    linkedFrom {
-      articleCollection {
-        items {
-          ...article
-        }
-      }
-    }
-  }
-}
-    ${TagFragmentDoc}
-${ArticleFragmentDoc}`;
 export const GetTagWithGroupCollectionDocument = gql`
     query getTagWithGroupCollection {
   tagCollection {
@@ -2530,9 +2508,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getTagGroupCollection(variables?: GetTagGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagGroupCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagGroupCollectionQuery>(GetTagGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagGroupCollection', 'query');
-    },
-    getTagWithArticles(variables: GetTagWithArticlesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagWithArticlesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetTagWithArticlesQuery>(GetTagWithArticlesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagWithArticles', 'query');
     },
     getTagWithGroupCollection(variables?: GetTagWithGroupCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTagWithGroupCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagWithGroupCollectionQuery>(GetTagWithGroupCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTagWithGroupCollection', 'query');

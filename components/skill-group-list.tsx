@@ -38,7 +38,7 @@ const SkillRatingList = ({ skillGroups, skillRatings }: Props) => {
                           <span className="group-hover:underline">
                             {skillRating.title}
                           </span>
-                          <FaTag className="inline-block text-sm ml-1 mb-2 group-hover:text-teal-700" />
+                          <FaTag className="inline-block text-xs ml-1 mb-2 text-gray-700 group-hover:text-teal-700" />
                         </Link>
                       ) : (
                         skillRating.title

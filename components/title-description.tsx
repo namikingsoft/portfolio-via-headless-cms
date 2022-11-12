@@ -9,7 +9,7 @@ const TitleDescription = ({ title, description }: Props) => {
   return (
     <>
       <h2 className="text-center text-4xl font-bold mb-7">{title}</h2>
-      <div className="text-center mb-24 leading-7">
+      <div className="text-center mb-28 leading-7">
         <Markdown type="lite">{description}</Markdown>
       </div>
     </>

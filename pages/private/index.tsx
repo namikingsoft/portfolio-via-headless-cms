@@ -71,7 +71,7 @@ const Index = ({
         <Container>
           <div className="relative z-10 -mt-72 md:-mt-64 p-0.5 overflow-hidden">
             <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-12 sm:p-16 rounded-xl shadow-lg">
-              <div>
+              <div className="mb-10">
                 <FillImage
                   src={intro.portraitImage.url}
                   alt={intro.portraitImage.alt}
@@ -90,16 +90,23 @@ const Index = ({
                   <FaGithub className="text-xl" />
                   GitHub
                 </a>
-                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12 mb-10">
+                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12">
                   <ruby>
                     {intro.firstName}
-                    <rt>{intro.firstNameRuby}</rt>
+                    <rt className="font-normal text-sm">
+                      {intro.firstNameRuby}
+                    </rt>
                   </ruby>
                   <ruby>
                     {intro.lastName}
-                    <rt>{intro.lastNameRuby}</rt>
+                    <rt className="font-normal text-sm">
+                      {intro.lastNameRuby}
+                    </rt>
                   </ruby>
                 </h2>
+                <div className="block border-t border-gray-500 text-gray-500 text-sm pt-1 mt-1">
+                  {intro.position}
+                </div>
               </div>
               <div className="text-lg leading-relaxed">
                 <Markdown type="lite">{intro.content}</Markdown>

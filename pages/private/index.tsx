@@ -30,6 +30,7 @@ import TagGroupList from '../../components/tag-group-list'
 import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
+import TitleDescription from '../../components/title-description'
 
 type Props = {
   intro: Intro & {
@@ -118,6 +119,10 @@ const Index = ({
 
       <Block>
         <Container>
+          <TitleDescription
+            title={intro.featureTitle}
+            description={intro.featureDescription}
+          />
           <FeatureList features={intro.features} />
         </Container>
       </Block>
@@ -135,12 +140,10 @@ const Index = ({
       {pickups.map((pickup) => (
         <Block key={pickup.title}>
           <Container>
-            <h2 className="text-center text-4xl font-bold mb-7">
-              {pickup.title}
-            </h2>
-            <div className="text-center mb-24 leading-7">
-              <Markdown type="lite">{pickup.description}</Markdown>
-            </div>
+            <TitleDescription
+              title={pickup.title}
+              description={pickup.description}
+            />
             {pickup.articles.length > 0 && (
               <ArticleList articles={pickup.articles} />
             )}
@@ -186,6 +189,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       intro: {
         ...intro,
         content: await markdownToHtml(intro.content),
+        featureDescription: await markdownToHtml(intro.featureDescription),
         backgroundImageBlurDataUri: await createDataUriBlurImage(
           intro.backgroundImage.url,
         ),

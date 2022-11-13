@@ -289,8 +289,10 @@ export async function getTagWithArticles(
   const allArticles = await getAllArticles()
   return {
     tag: firstTag,
-    articles: allArticles.filter((article) =>
-      article.tags.some((tag) => tag.slug === firstTag.slug),
+    articles: allArticles.filter(
+      (article) =>
+        article.category.slug === firstTag.slug ||
+        article.tags.some((tag) => tag.slug === firstTag.slug),
     ),
   }
 }

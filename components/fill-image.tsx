@@ -43,17 +43,7 @@ const FillImage = ({
         alt={alt}
         width={width}
         height={height}
-        sizes="
-  (max-width: 640px) 640px,
-  (max-width: 800px) 800px,
-  (max-width: 1024px) 1024px,
-  (max-width: 1280px) 1280px,
-  (max-width: 1440px) 1440px,
-  (max-width: 1680px) 1680px,
-  (max-width: 1920px) 1920px,
-  (max-width: 2560px) 2560px,
-  3840px
-"
+        sizes="100vw"
         priority={priority}
         className={cn(baseClassName, {
           hidden: !loaded && blurSrc,

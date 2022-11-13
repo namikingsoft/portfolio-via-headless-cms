@@ -1,4 +1,3 @@
-import { FaTag } from 'react-icons/fa'
 import { calcStarType } from '../lib/star'
 import { SkillGroup, SkillRating } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
@@ -30,15 +29,12 @@ const SkillRatingList = ({ skillGroups, skillRatings }: Props) => {
                     <dt className="font-bold text-lg">
                       {skillRating.relatedTag ? (
                         <Link
-                          className="group"
+                          className="underline hover:no-underline"
                           href={pagesPath.private.tags
                             ._slug(skillRating.relatedTag.slug)
                             .$url()}
                         >
-                          <span className="group-hover:underline">
-                            {skillRating.title}
-                          </span>
-                          <FaTag className="inline-block text-xs ml-1 mb-2 text-gray-700 group-hover:text-teal-700" />
+                          {skillRating.title}
                         </Link>
                       ) : (
                         skillRating.title

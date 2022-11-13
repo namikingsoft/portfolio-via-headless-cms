@@ -47,6 +47,11 @@
   @apply block text-center;
 }
 
+.base video {
+  /* centering */
+  @apply mx-auto;
+}
+
 .base a {
   @apply text-sky-700;
 }

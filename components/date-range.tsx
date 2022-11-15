@@ -13,9 +13,11 @@ const DateRange = ({ date, dateEnd, isContinue }: Props) => {
   return (
     <div className="flex flex-row items-center">
       <MdDateRange className="mr-1" />
-      <DateFormatter dateString={date} />
+      <DateFormatter dateString={date} dateFormat={t('yyyy/MM')} />
       {(dateEnd != null || isContinue) && <span className="mx-1">〜</span>}
-      {dateEnd != null && <DateFormatter dateString={dateEnd} />}
+      {dateEnd != null && (
+        <DateFormatter dateString={dateEnd} dateFormat={t('yyyy/MM')} />
+      )}
       {isContinue && t('ongoing')}
     </div>
   )

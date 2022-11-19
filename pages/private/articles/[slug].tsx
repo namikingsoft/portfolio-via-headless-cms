@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { FaChevronCircleLeft } from 'react-icons/fa'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
 import markdownToHtml from '../../../lib/markdownToHtml'
@@ -100,6 +101,18 @@ const Post = ({ article, content }: Props) => {
           <aside>
             <Container narrow>
               <ArticleListRelative articles={article.relatedArticles} />
+            </Container>
+          </aside>
+        </Block>
+      )}
+      {article.parentArticles.length > 0 && (
+        <Block>
+          <aside>
+            <Container narrow>
+              <h3 className="flex flex-row items-center gap-1 font-bold text-xl mb-4">
+                <FaChevronCircleLeft /> {t('referrer')}
+              </h3>
+              <ArticleListRelative articles={article.parentArticles} />
             </Container>
           </aside>
         </Block>

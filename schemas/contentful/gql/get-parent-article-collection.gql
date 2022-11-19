@@ -1,0 +1,11 @@
+query getParentArticle($id: String!) {
+  article(id: $id) {
+    linkedFrom {
+      articleCollection {
+        items {
+          ...article
+        }
+      }
+    }
+  }
+}

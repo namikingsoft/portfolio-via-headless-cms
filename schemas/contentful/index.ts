@@ -230,13 +230,25 @@ export async function getArticle(slug: string): Promise<ArticleWithRelated> {
     slug,
   })
   const articleRaw = nonNullable(articleCollection?.items?.[0])
-  const { article } = await sdk.getRelatedArticleCollection({
-    id: articleRaw.sys.id,
-  })
-  const relatedArticles = (article?.relatedArticleCollection?.items ?? [])
-    .flatMap((x) => (x === null ? [] : [x]))
-    .map(toArticle)
-  return { ...toArticle(articleRaw), relatedArticles }
+  const [parentArticles, relatedArticles] = await Promise.all([
+    (async () => {
+      const { article } = await sdk.getParentArticle({
+        id: articleRaw.sys.id,
+      })
+      return (article?.linkedFrom?.articleCollection?.items ?? [])
+        .flatMap((x) => (x === null ? [] : [x]))
+        .map(toArticle)
+    })(),
+    (async () => {
+      const { article } = await sdk.getRelatedArticleCollection({
+        id: articleRaw.sys.id,
+      })
+      return (article?.relatedArticleCollection?.items ?? [])
+        .flatMap((x) => (x === null ? [] : [x]))
+        .map(toArticle)
+    })(),
+  ])
+  return { ...toArticle(articleRaw), parentArticles, relatedArticles }
 }
 
 export async function getIntro(): Promise<Intro> {

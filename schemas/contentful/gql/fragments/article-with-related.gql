@@ -1,8 +1,0 @@
-fragment articleWithRelated on Article {
-  ...article
-  relatedArticleCollection {
-    items {
-      ...article
-    }
-  }
-}

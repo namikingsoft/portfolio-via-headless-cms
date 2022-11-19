@@ -50,6 +50,7 @@ export interface Article {
 }
 
 export interface ArticleWithRelated extends Article {
+  parentArticles: Article[]
   relatedArticles: Article[]
 }
 

@@ -2118,8 +2118,6 @@ export type CfTagNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ArticleWithRelatedFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, relatedArticleCollection?: { __typename?: 'ArticleRelatedArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
-
 export type ArticleFragment = { __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } };
 
 export type ImageFragment = { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null };
@@ -2148,6 +2146,13 @@ export type GetIntroCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetIntroCollectionQuery = { __typename?: 'Query', introCollection?: { __typename?: 'IntroCollection', items: Array<{ __typename?: 'Intro', title?: string | null, content?: string | null, firstName?: string | null, firstNameRuby?: string | null, lastName?: string | null, lastNameRuby?: string | null, position?: string | null, githubUrl?: string | null, featureTitle?: string | null, featureDescription?: string | null, portraitImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, backgroundImage?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, featureCollection?: { __typename?: 'IntroFeatureCollection', items: Array<{ __typename?: 'Feature', title?: string | null, content?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null } | null> } | null } | null> } | null };
+
+export type GetParentArticleQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetParentArticleQuery = { __typename?: 'Query', article?: { __typename?: 'Article', linkedFrom?: { __typename?: 'ArticleLinkingCollections', articleCollection?: { __typename?: 'ArticleCollection', items: Array<{ __typename?: 'Article', slug?: string | null, title?: string | null, excerpt?: string | null, content?: string | null, date?: any | null, dateEnd?: any | null, dateIsContinue?: boolean | null, company?: string | null, githubRepo?: string | null, image?: { __typename?: 'Asset', title?: string | null, url?: string | null, width?: number | null, height?: number | null } | null, category?: { __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null, tagCollection?: { __typename?: 'ArticleTagCollection', items: Array<{ __typename?: 'Tag', slug?: string | null, title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null } } | null> } | null } | null } | null };
 
 export type GetPickupByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2260,16 +2265,6 @@ export const ArticleFragmentDoc = gql`
 }
     ${ImageFragmentDoc}
 ${TagFragmentDoc}`;
-export const ArticleWithRelatedFragmentDoc = gql`
-    fragment articleWithRelated on Article {
-  ...article
-  relatedArticleCollection {
-    items {
-      ...article
-    }
-  }
-}
-    ${ArticleFragmentDoc}`;
 export const IntroFragmentDoc = gql`
     fragment intro on Intro {
   title
@@ -2346,6 +2341,19 @@ export const GetIntroCollectionDocument = gql`
   }
 }
     ${IntroFragmentDoc}`;
+export const GetParentArticleDocument = gql`
+    query getParentArticle($id: String!) {
+  article(id: $id) {
+    linkedFrom {
+      articleCollection {
+        items {
+          ...article
+        }
+      }
+    }
+  }
+}
+    ${ArticleFragmentDoc}`;
 export const GetPickupByIdDocument = gql`
     query getPickupById($id: String!) {
   pickup(id: $id) {
@@ -2484,6 +2492,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getIntroCollection(variables?: GetIntroCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetIntroCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetIntroCollectionQuery>(GetIntroCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getIntroCollection', 'query');
+    },
+    getParentArticle(variables: GetParentArticleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetParentArticleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetParentArticleQuery>(GetParentArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getParentArticle', 'query');
     },
     getPickupById(variables: GetPickupByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPickupByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPickupByIdQuery>(GetPickupByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPickupById', 'query');

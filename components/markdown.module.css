@@ -86,6 +86,15 @@
   @apply not-italic;
 }
 
+.base blockquote {
+  @apply relative border border-gray-300 p-5;
+}
+
+.base blockquote::before {
+  content: "❝";
+  @apply absolute -top-4 inline-block text-gray-500 text-4xl;
+}
+
 .base summary {
   @apply cursor-pointer;
 }

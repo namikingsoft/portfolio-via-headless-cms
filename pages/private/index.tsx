@@ -59,20 +59,33 @@ const Index = ({
       </Head>
 
       <Block>
-        <FillImage
-          src={intro.backgroundImage.url}
-          alt={intro.backgroundImage.alt}
-          width={intro.backgroundImage.width}
-          height={intro.backgroundImage.height}
-          blurSrc={intro.backgroundImageBlurDataUri}
-          className="w-screen h-screen sepia contrast-50 brightness-110 shadow-medium -z-10"
-          objectPosition="center"
-          priority
-        />
+        <div className="w-screen h-screen relative">
+          <FillImage
+            src={intro.backgroundImage.url}
+            alt={intro.backgroundImage.alt}
+            width={intro.backgroundImage.width}
+            height={intro.backgroundImage.height}
+            blurSrc={intro.backgroundImageBlurDataUri}
+            className="w-screen h-screen absolute sepia contrast-50 brightness-110 shadow-medium -z-10"
+            objectPosition="center"
+            priority
+          />
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-16 backdrop-blur-sm bg-opacity-75 bg-black text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
+              {intro.catchTitle}
+            </h2>
+            <div className="sm:text-lg leading-relaxed drop-shadow">
+              <Markdown type="lite">{intro.catchDescription}</Markdown>
+            </div>
+          </div>
+        </div>
+      </Block>
+
+      <Block>
         <Container>
-          <div className="relative z-10 -mt-72 md:-mt-64 p-0.5 overflow-hidden">
-            <div className="md:grid lg:grid-cols-2 md:gap-x-16 lg:gap-x-16 bg-white p-12 sm:p-16 rounded-xl shadow-lg">
-              <div className="mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-x-16 xl:gap-x-20">
+            <div>
+              <div className="relative p-1 overflow-hidden shadow-medium">
                 <FillImage
                   src={intro.portraitImage.url}
                   alt={intro.portraitImage.alt}
@@ -80,7 +93,7 @@ const Index = ({
                   height={intro.portraitImage.height}
                   blurSrc={intro.portraitImageBlurDataUri}
                   priority
-                  className="shadow-medium aspect-video lg:aspect-square xl:aspect-video -mt-2 -ml-2 sm:-mt-7 sm:-ml-7"
+                  className="aspect-video lg:aspect-square"
                 />
                 <a
                   href={intro.githubUrl}
@@ -91,7 +104,11 @@ const Index = ({
                   <FaGithub className="text-xl" />
                   GitHub
                 </a>
-                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9 mt-12">
+              </div>
+            </div>
+            <div className="flex flex-col gap-10">
+              <div>
+                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9">
                   <ruby>
                     {intro.firstName}
                     <rt className="font-normal text-sm">
@@ -189,6 +206,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       intro: {
         ...intro,
         content: await markdownToHtml(intro.content),
+        catchDescription: await markdownToHtml(intro.catchDescription),
         featureDescription: await markdownToHtml(intro.featureDescription),
         backgroundImageBlurDataUri: await createDataUriBlurImage(
           intro.backgroundImage.url,

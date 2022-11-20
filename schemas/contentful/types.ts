@@ -71,6 +71,8 @@ export type Intro = {
   githubUrl: string
   portraitImage: Image
   backgroundImage: Image
+  catchTitle: string
+  catchDescription: string
   featureTitle: string
   featureDescription: string
   features: Feature[]

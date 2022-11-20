@@ -181,6 +181,8 @@ function toIntro(raw: IntroRaw): Intro {
     lastNameRuby: nonNullable(raw.lastNameRuby),
     position: nonNullable(raw.position),
     githubUrl: nonNullable(raw.githubUrl),
+    catchTitle: nonNullable(raw.catchTitle),
+    catchDescription: nonNullable(raw.catchDescription),
     featureTitle: nonNullable(raw.featureTitle),
     featureDescription: nonNullable(raw.featureDescription),
     portraitImage: {

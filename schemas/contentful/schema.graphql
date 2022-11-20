@@ -616,9 +616,11 @@ type Intro implements Entry {
   position(locale: String): String
   dateOfBirth(locale: String): String
   githubUrl(locale: String): String
+  content(locale: String): String
   portraitImage(preview: Boolean, locale: String): Asset
   backgroundImage(preview: Boolean, locale: String): Asset
-  content(locale: String): String
+  catchTitle(locale: String): String
+  catchDescription(locale: String): String
   featureTitle(locale: String): String
   featureDescription(locale: String): String
   featureCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): IntroFeatureCollection
@@ -697,8 +699,6 @@ input IntroFilter {
   githubUrl_not_in: [String]
   githubUrl_contains: String
   githubUrl_not_contains: String
-  portraitImage_exists: Boolean
-  backgroundImage_exists: Boolean
   content_exists: Boolean
   content: String
   content_not: String
@@ -706,6 +706,22 @@ input IntroFilter {
   content_not_in: [String]
   content_contains: String
   content_not_contains: String
+  portraitImage_exists: Boolean
+  backgroundImage_exists: Boolean
+  catchTitle_exists: Boolean
+  catchTitle: String
+  catchTitle_not: String
+  catchTitle_in: [String]
+  catchTitle_not_in: [String]
+  catchTitle_contains: String
+  catchTitle_not_contains: String
+  catchDescription_exists: Boolean
+  catchDescription: String
+  catchDescription_not: String
+  catchDescription_in: [String]
+  catchDescription_not_in: [String]
+  catchDescription_contains: String
+  catchDescription_not_contains: String
   featureTitle_exists: Boolean
   featureTitle: String
   featureTitle_not: String
@@ -746,6 +762,8 @@ enum IntroOrder {
   dateOfBirth_DESC
   githubUrl_ASC
   githubUrl_DESC
+  catchTitle_ASC
+  catchTitle_DESC
   featureTitle_ASC
   featureTitle_DESC
   sys_id_ASC

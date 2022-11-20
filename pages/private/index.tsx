@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import jimp from 'jimp'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
-import { MdOutlineArticle } from 'react-icons/md'
 import { FaGithub } from 'react-icons/fa'
 import { siteName, siteDescription } from '../../lib/constants'
 import {
@@ -21,7 +19,6 @@ import {
   getSkillRatingList,
   getTagGroupList,
 } from '../../schemas/contentful'
-import { pagesPath } from '../../lib/$path'
 import Block from '../../components/block'
 import Container from '../../components/container'
 import Markdown from '../../components/markdown'
@@ -173,17 +170,6 @@ const Index = ({
         <Container>
           <TagGroupList tagGroups={tagGroups} />
         </Container>
-        <div className="text-center mt-20">
-          <Link
-            className="inline-flex rounded items-center border overflow-hidden border-stone-200 transition bg-white group hover:bg-slate-50"
-            href={pagesPath.private.articles.$url()}
-          >
-            <div className="flex-none bg-teal-700 group-hover:bg-teal-900 transition text-white p-4">
-              <MdOutlineArticle className="inline" size={38} />
-            </div>
-            <div className="grow px-8 text-center">{t('allArticles')}</div>
-          </Link>
-        </div>
       </Block>
     </>
   )

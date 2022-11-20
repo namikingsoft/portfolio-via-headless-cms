@@ -139,9 +139,12 @@ const Layout = ({ children }: Props) => {
           <Container>
             <div className="py-28 flex flex-col gap-5 md:flex-row items-center">
               <div className="grow text-center md:text-left">
-                <h3 className="inline text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-                  {siteName}
-                </h3>
+                <Link
+                  href={pagesPath.private.$url()}
+                  className="inline-flex items-center gap-3 text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-3 lg:mb-0 lg:pr-4 lg:w-1/2"
+                >
+                  <MyAvatar size={48} /> {siteName}
+                </Link>
                 <cite className="text-xs block">
                   Copyright ©️ Tsubasa Namiki, Based by{' '}
                   <a
@@ -156,6 +159,12 @@ const Layout = ({ children }: Props) => {
                   </a>
                 </cite>
               </div>
+              <Link
+                href={pagesPath.private.articles.$url()}
+                className="bg-white hover:bg-black hover:text-white border border-black text-black font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"
+              >
+                {t('allArticles')}
+              </Link>
               <a
                 href={portfolioGitHubUrl}
                 className="inline-flex items-center gap-2 grow-0 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors"

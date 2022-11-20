@@ -14,7 +14,7 @@ const ThumbImage = ({
   alt,
   width,
   height,
-  aspectRatio,
+  aspectRatio = 16 / 9,
   priority,
 }: Props) => {
   return (

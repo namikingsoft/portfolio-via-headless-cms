@@ -19,7 +19,7 @@ const FillImage = ({
   alt,
   width,
   height,
-  aspectRatio = 16 / 9,
+  aspectRatio,
   objectPosition = 'top',
   priority,
   blurSrc,

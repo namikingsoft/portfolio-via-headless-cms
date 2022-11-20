@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import { ArticleWithRelated } from '../../../schemas/contentful/types'
 import { getAllArticles, getArticle } from '../../../schemas/contentful'
+import { siteName } from '../../../lib/constants'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
@@ -45,7 +46,7 @@ const Post = ({ article, content }: Props) => {
   return (
     <>
       <Head>
-        <title>{`${article.title} | ${t('siteName')}`}</title>
+        <title>{`${article.title} | ${siteName}`}</title>
       </Head>
       <Block>
         <article>

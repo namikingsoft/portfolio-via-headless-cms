@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { MdOutlineArticle } from 'react-icons/md'
 import { FaGithub } from 'react-icons/fa'
+import { siteName, siteDescription } from '../../lib/constants'
 import {
   Intro,
   Pickup,
@@ -55,7 +56,7 @@ const Index = ({
   return (
     <>
       <Head>
-        <title>{`${t('siteName')} | ${t('siteDescription')}`}</title>
+        <title>{`${siteName} | ${siteDescription}`}</title>
       </Head>
 
       <Block>

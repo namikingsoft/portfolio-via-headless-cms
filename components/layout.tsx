@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { FaGithub } from 'react-icons/fa'
 import cn from 'classnames'
 import { useLogoutMutation } from '../schemas/bff/client'
-import { portfolioGitHubUrl } from '../lib/constants'
+import { siteName, siteDescription, portfolioGitHubUrl } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import Container from './container'
 import Block from './block'
@@ -81,12 +81,12 @@ const Layout = ({ children }: Props) => {
                     href={pagesPath.private.$url()}
                   >
                     <MyAvatar size={32} />
-                    {t('siteName')}
+                    {siteName}
                   </Link>
                 ) : (
                   <div className="flex flex-row items-center gap-5">
                     <MyAvatar size={100} />
-                    {t('siteName')}
+                    {siteName}
                   </div>
                 )}
               </h1>
@@ -98,7 +98,7 @@ const Layout = ({ children }: Props) => {
                   hidden: pageType === 'lower',
                 })}
               >
-                {t('siteDescription')}
+                {siteDescription}
               </h2>
               <nav
                 className={cn({
@@ -140,7 +140,7 @@ const Layout = ({ children }: Props) => {
             <div className="py-28 flex flex-col gap-5 md:flex-row items-center">
               <div className="grow text-center md:text-left">
                 <h3 className="inline text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-                  {t('siteName')}
+                  {siteName}
                 </h3>
                 <cite className="text-xs block">
                   Copyright ©️ Tsubasa Namiki, Based by{' '}

@@ -6,7 +6,11 @@ import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../schemas/bff/client'
-import { passwordLength, redirectUriSearchParamsName } from '../lib/constants'
+import {
+  siteName,
+  passwordLength,
+  redirectUriSearchParamsName,
+} from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import { parseToFormValidationErrors } from '../schemas/bff/errors'
 import Container from '../components/container'
@@ -84,7 +88,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>{`${t('login')} | ${t('siteDescription')}`}</title>
+        <title>{`${t('login')} | ${siteName}`}</title>
       </Head>
       <Container narrow>
         <form className="my-20" onSubmit={handleSubmit(onSubmit)}>

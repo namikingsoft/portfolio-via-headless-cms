@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Heading from '../../../components/heading'
 import Container from '../../../components/container'
 import ArticleList from '../../../components/article-list'
+import { siteName } from '../../../lib/constants'
 import { Article } from '../../../schemas/contentful/types'
 import { getAllArticles } from '../../../schemas/contentful'
 
@@ -18,7 +19,7 @@ const ArticleIndex = ({ articles }: Props) => {
   return (
     <>
       <Head>
-        <title>{`${t('allArticles')} | ${t('siteName')}`}</title>
+        <title>{`${t('allArticles')} | ${siteName}`}</title>
       </Head>
       <Container>
         <div className="py-10">

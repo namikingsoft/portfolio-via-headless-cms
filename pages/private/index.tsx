@@ -30,7 +30,6 @@ import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
 import TitleDescription from '../../components/title-description'
-import useLapTimer from '../../components/use-lap-timer'
 import styles from './index.module.css'
 
 type Props = {
@@ -53,10 +52,6 @@ const Index = ({
 }: Props) => {
   const { t } = useTranslation()
 
-  const lap = useLapTimer({
-    liftFilterImage: 0,
-  })
-
   return (
     <>
       <Head>
@@ -73,11 +68,7 @@ const Index = ({
             blurSrc={intro.backgroundImageBlurDataUri}
             className={cn(
               'w-screen h-screen absolute shadow-medium -z-10',
-              'transition duration-1000',
-              {
-                'sepia contrast-50 brightness-110 blur-3xl':
-                  !lap.liftFilterImage,
-              },
+              styles.animateFilterRemoval,
             )}
             priority
           />

@@ -1,0 +1,36 @@
+.animateStrong strong {
+  @apply relative;
+}
+
+.animateStrong strong::after {
+  @apply absolute left-0 w-full h-0.5 bg-white -bottom-px origin-top-left scale-x-0;
+  content: '';
+}
+
+.animateStrong strong:nth-of-type(1)::after {
+  animation: scaleXOut forwards 0.5s ease 1.2s 1;
+}
+
+.animateStrong strong:nth-of-type(2)::after {
+  animation: scaleXOut forwards 0.5s ease 1.6s 1;
+}
+
+.animateStrong strong:nth-of-type(3)::after {
+  animation: scaleXOut forwards 0.5s ease 2.0s 1;
+}
+
+.animateStrong strong:nth-of-type(n+4)::after {
+  animation: scaleXOut forwards 0.5s ease 2.4s 1;
+}
+
+
+@keyframes scaleXOut {
+  0% {
+    /* NOTE: not animate @apply scale-x-0 */
+    transform: scaleX(0)
+  }
+
+  100% {
+    transform: scaleX(1)
+  }
+}

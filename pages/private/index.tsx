@@ -31,6 +31,7 @@ import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
 import TitleDescription from '../../components/title-description'
 import useLapTimer from '../../components/use-lap-timer'
+import styles from './index.module.css'
 
 type Props = {
   intro: Intro & {
@@ -84,7 +85,12 @@ const Index = ({
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
               {intro.catchTitle}
             </h2>
-            <div className="sm:text-lg leading-relaxed drop-shadow">
+            <div
+              className={cn(
+                'sm:text-lg leading-relaxed drop-shadow',
+                styles.animateStrong,
+              )}
+            >
               <Markdown type="lite">{intro.catchDescription}</Markdown>
             </div>
           </div>

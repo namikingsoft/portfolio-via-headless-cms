@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { FaGithub } from 'react-icons/fa'
+import cn from 'classnames'
 import { siteName, siteDescription } from '../../lib/constants'
 import {
   Intro,
@@ -29,6 +30,7 @@ import SkillGroupList from '../../components/skill-group-list'
 import FeatureList from '../../components/feature-list'
 import markdownToHtml from '../../lib/markdownToHtml'
 import TitleDescription from '../../components/title-description'
+import useLapTimer from '../../components/use-lap-timer'
 
 type Props = {
   intro: Intro & {
@@ -50,6 +52,10 @@ const Index = ({
 }: Props) => {
   const { t } = useTranslation()
 
+  const lap = useLapTimer({
+    liftFilterImage: 0,
+  })
+
   return (
     <>
       <Head>
@@ -64,11 +70,17 @@ const Index = ({
             width={intro.backgroundImage.width}
             height={intro.backgroundImage.height}
             blurSrc={intro.backgroundImageBlurDataUri}
-            className="w-screen h-screen absolute sepia contrast-50 brightness-110 shadow-medium -z-10"
-            objectPosition="center"
+            className={cn(
+              'w-screen h-screen absolute shadow-medium -z-10',
+              'transition duration-1000',
+              {
+                'sepia contrast-50 brightness-110 blur-3xl':
+                  !lap.liftFilterImage,
+              },
+            )}
             priority
           />
-          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-16 backdrop-blur-sm bg-opacity-75 bg-black text-white">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-14 backdrop-blur-sm bg-opacity-75 bg-black text-white">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
               {intro.catchTitle}
             </h2>

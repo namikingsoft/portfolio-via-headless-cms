@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 type Props = {
   src: string
@@ -29,31 +29,37 @@ const FillImage = ({
 
   const loading = blurSrc && !loaded
 
-  useEffect(() => {
-    if (loading) {
-      const img = new window.Image()
-      img.onload = () => {
-        setLoaded(true)
-      }
-      img.src = src
-    }
-  }, [src])
+  const baseClassName = cn(
+    className,
+    objectPosition === 'top' ? 'object-top' : 'object-center',
+    'object-cover min-w-full',
+  )
 
   return (
-    <Image
-      src={loading ? blurSrc : src}
-      alt={alt}
-      width={width}
-      height={height}
-      sizes="100vw"
-      priority={priority}
-      className={cn(
-        className,
-        objectPosition === 'top' ? 'object-top' : 'object-center',
-        'object-cover min-w-full',
+    <>
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes="100vw"
+        priority={priority}
+        className={cn(baseClassName, {
+          hidden: loading,
+        })}
+        style={{ aspectRatio }}
+        onLoad={() => setLoaded(true)}
+      />
+      {loading && (
+        // eslint-disable-next-line @next/next/no-img-element -- light image
+        <img
+          src={blurSrc}
+          alt={alt}
+          className={baseClassName}
+          style={{ aspectRatio }}
+        />
       )}
-      style={{ aspectRatio }}
-    />
+    </>
   )
 }
 

@@ -29,9 +29,9 @@
 }
 
 
+/* NOTE: not animate @apply scale-x-n */
 @keyframes scaleXOut {
   0% {
-    /* NOTE: not animate @apply scale-x-0 */
     transform: scaleX(0)
   }
 

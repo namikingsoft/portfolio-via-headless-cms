@@ -93,7 +93,7 @@ const Layout = ({ children }: Props) => {
               <h2
                 className={cn({
                   'text-lg mt-5': pageType === 'login',
-                  'text-center md:text-left text-lg md:pl-8 mx-5':
+                  'text-center md:text-left text-lg md:pl-8 mx-5 drop-shadow-white-sm':
                     pageType === 'top',
                   hidden: pageType === 'lower',
                 })}

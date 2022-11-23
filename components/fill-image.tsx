@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import cn from 'classnames'
-import { useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Props = {
   src: string
@@ -26,41 +26,34 @@ const FillImage = ({
   className,
 }: Props) => {
   const [loaded, setLoaded] = useState(false)
-  const onLoad = useCallback(() => {
-    setLoaded(true)
-  }, [])
 
-  const baseClassName = cn(
-    className,
-    objectPosition === 'top' ? 'object-top' : 'object-center',
-    'object-cover min-w-full',
-  )
+  const loading = blurSrc && !loaded
+
+  useEffect(() => {
+    if (loading) {
+      const img = new window.Image()
+      img.onload = () => {
+        setLoaded(true)
+      }
+      img.src = src
+    }
+  }, [src])
 
   return (
-    <>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        sizes="100vw"
-        priority={priority}
-        className={cn(baseClassName, {
-          hidden: !loaded && blurSrc,
-        })}
-        style={{ aspectRatio }}
-        onLoad={onLoad}
-      />
-      {blurSrc && !loaded && (
-        // eslint-disable-next-line @next/next/no-img-element -- only blur image
-        <img
-          src={blurSrc}
-          alt={alt}
-          className={baseClassName}
-          style={{ aspectRatio }}
-        />
+    <Image
+      src={loading ? blurSrc : src}
+      alt={alt}
+      width={width}
+      height={height}
+      sizes="100vw"
+      priority={priority}
+      className={cn(
+        className,
+        objectPosition === 'top' ? 'object-top' : 'object-center',
+        'object-cover min-w-full',
       )}
-    </>
+      style={{ aspectRatio }}
+    />
   )
 }
 

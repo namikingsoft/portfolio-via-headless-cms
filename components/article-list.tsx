@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ThumbnailImage from './thumbnail-image'
+import FillImage from './fill-image'
 import DateRange from './date-range'
 import Company from './company'
 import { Article } from '../schemas/contentful/types'
@@ -22,11 +22,13 @@ const ArticleList = ({ articles }: Props) => {
                 className="hover"
                 href={pagesPath.private.articles._slug(article.slug).$url()}
               >
-                <ThumbnailImage
+                <FillImage
+                  className="shadow-small hover:shadow-medium transition-shadow duration-200"
                   src={article.image.url}
                   alt={article.image.alt}
                   width={article.image.width}
                   height={article.image.height}
+                  aspectRatio={16 / 9}
                 />
               </Link>
             </div>

@@ -9,7 +9,7 @@ import { siteName } from '../../../lib/constants'
 import markdownToHtml from '../../../lib/markdownToHtml'
 import Block from '../../../components/block'
 import Container from '../../../components/container'
-import ThumbnailImage from '../../../components/thumbnail-image'
+import FillImage from '../../../components/fill-image'
 import Markdown from '../../../components/markdown'
 import Company from '../../../components/company'
 import DateRange from '../../../components/date-range'
@@ -59,7 +59,8 @@ const Post = ({ article, content }: Props) => {
               <div className="flex flex-col md:flex-row gap-12 mt-12 lg:mt-24 text-slate-500">
                 <div className="flex-none md:w-1/2 lg:w-2/5">
                   <a href={article.image.url}>
-                    <ThumbnailImage
+                    <FillImage
+                      className="shadow-small hover:shadow-medium transition-shadow duration-200"
                       src={article.image.url}
                       alt={article.image.alt}
                       width={article.image.width}

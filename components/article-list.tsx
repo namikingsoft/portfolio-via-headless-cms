@@ -5,7 +5,6 @@ import Company from './company'
 import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 import TagList from './tag-list'
-import Heading from './heading'
 
 type Props = {
   articles: Article[]
@@ -16,31 +15,22 @@ const ArticleList = ({ articles }: Props) => {
     <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32">
       {articles.map((article) => (
         <section key={article.slug}>
-          <div className="mb-6">
-            <div className="sm:mx-0">
-              <Link
-                className="hover"
-                href={pagesPath.private.articles._slug(article.slug).$url()}
-              >
-                <FillImage
-                  className="shadow-small hover:shadow-medium transition-shadow duration-200"
-                  src={article.image.url}
-                  alt={article.image.alt}
-                  width={article.image.width}
-                  height={article.image.height}
-                  aspectRatio={16 / 9}
-                />
-              </Link>
-            </div>
-          </div>
-          <Heading as="h3">
-            <Link
-              className="hover:underline"
-              href={pagesPath.private.articles._slug(article.slug).$url()}
-            >
+          <Link
+            className="group cursor-pointer"
+            href={pagesPath.private.articles._slug(article.slug).$url()}
+          >
+            <FillImage
+              className="mb-6 shadow-small group-hover:shadow-medium transition-shadow duration-200"
+              src={article.image.url}
+              alt={article.image.alt}
+              width={article.image.width}
+              height={article.image.height}
+              aspectRatio={16 / 9}
+            />
+            <h3 className="group-hover:underline text-2xl xl:text-3xl mb-4 leading-snug">
               {article.title}
-            </Link>
-          </Heading>
+            </h3>
+          </Link>
           <p className="leading-7 mb-4 text-gray-700">{article.excerpt}</p>
           <div className="text-sm mb-1">
             <Company company={article.company} />

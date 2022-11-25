@@ -15,36 +15,37 @@ const ArticleListRelative = ({ articles }: Props) => {
     <div className="grid grid-cols-1 gap-y-24">
       {articles.map((article) => (
         <section key={article.slug}>
-          <div className="flex flex-col sm:flex-row gap-5">
-            <div className="flex-auto">
-              <h3 className="text-2xl mb-4">
+          <Link
+            key={article.slug}
+            className="group cursor-pointer"
+            href={pagesPath.private.articles._slug(article.slug).$url()}
+          >
+            <div className="flex flex-col sm:flex-row gap-5">
+              <div className="flex-auto">
+                <h3 className="text-2xl mb-4 group-hover:underline">
+                  {article.title}
+                </h3>
+                <p className="col-span-2 leading-7 text-gray-700">
+                  {article.excerpt}
+                </p>
+              </div>
+              <div className="flex-none sm:w-40">
                 <Link
-                  className="hover:underline"
+                  className="group-hover"
                   href={pagesPath.private.articles._slug(article.slug).$url()}
                 >
-                  {article.title}
+                  <FillImage
+                    className="shadow-small group-hover:shadow-medium transition-shadow duration-200"
+                    src={article.image.url}
+                    alt={article.image.alt}
+                    width={article.image.width}
+                    height={article.image.height}
+                    aspectRatio={16 / 9}
+                  />
                 </Link>
-              </h3>
-              <p className="col-span-2 leading-7 text-gray-700">
-                {article.excerpt}
-              </p>
+              </div>
             </div>
-            <div className="flex-none sm:w-40">
-              <Link
-                className="hover"
-                href={pagesPath.private.articles._slug(article.slug).$url()}
-              >
-                <FillImage
-                  className="shadow-small hover:shadow-medium transition-shadow duration-200"
-                  src={article.image.url}
-                  alt={article.image.alt}
-                  width={article.image.width}
-                  height={article.image.height}
-                  aspectRatio={16 / 9}
-                />
-              </Link>
-            </div>
-          </div>
+          </Link>
           <div className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm mt-5">
             <div>
               <Company company={article.company} />

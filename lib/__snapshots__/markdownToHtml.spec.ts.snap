@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`image with dimension 1`] = `"<p><img alt="img {640x480}" srcSet="/_next/image?url=https%3A%2F%2Fexample.com%2Ftest.png&amp;w=640&amp;q=75 1x, /_next/image?url=https%3A%2F%2Fexample.com%2Ftest.png&amp;w=1920&amp;q=75 2x" src="/_next/image?url=https%3A%2F%2Fexample.com%2Ftest.png&amp;w=1920&amp;q=75" width="640" height="480" decoding="async" data-nimg="1" loading="lazy" style="color:transparent"/></p>"`;
+
+exports[`image without dimension 1`] = `"<p><img src="//example.com/test.png" alt="img"/></p>"`;

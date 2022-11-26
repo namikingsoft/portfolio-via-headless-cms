@@ -12,6 +12,7 @@ import remarkMath from 'remark-math'
 import remarkHtmlKatex from 'remark-html-katex'
 import remarkEmoji from 'remark-emoji'
 import remarkSimplePlantUML from '@akebifiky/remark-simple-plantuml'
+import ImageOnMarkdown from '../components/image-on-markdown'
 
 export default async function markdownToHtml(
   markdown: string,
@@ -30,6 +31,9 @@ export default async function markdownToHtml(
     .use(rehypeReact, {
       createElement,
       Fragment,
+      components: {
+        img: ImageOnMarkdown,
+      },
     })
     .process(markdown)
 

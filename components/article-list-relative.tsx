@@ -30,19 +30,14 @@ const ArticleListRelative = ({ articles }: Props) => {
                 </p>
               </div>
               <div className="flex-none sm:w-40">
-                <Link
-                  className="group-hover"
-                  href={pagesPath.private.articles._slug(article.slug).$url()}
-                >
-                  <FillImage
-                    className="shadow-small group-hover:shadow-medium transition-shadow duration-200"
-                    src={article.image.url}
-                    alt={article.image.alt}
-                    width={article.image.width}
-                    height={article.image.height}
-                    aspectRatio={16 / 9}
-                  />
-                </Link>
+                <FillImage
+                  className="shadow-small group-hover:shadow-medium transition-shadow duration-200"
+                  src={article.image.url}
+                  alt={article.image.alt}
+                  width={article.image.width}
+                  height={article.image.height}
+                  aspectRatio={16 / 9}
+                />
               </div>
             </div>
           </Link>

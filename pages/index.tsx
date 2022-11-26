@@ -6,11 +6,7 @@ import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useAuthenticateMutation } from '../schemas/bff/client'
-import {
-  siteName,
-  passwordLength,
-  redirectUriSearchParamsName,
-} from '../lib/constants'
+import { siteName, redirectUriSearchParamsName } from '../lib/constants'
 import { pagesPath } from '../lib/$path'
 import { parseToFormValidationErrors } from '../schemas/bff/errors'
 import Container from '../components/container'
@@ -70,7 +66,7 @@ const Index = () => {
     // NOTE: value is previous before setTimeout
     setTimeout(() => {
       const value = getValues('password')
-      if (value && value.length >= passwordLength) handleSubmit(onSubmit)()
+      if (value) handleSubmit(onSubmit)()
     }, 0)
   }, [])
 

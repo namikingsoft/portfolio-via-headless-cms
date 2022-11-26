@@ -1,5 +1,10 @@
-import { remark } from 'remark'
-import remarkHtml from 'remark-html'
+import { unified } from 'unified'
+import { createElement, Fragment } from 'react'
+import { renderToString } from 'react-dom/server'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeReact from 'rehype-react'
+import rehypeRaw from 'rehype-raw'
 import remarkPrism from 'remark-prism'
 import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
@@ -8,8 +13,10 @@ import remarkHtmlKatex from 'remark-html-katex'
 import remarkEmoji from 'remark-emoji'
 import remarkSimplePlantUML from '@akebifiky/remark-simple-plantuml'
 
-export default async function markdownToHtml(markdown: string) {
-  const result = await remark()
+export default async function markdownToHtml(
+  markdown: string,
+): Promise<string> {
+  const { result } = await unified()
     .use(remarkGfm)
     .use(remarkToc, { heading: 'toc|TOC|Table of Contents|目次', maxDepth: 2 })
     .use(remarkMath)
@@ -17,7 +24,14 @@ export default async function markdownToHtml(markdown: string) {
     .use(remarkSimplePlantUML)
     .use(remarkEmoji)
     .use(remarkPrism)
-    .use(remarkHtml, { sanitize: false }) // cms content only
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true }) // cms content only
+    .use(rehypeRaw)
+    .use(rehypeReact, {
+      createElement,
+      Fragment,
+    })
     .process(markdown)
-  return result.toString()
+
+  return renderToString(result)
 }

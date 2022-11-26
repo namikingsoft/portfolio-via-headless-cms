@@ -17,8 +17,8 @@ import GithubLink from '../../../components/github-link'
 import ArticleListRelative from '../../../components/article-list-relative'
 import TagList from '../../../components/tag-list'
 import Heading from '../../../components/heading'
-import useZoomImage from '../../../hooks/use-zoom-image'
-import useLazyStylesheet from '../../../hooks/use-lazy-stylesheet'
+import useZoomImage from '../../../lib/use-zoom-image'
+import useLazyStylesheet from '../../../lib/use-lazy-stylesheet'
 
 type Props = {
   article: ArticleWithRelated

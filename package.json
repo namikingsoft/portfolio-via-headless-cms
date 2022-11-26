@@ -6,7 +6,7 @@
     "start": "next start",
     "update": "npx npm-check --update",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "typecheck": "tsc",
+    "type": "tsc",
     "test": "jest"
   },
   "dependencies": {

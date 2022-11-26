@@ -22,6 +22,7 @@ export const context = ({ req, res }: ContextArgument): Context => {
       serialize(visitorTokenCookieName, value, {
         maxAge: visitorTokenMaxAgeSec * 1000,
         httpOnly: true,
+        secure: true,
         path: '/',
       }),
     )
@@ -31,6 +32,7 @@ export const context = ({ req, res }: ContextArgument): Context => {
       serialize(visitorTokenCookieName, '', {
         maxAge: 0,
         httpOnly: true,
+        secure: true,
         path: '/',
       }),
     )

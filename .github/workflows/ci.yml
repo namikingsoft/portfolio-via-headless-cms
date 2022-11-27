@@ -26,4 +26,6 @@ jobs:
     - name: Install Dependencies
       run: npm install
     - name: Run
-      run: npm run ${{ matrix.version }}
+      run: |
+        COMMAND="${{ matrix.run }}"
+        npm run ${COMMAND:-__notfound__}

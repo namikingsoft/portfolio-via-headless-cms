@@ -20,9 +20,9 @@ const TagIndex = ({ tag, articles }: Props) => {
         <title>{`${tag.title} | ${siteName}`}</title>
       </Head>
       <Container>
-        <div className="py-10">
-          <Heading as="h1">{tag.title}</Heading>
-        </div>
+        <Heading as="h1" className="py-10">
+          {tag.title}
+        </Heading>
         {articles.length > 0 && <ArticleList articles={articles} />}
       </Container>
     </>

@@ -50,47 +50,45 @@ const Post = ({ article, content }: Props) => {
       </Head>
       <Block>
         <article>
-          <div className="mt-16 lg:mt-20">
-            <Container>
-              <Heading as="h1">{article.title}</Heading>
-              <h2 className="mt-6 text-base lg:visible text-slate-600">
-                {article.excerpt}
-              </h2>
-              <div className="flex flex-col md:flex-row gap-12 mt-12 lg:mt-24 text-slate-500">
-                <div className="flex-none md:w-1/2 lg:w-2/5">
-                  <a href={article.image.url}>
-                    <FillImage
-                      className="shadow-small hover:shadow-medium transition-shadow duration-200"
-                      src={article.image.url}
-                      alt={article.image.alt}
-                      width={article.image.width}
-                      height={article.image.height}
-                      aspectRatio={article.image.width / article.image.height}
-                      priority
-                    />
-                  </a>
+          <Container className="mt-16 lg:mt-20">
+            <Heading as="h1">{article.title}</Heading>
+            <h2 className="mt-6 text-base lg:visible text-slate-600">
+              {article.excerpt}
+            </h2>
+            <div className="flex flex-col md:flex-row gap-12 mt-12 lg:mt-24 text-slate-500">
+              <div className="flex-none md:w-1/2 lg:w-2/5">
+                <a href={article.image.url}>
+                  <FillImage
+                    className="shadow-small hover:shadow-medium transition-shadow duration-200"
+                    src={article.image.url}
+                    alt={article.image.alt}
+                    width={article.image.width}
+                    height={article.image.height}
+                    aspectRatio={article.image.width / article.image.height}
+                    priority
+                  />
+                </a>
+              </div>
+              <div className="flex flex-col gap-2 lg:gap-5 text-lg md:text-xl lg:text-2xl">
+                <div>
+                  <Company company={article.company} />
                 </div>
-                <div className="flex flex-col gap-2 lg:gap-5 text-lg md:text-xl lg:text-2xl">
-                  <div>
-                    <Company company={article.company} />
-                  </div>
-                  <div>
-                    <DateRange
-                      date={article.date}
-                      dateEnd={article.dateEnd}
-                      isContinue={article.dateIsContinue}
-                    />
-                  </div>
-                  <div>
-                    <GithubLink repo={article.githubRepo} />
-                  </div>
-                  <div className="text-sm md:col-span-2">
-                    <TagList article={article} />
-                  </div>
+                <div>
+                  <DateRange
+                    date={article.date}
+                    dateEnd={article.dateEnd}
+                    isContinue={article.dateIsContinue}
+                  />
+                </div>
+                <div>
+                  <GithubLink repo={article.githubRepo} />
+                </div>
+                <div className="text-sm md:col-span-2">
+                  <TagList article={article} />
                 </div>
               </div>
-            </Container>
-          </div>
+            </div>
+          </Container>
           <Container narrow>
             <div className="text-gray-700 text-lg mt-16 md:mt-28 lg:mt-44">
               <Markdown type="detail">{content}</Markdown>

@@ -58,85 +58,78 @@ const Index = ({
         <title>{`${siteName} | ${siteDescription}`}</title>
       </Head>
 
-      <Block>
-        <div className="w-screen h-screen relative">
-          <FillImage
-            src={intro.backgroundImage.url}
-            alt={intro.backgroundImage.alt}
-            width={intro.backgroundImage.width}
-            height={intro.backgroundImage.height}
-            blurSrc={intro.backgroundImageBlurDataUri}
+      <Block className="w-screen h-screen relative">
+        <FillImage
+          src={intro.backgroundImage.url}
+          alt={intro.backgroundImage.alt}
+          width={intro.backgroundImage.width}
+          height={intro.backgroundImage.height}
+          blurSrc={intro.backgroundImageBlurDataUri}
+          className={cn(
+            'w-screen h-screen absolute shadow-medium -z-10',
+            styles.animateFilterRemoval,
+          )}
+          priority
+        />
+        <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-14 backdrop-blur-sm bg-opacity-75 bg-black text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
+            {intro.catchTitle}
+          </h2>
+          <Markdown
+            type="lite"
             className={cn(
-              'w-screen h-screen absolute shadow-medium -z-10',
-              styles.animateFilterRemoval,
+              'sm:text-lg leading-relaxed drop-shadow',
+              styles.animateStrong,
             )}
-            priority
-          />
-          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-14 backdrop-blur-sm bg-opacity-75 bg-black text-white">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
-              {intro.catchTitle}
-            </h2>
-            <div
-              className={cn(
-                'sm:text-lg leading-relaxed drop-shadow',
-                styles.animateStrong,
-              )}
-            >
-              <Markdown type="lite">{intro.catchDescription}</Markdown>
-            </div>
-          </div>
+          >
+            {intro.catchDescription}
+          </Markdown>
         </div>
       </Block>
 
       <Block>
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-x-16 xl:gap-x-20">
+        <Container className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-x-16 xl:gap-x-20">
+          <div>
+            <div className="relative p-1 overflow-hidden shadow-medium">
+              <FillImage
+                src={intro.portraitImage.url}
+                alt={intro.portraitImage.alt}
+                width={intro.portraitImage.width}
+                height={intro.portraitImage.height}
+                blurSrc={intro.portraitImageBlurDataUri}
+                priority
+                className="aspect-video lg:aspect-square"
+              />
+              <a
+                href={intro.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 py-1.5 font-bold text-md bg-black hover:bg-teal-500 transition shadow-md -rotate-45 text-white absolute top-12 -left-12 border-t border-b border-white w-56"
+              >
+                <FaGithub className="text-xl" />
+                GitHub
+              </a>
+            </div>
+          </div>
+          <div className="flex flex-col gap-10">
             <div>
-              <div className="relative p-1 overflow-hidden shadow-medium">
-                <FillImage
-                  src={intro.portraitImage.url}
-                  alt={intro.portraitImage.alt}
-                  width={intro.portraitImage.width}
-                  height={intro.portraitImage.height}
-                  blurSrc={intro.portraitImageBlurDataUri}
-                  priority
-                  className="aspect-video lg:aspect-square"
-                />
-                <a
-                  href={intro.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-center gap-2 py-1.5 font-bold text-md bg-black hover:bg-teal-500 transition shadow-md -rotate-45 text-white absolute top-12 -left-12 border-t border-b border-white w-56"
-                >
-                  <FaGithub className="text-xl" />
-                  GitHub
-                </a>
+              <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9">
+                <ruby>
+                  {intro.firstName}
+                  <rt className="font-normal text-sm">{intro.firstNameRuby}</rt>
+                </ruby>
+                <ruby>
+                  {intro.lastName}
+                  <rt className="font-normal text-sm">{intro.lastNameRuby}</rt>
+                </ruby>
+              </h2>
+              <div className="block border-t border-gray-500 text-gray-500 text-sm pt-1 mt-1">
+                {intro.position}
               </div>
             </div>
-            <div className="flex flex-col gap-10">
-              <div>
-                <h2 className="text-4xl sm:text-6xl font-bold inline-flex flex-row-reverse gap-9">
-                  <ruby>
-                    {intro.firstName}
-                    <rt className="font-normal text-sm">
-                      {intro.firstNameRuby}
-                    </rt>
-                  </ruby>
-                  <ruby>
-                    {intro.lastName}
-                    <rt className="font-normal text-sm">
-                      {intro.lastNameRuby}
-                    </rt>
-                  </ruby>
-                </h2>
-                <div className="block border-t border-gray-500 text-gray-500 text-sm pt-1 mt-1">
-                  {intro.position}
-                </div>
-              </div>
-              <div className="text-lg leading-relaxed">
-                <Markdown type="lite">{intro.content}</Markdown>
-              </div>
-            </div>
+            <Markdown type="lite" className="text-lg leading-relaxed">
+              {intro.content}
+            </Markdown>
           </div>
         </Container>
       </Block>

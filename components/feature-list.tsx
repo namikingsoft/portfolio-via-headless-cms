@@ -1,13 +1,20 @@
+import cn from 'classnames'
 import Image from 'next/image'
 import { Feature } from '../schemas/contentful/types'
 
 type Props = {
+  className?: string
   features: Feature[]
 }
 
-const FeatureList = ({ features }: Props) => {
+const FeatureList = ({ className, features }: Props) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-10">
+    <div
+      className={cn(
+        'grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-10',
+        className,
+      )}
+    >
       {features.map((feature) => (
         <div key={feature.title} className="flex flex-col gap-5">
           <div className="flex flex-col items-center justify-center gap-8">

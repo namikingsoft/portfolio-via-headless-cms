@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import Link from 'next/link'
 import FillImage from './fill-image'
 import DateRange from './date-range'
@@ -7,12 +8,13 @@ import { pagesPath } from '../lib/$path'
 import TagList from './tag-list'
 
 type Props = {
+  className?: string
   articles: Article[]
 }
 
-const ArticleListRelative = ({ articles }: Props) => {
+const ArticleListRelative = ({ className, articles }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-y-24">
+    <div className={cn('grid grid-cols-1 gap-y-24', className)}>
       {articles.map((article) => (
         <section key={article.slug}>
           <Link

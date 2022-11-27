@@ -4,14 +4,15 @@ import { Article } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 
 type Props = {
+  className?: string
   article: Article
 }
 
 const baseClassName = 'font-semibold inline-block mt-2 py-1 px-2 rounded'
 
-const TagList = ({ article }: Props) => {
+const TagList = ({ className, article }: Props) => {
   return (
-    <div className="-mt-2">
+    <div className={cn('-mt-2', className)}>
       <Link
         key={article.category.slug}
         className="hover last:mr-0 mr-3"

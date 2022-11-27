@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import { calcStarType } from '../lib/star'
 import { SkillGroup, SkillRating } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
@@ -5,13 +6,14 @@ import Star from './star'
 import Link from 'next/link'
 
 type Props = {
+  className?: string
   skillGroups: SkillGroup[]
   skillRatings: SkillRating[]
 }
 
-const SkillRatingList = ({ skillGroups, skillRatings }: Props) => {
+const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div className={cn('grid grid-cols-1 lg:grid-cols-2 gap-16', className)}>
       {skillGroups.map((skillGroup) => (
         <section
           key={skillGroup.title}

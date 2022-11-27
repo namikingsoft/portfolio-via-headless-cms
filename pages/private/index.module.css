@@ -4,7 +4,7 @@
 }
 
 .animateStrong strong {
-  @apply relative;
+  @apply relative text-xl;
 }
 
 .animateStrong strong::after {

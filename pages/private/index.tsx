@@ -104,7 +104,7 @@ const Index = ({
                 href={intro.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 py-1.5 font-bold text-md bg-black hover:bg-teal-500 transition shadow-md -rotate-45 text-white absolute top-12 -left-12 border-t border-b border-white w-56"
+                className="flex items-center justify-center gap-2 py-1.5 font-bold text-md bg-black hover:bg-accent-500 transition shadow-md -rotate-45 text-white absolute top-12 -left-12 border-t border-b border-white w-56"
               >
                 <FaGithub className="text-xl" />
                 GitHub

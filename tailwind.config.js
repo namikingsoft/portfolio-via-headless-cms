@@ -1,13 +1,13 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: ['./components/**/*.tsx', './pages/**/*.tsx', './lib/**/*.tsx'],
   theme: {
     extend: {
       colors: {
-        'accent-1': '#FAFAFA',
-        'accent-2': '#EAEAEA',
-        'accent-7': '#333',
-        success: '#0070f3',
-        cyan: '#79FFE1',
+        'accent-500': colors.teal[500],
+        'accent-700': colors.teal[700],
+        'accent-900': colors.teal[900],
       },
       spacing: {
         28: '7rem',

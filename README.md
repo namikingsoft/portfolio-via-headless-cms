@@ -11,12 +11,24 @@ The content of this portfolio is referenced from [Contentful](https://www.conten
 How to Development
 ----------------------------------------
 
-```bash
-npm install
-npm run dev
-```
+Install npm modules.
+
 
 ```bash
+npm install
+```
+
+Edit `.env` file. (required Contentful account)
+
+```bash
+cp .env.template .env
+# vi .env
+```
+
+Run dev server on local.
+
+```bash
+npm run dev
 open http://localhost:3456/
 ```
 

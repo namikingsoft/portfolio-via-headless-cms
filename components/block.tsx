@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Block = ({ className, children }: Props) => {
-  return <div className={cn('first:mt-0 my-44', className)}>{children}</div>
+  return <div className={cn('first:mt-0 my-48', className)}>{children}</div>
 }
 
 export default Block

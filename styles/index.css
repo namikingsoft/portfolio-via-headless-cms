@@ -13,7 +13,3 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
-
-.base {
-  @apply bg-stone-50;
-}

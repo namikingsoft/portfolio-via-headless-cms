@@ -1,13 +1,17 @@
 const colors = require('tailwindcss/colors')
 
+const colorAccent = colors.teal
+const colorBase = colors.stone
+
 module.exports = {
   content: ['./components/**/*.tsx', './pages/**/*.tsx', './lib/**/*.tsx'],
   theme: {
     extend: {
       colors: {
-        'accent-500': colors.teal[500],
-        'accent-700': colors.teal[700],
-        'accent-900': colors.teal[900],
+        'base-50': colorBase[50],
+        'accent-500': colorAccent[500],
+        'accent-700': colorAccent[700],
+        'accent-900': colorAccent[900],
       },
       spacing: {
         28: '7rem',
@@ -30,6 +34,10 @@ module.exports = {
       },
       dropShadow: {
         'white-sm': '0 0 2px rgba(255, 255, 255, 1)',
+      },
+      scale: {
+        175: '1.75',
+        200: '2.00',
       },
     },
   },

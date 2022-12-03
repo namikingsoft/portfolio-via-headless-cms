@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body className="base">
+        <body className="bg-base-50">
           <Main />
           <NextScript />
         </body>

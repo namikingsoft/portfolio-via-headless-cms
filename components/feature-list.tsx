@@ -15,7 +15,7 @@ const FeatureList = ({ className, features }: Props) => {
         className,
       )}
     >
-      {features.map((feature) => (
+      {features.map((feature, index) => (
         <div key={feature.title} className="flex flex-col gap-5">
           <div className="flex flex-col items-center justify-center gap-8">
             <Image
@@ -30,8 +30,11 @@ const FeatureList = ({ className, features }: Props) => {
               }}
               className="w-48 md:w-40"
             />
-            <h3 className="text-4xl md:text-3xl font-bold md:text-center">
-              {feature.title}
+            <h3 className="relative text-4xl md:text-3xl font-bold md:text-center">
+              <div className="absolute top-5 left-3 px-4 py-2 -translate-x-full -translate-y-full text-3xl font-bold bg-accent-500 -z-10 drop-shadow-white-sm -skew-x-6">
+                {index + 1}
+              </div>
+              <span className="drop-shadow-white-sm">{feature.title}</span>
             </h3>
           </div>
           <p>{feature.content}</p>

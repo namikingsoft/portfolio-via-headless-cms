@@ -70,7 +70,7 @@ const Layout = ({ children }: Props) => {
                   pageType === 'login',
                 'text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-tight md:pr-8':
                   pageType === 'top',
-                'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight rounded-lg backdrop-blur-sm p-0.5':
+                'text-2xl font-bold tracking-tight md:tracking-tighter leading-tight drop-shadow-white-sm':
                   pageType === 'lower',
               })}
             >

@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'base-50': colorBase[50],
         'accent-500': colorAccent[500],
+        'accent-600': colorAccent[600],
         'accent-700': colorAccent[700],
         'accent-900': colorAccent[900],
       },

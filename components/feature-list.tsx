@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import Image from 'next/image'
+import useIntersection from '../lib/use-intersection'
 import { Feature } from '../schemas/contentful/types'
 
 type Props = {
@@ -8,8 +9,11 @@ type Props = {
 }
 
 const FeatureList = ({ className, features }: Props) => {
+  const { done, setRef } = useIntersection()
+
   return (
     <div
+      ref={setRef}
       className={cn(
         'grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-10',
         className,
@@ -31,7 +35,19 @@ const FeatureList = ({ className, features }: Props) => {
               className="w-48 md:w-40"
             />
             <h3 className="relative text-4xl md:text-3xl font-bold md:text-center">
-              <div className="absolute top-5 left-3 px-4 py-2 -translate-x-full -translate-y-full text-3xl font-bold bg-accent-500 -z-10 drop-shadow-white-sm -skew-x-6">
+              <div
+                className={cn(
+                  'absolute top-5 left-3 px-4 py-2 -translate-x-full -translate-y-full text-3xl font-bold bg-accent-500 -z-10 drop-shadow-white-sm -skew-x-6',
+                  'transition duration-700',
+                  {
+                    'scale-200 -translate-x-20 opacity-0': !done,
+                    'scale-100 opacity-100': done,
+                    'delay-0': index === 0,
+                    'delay-[400ms]': index === 1,
+                    'delay-[800ms]': index >= 2,
+                  },
+                )}
+              >
                 {index + 1}
               </div>
               <span className="drop-shadow-white-sm">{feature.title}</span>

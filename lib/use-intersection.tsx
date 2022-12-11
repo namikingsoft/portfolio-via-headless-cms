@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useDependencyInjection } from './use-dependency-injection'
 
+type Param = {
+  rootMargin?: string
+}
+
 type ReturnType = {
   setRef: (elm: Element | null) => void
   done: boolean
 }
 
-const useIntersection = (): ReturnType => {
+const useIntersection = ({
+  rootMargin = '0px 0px',
+}: Param = {}): ReturnType => {
   const [element, setElement] = useState<Element | null>(null)
   const [done, setDone] = useState(false)
 
@@ -24,7 +30,7 @@ const useIntersection = (): ReturnType => {
           })
         },
         {
-          rootMargin: '-25% 0px',
+          rootMargin,
         },
       )
       observer.observe(element)

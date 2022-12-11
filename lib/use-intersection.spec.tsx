@@ -8,7 +8,7 @@ import { DependencyInjectionProvider } from './use-dependency-injection'
 import useIntersection from './use-intersection'
 
 const Usage = () => {
-  const { done, setRef } = useIntersection()
+  const { done, setRef } = useIntersection({ rootMargin: '-20% 0px' })
 
   return <div ref={setRef}>{done ? 'true' : 'false'}</div>
 }
@@ -20,8 +20,10 @@ describe('useIntersection', () => {
     const disconnect = jest.fn()
 
     let callbackFn: Function = () => {}
-    const IntersectionObserver = jest.fn().mockImplementation((fn) => {
+    let options = {}
+    const IntersectionObserver = jest.fn().mockImplementation((fn, opts) => {
       callbackFn = fn
+      options = opts
       return { observe, unobserve, disconnect }
     })
 
@@ -32,6 +34,7 @@ describe('useIntersection', () => {
     )
 
     expect(IntersectionObserver).toHaveBeenCalledTimes(1)
+    expect(options).toEqual({ rootMargin: '-20% 0px' })
     expect(observe).toHaveBeenCalledTimes(1)
     expect(unobserve).toHaveBeenCalledTimes(0)
     expect(disconnect).toHaveBeenCalledTimes(0)

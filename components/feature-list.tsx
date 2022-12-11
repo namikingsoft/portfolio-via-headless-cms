@@ -9,7 +9,7 @@ type Props = {
 }
 
 const FeatureList = ({ className, features }: Props) => {
-  const { done, setRef } = useIntersection()
+  const { done, setRef } = useIntersection({ rootMargin: '-25% 0px' })
 
   return (
     <div

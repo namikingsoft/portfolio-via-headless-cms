@@ -1,9 +1,11 @@
+import Link from 'next/link'
 import cn from 'classnames'
 import { calcStarType } from '../lib/star'
 import { SkillGroup, SkillRating } from '../schemas/contentful/types'
 import { pagesPath } from '../lib/$path'
 import Star from './star'
-import Link from 'next/link'
+import useIntersection from '../lib/use-intersection'
+import useLapTimer from '../lib/use-lap-timer'
 
 type Props = {
   className?: string
@@ -12,8 +14,29 @@ type Props = {
 }
 
 const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
+  const { done, setRef } = useIntersection({ rootMargin: '-40% 0px' })
+
+  const lap = useLapTimer(
+    {
+      begin1: 100,
+      end1: 200,
+      begin2: 200,
+      end2: 400,
+      begin3: 300,
+      end3: 500,
+      begin4: 400,
+      end4: 600,
+      begin5: 500,
+      end5: 700,
+    },
+    done,
+  )
+
   return (
-    <div className={cn('grid grid-cols-1 lg:grid-cols-2 gap-16', className)}>
+    <div
+      ref={setRef}
+      className={cn('grid grid-cols-1 lg:grid-cols-2 gap-16', className)}
+    >
       {skillGroups.map((skillGroup) => (
         <section
           key={skillGroup.title}
@@ -25,7 +48,7 @@ const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
           <div className="flex-grow flex flex-col gap-3">
             {skillRatings
               .filter((skill) => skill.group.title === skillGroup.title)
-              .map((skillRating) => (
+              .map((skillRating, index) => (
                 <div key={skillRating.title}>
                   <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">
                     <dt className="font-bold text-lg">
@@ -43,12 +66,26 @@ const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
                       )}
                     </dt>
                     <dd className="text-3xl text-yellow-500 drop-shadow-sm text-right whitespace-nowrap">
-                      {([1, 2, 3, 4, 5] as const).map((pos) => (
-                        <Star
-                          key={pos}
-                          type={calcStarType(pos, skillRating.rating)}
-                        />
-                      ))}
+                      {([1, 2, 3, 4, 5] as const).map((pos) => {
+                        const type = calcStarType(pos, skillRating.rating)
+                        return (
+                          <Star
+                            key={pos}
+                            type={type}
+                            className={cn('transition-transform duration-200', {
+                              'scale-200 rotate-90':
+                                index === 0 &&
+                                type !== 'none' &&
+                                lap[`begin${pos}`] &&
+                                !lap[`end${pos}`],
+                              'text-red-500':
+                                index === 0 &&
+                                type !== 'none' &&
+                                lap[`end${pos}`],
+                            })}
+                          />
+                        )
+                      })}
                     </dd>
                   </dl>
                   <p

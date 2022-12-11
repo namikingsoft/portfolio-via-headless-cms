@@ -14,7 +14,7 @@ const Heading = ({ className, as: Component, children }: Props) => {
         {
           'text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-10':
             Component === 'h1',
-          'mb-10 text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter leading-tight':
+          'mb-10 text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tighter leading-tight':
             Component === 'h2',
           'text-2xl xl:text-3xl mb-4 leading-snug': Component === 'h3',
         },

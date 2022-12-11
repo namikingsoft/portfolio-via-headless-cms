@@ -22,7 +22,7 @@ const ArticleIndex = ({ articles }: Props) => {
         <title>{`${t('allArticles')} | ${siteName}`}</title>
       </Head>
       <Container>
-        <Heading as="h1" className="py-10">
+        <Heading as="h2" className="py-10">
           {t('allArticles')}
         </Heading>
         {articles.length > 0 && <ArticleList articles={articles} />}

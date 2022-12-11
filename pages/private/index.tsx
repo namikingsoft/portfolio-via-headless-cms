@@ -72,7 +72,7 @@ const Index = ({
           priority
         />
         <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 absolute bottom-0 md:bottom-16 left-0 px-20 py-14 backdrop-blur-sm bg-opacity-75 bg-black text-white">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-sm">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl md:leading-snug font-bold mb-6 drop-shadow-sm">
             {intro.catchTitle}
           </h2>
           <Markdown

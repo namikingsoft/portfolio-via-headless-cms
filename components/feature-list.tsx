@@ -43,8 +43,8 @@ const FeatureList = ({ className, features }: Props) => {
                     'scale-200 -translate-x-20 opacity-0': !done,
                     'scale-100 opacity-100': done,
                     'delay-0': index === 0,
-                    'delay-[400ms]': index === 1,
-                    'delay-[800ms]': index >= 2,
+                    'delay-[200ms]': index === 1,
+                    'delay-[400ms]': index >= 2,
                   },
                 )}
               >

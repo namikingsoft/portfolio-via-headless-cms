@@ -48,7 +48,7 @@ const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
           <div className="flex-grow flex flex-col gap-3">
             {skillRatings
               .filter((skill) => skill.group.title === skillGroup.title)
-              .map((skillRating, index) => (
+              .map((skillRating) => (
                 <div key={skillRating.title}>
                   <dl className="grid grid-cols-2 gap-2 items-baseline mb-3 whitespace-nowrap">
                     <dt className="font-bold text-lg">
@@ -74,12 +74,12 @@ const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
                             type={type}
                             className={cn('transition-transform duration-200', {
                               'scale-200 rotate-90':
-                                index === 0 &&
+                                skillRating.rating === 10 &&
                                 type !== 'none' &&
                                 lap[`begin${pos}`] &&
                                 !lap[`end${pos}`],
                               'text-red-500':
-                                index === 0 &&
+                                skillRating.rating === 10 &&
                                 type !== 'none' &&
                                 lap[`end${pos}`],
                             })}

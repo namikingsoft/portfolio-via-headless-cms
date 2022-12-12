@@ -23,7 +23,9 @@ const TagIndex = ({ tag, articles }: Props) => {
         <Heading as="h2" className="py-12">
           {tag.title}
         </Heading>
-        {articles.length > 0 && <ArticleList articles={articles} />}
+        {articles.length > 0 && (
+          <ArticleList articles={articles} priorityLessThanIndex={2} />
+        )}
       </Container>
     </>
   )

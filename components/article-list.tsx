@@ -10,9 +10,14 @@ import TagList from './tag-list'
 type Props = {
   className?: string
   articles: Article[]
+  priorityLessThanIndex?: number
 }
 
-const ArticleList = ({ className, articles }: Props) => {
+const ArticleList = ({
+  className,
+  articles,
+  priorityLessThanIndex = 0,
+}: Props) => {
   return (
     <div
       className={cn(
@@ -20,7 +25,7 @@ const ArticleList = ({ className, articles }: Props) => {
         className,
       )}
     >
-      {articles.map((article) => (
+      {articles.map((article, index) => (
         <section key={article.slug}>
           <Link
             className="group cursor-pointer"
@@ -33,6 +38,7 @@ const ArticleList = ({ className, articles }: Props) => {
               width={article.image.width}
               height={article.image.height}
               aspectRatio={16 / 9}
+              priority={index < priorityLessThanIndex}
             />
             <h3 className="group-hover:underline text-2xl xl:text-3xl mb-4 leading-snug">
               {article.title}

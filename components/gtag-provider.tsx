@@ -11,13 +11,18 @@ export const useGtagUserId = (userId: string | undefined) => {
   const gtagId = useContext(GtagContext)
 
   useEffect(() => {
-    if (gtagId != null && userId != null)
+    if (gtagId != null && userId != null) {
       window.gtag('config', gtagId, {
         // refs. https://support.google.com/analytics/answer/9213390?hl=ja
         user_id: userId,
         // refs. https://developers.google.cn/analytics/devguides/collection/ga4/disable-page-view?hl=ja
         send_page_view: false,
       })
+      window.gtag('set', 'user_properties', {
+        // for aggregate metrics group by username
+        username: userId,
+      })
+    }
   }, [gtagId, userId])
 }
 

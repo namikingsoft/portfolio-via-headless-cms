@@ -14,7 +14,7 @@ type Props = {
 }
 
 const SkillRatingList = ({ className, skillGroups, skillRatings }: Props) => {
-  const { done, setRef } = useIntersection({ rootMargin: '-40% 0px' })
+  const { done, setRef } = useIntersection({ rootMargin: '-35% 0px' })
 
   const lap = useLapTimer(
     {
